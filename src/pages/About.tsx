@@ -105,7 +105,7 @@ const About = () => {
                     Across three days, the festival will feature immersive workshops, competitive hackathons, inspiring keynotes, and creative showcases. Covering fields such as artificial intelligence, machine learning, game development, and cybersecurity, i’Fest’25 offers something for every technology enthusiast.
                   </p>
                   <p>
-                    Each year, more than 1000 students, professionals, and innovators come together to learn, share ideas, and push the boundaries of what technology can achieve. It is a space where yesterday’s digital imagination meets tomorrow’s technological reality.
+                    Each year, more than 10000 students, professionals, and innovators come together to learn, share ideas, and push the boundaries of what technology can achieve. It is a space where yesterday’s digital imagination meets tomorrow’s technological reality.
                   </p>
 
                   {/* Inspiring & Inclusive subsection */}
@@ -140,7 +140,7 @@ const About = () => {
                       <div className="text-sm text-ghost-grey">Established</div>
                     </div>
                     <div className="text-center p-4 border border-ghost-grey">
-                      <div className="text-2xl text-pacman-yellow mb-2">1000+ </div>
+                      <div className="text-2xl text-pacman-yellow mb-2">10000+ </div>
                       <div className="text-sm text-ghost-grey">Annual Participants</div>
                     </div>
                   </div>
