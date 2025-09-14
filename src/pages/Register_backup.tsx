@@ -23,34 +23,34 @@ interface PassType {
 }
 
 interface UserCategory {
-  id: 'non-daiict' | 'non-daiict-ieee' | 'daiict';
+  id: 'non-dau' | 'non-dau-ieee' | 'dau';
   name: string;
   description: string;
 }
 
 const userCategories: UserCategory[] = [
   {
-    id: 'non-daiict',
-    name: 'Non-DAIICT Student',
+    id: 'non-dau',
+    name: 'Non-DAU Student',
     description: 'Students from other institutions'
   },
   {
-    id: 'non-daiict-ieee',
-    name: 'Non-DAIICT IEEE Student',
+    id: 'non-dau-ieee',
+    name: 'Non-DAU IEEE Student',
     description: 'IEEE members from other institutions'
   },
   {
-    id: 'daiict',
-    name: 'DAIICT Student',
-    description: 'Current DAIICT students'
+    id: 'dau',
+    name: 'DAU Student',
+    description: 'Current DAU students'
   }
 ];
 
 const getPassPrice = (categoryId: string, passId: string): number => {
   const prices: Record<string, Record<string, number>> = {
-    'non-daiict': { silver: 150, gold: 350 },
-    'non-daiict-ieee': { silver: 100, gold: 300 },
-    'daiict': { silver: 0, gold: 100 }
+    'non-dau': { silver: 150, gold: 350 },
+    'non-dau-ieee': { silver: 100, gold: 300 },
+    'dau': { silver: 0, gold: 100 }
   };
   return prices[categoryId]?.[passId] || 0;
 };
@@ -58,8 +58,8 @@ const getPassPrice = (categoryId: string, passId: string): number => {
 const createPasses = (categoryId: string): PassType[] => {
   const passes: PassType[] = [];
   
-  // Add Silver Pass for non-DAIICT students only
-  if (categoryId !== 'daiict') {
+  // Add Silver Pass for non-DAU students only
+  if (categoryId !== 'dau') {
     passes.push({
       id: 'silver',
       name: 'Silver Pass',
@@ -83,8 +83,8 @@ const createPasses = (categoryId: string): PassType[] => {
     id: 'gold',
     name: 'Gold Pass',
     price: getPassPrice(categoryId, 'gold'),
-    description: categoryId === 'daiict' ? 'Complete festival access for DAIICT students' : 'Premium experience with exclusive benefits',
-    features: categoryId === 'daiict' ? [
+    description: categoryId === 'dau' ? 'Complete festival access for DAU students' : 'Premium experience with exclusive benefits',
+    features: categoryId === 'dau' ? [
       'Access to all workshops',
       'General seating at keynotes',
       'Basic networking sessions',
@@ -103,7 +103,7 @@ const createPasses = (categoryId: string): PassType[] => {
     ],
     icon: <Crown className="w-6 h-6" />,
     color: 'pacman-yellow',
-    popular: categoryId !== 'daiict'
+    popular: categoryId !== 'dau'
   });
   
   return passes;
@@ -165,18 +165,18 @@ const Register = () => {
       errors.acceptTerms = 'You must accept the Terms and Conditions to continue';
     }
     
-    // IEEE ID validation for Non-DAIICT IEEE students
-    if (selectedCategory?.id === 'non-daiict-ieee') {
+    // IEEE ID validation for Non-DAU IEEE students
+    if (selectedCategory?.id === 'non-dau-ieee') {
       if (!userDetails.ieeeId.trim()) {
         errors.ieeeId = 'IEEE ID is required for IEEE members';
       }
     }
     
     // Email validation based on category
-    if (selectedCategory?.id === 'daiict') {
-      const daiictEmailRegex = /^\d{9}@dau\.ac\.in$/;
-      if (userDetails.email && !daiictEmailRegex.test(userDetails.email)) {
-        errors.email = 'Please use your DAIICT institute email (9 digits @dau.ac.in)';
+    if (selectedCategory?.id === 'dau') {
+      const dauEmailRegex = /^\d{9}@dau\.ac\.in$/;
+      if (userDetails.email && !dauEmailRegex.test(userDetails.email)) {
+        errors.email = 'Please use your DAU institute email (9 digits @dau.ac.in)';
       }
     } else {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -216,7 +216,7 @@ const Register = () => {
         full_name: userDetails.fullName.trim(),
         pass_type: selectedPass?.id || 'gold',
         college: userDetails.college.trim(),
-        ieee_id: selectedCategory?.id === 'non-daiict-ieee' ? userDetails.ieeeId.trim() : null
+        ieee_id: selectedCategory?.id === 'non-dau-ieee' ? userDetails.ieeeId.trim() : null
       };
 
       const resp = await fetch(`${API_BASE}/auth/register`, {
@@ -458,21 +458,21 @@ const Register = () => {
                           value={userDetails.email}
                           onChange={handleInputChange}
                           className="pixel-input"
-                          placeholder={selectedCategory?.id === 'daiict' ? "Enter institutes email" : "Enter your email"}
+                          placeholder={selectedCategory?.id === 'dau' ? "Enter institutes email" : "Enter your email"}
                         />
                         {formErrors.email && (
                           <p className="text-error-red text-sm mt-1">{formErrors.email}</p>
                         )}
-                        {selectedCategory?.id === 'daiict' && (
+                        {selectedCategory?.id === 'dau' && (
                           <p className="text-neon-cyan text-sm mt-1">
-                            Please use your DAIICT institute email ID
+                            Please use your DAU institute email ID
                           </p>
                         )}
                       </div>
                     </div>
 
-                    {/* IEEE ID Field for Non-DAIICT IEEE students */}
-                    {selectedCategory?.id === 'non-daiict-ieee' && (
+                    {/* IEEE ID Field for Non-DAU IEEE students */}
+                    {selectedCategory?.id === 'non-dau-ieee' && (
                       <div>
                         <Label htmlFor="ieeeId">IEEE Member ID *</Label>
                         <Input

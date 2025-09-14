@@ -8,7 +8,7 @@ const PrivacyPolicy: FC = () => {
         <h1 className="text-4xl font-bold bg-gradient-to-r from-green-500 to-teal-400 bg-clip-text text-transparent">
           Privacy Policy
         </h1>
-        <p className="text-gray-400">i'Fest'25 Cyber Pac Blueprint - DAIICT</p>
+        <p className="text-gray-400">i'Fest'25 Pixel Paradox - DAU</p>
         <div className="text-sm text-gray-400 italic">
           Last Updated: December 2025
         </div>
@@ -18,12 +18,12 @@ const PrivacyPolicy: FC = () => {
         <div className="bg-black/50 p-6 rounded-lg border border-green-500/20">
           <h2 className="text-2xl font-semibold text-green-400 mb-4">1. Introduction</h2>
           <p className="text-gray-300">
-            This Privacy Policy explains how DAIICT and the i'Fest'25 Cyber Pac Blueprint organizing committee ("we," "our," or "us") collect, use, disclose, and protect your personal information when you register for and participate in our festival events.
+            This Privacy Policy explains how DAU and the i'Fest'25 Pixel Paradox organizing committee ("we," "our," or "us") collect, use, disclose, and protect your personal information when you register for and participate in our festival events.
           </p>
           <div className="mt-4 p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
             <strong className="text-yellow-400">Your Privacy Matters:</strong>{' '}
             <span className="text-gray-300">
-              We are committed to protecting your personal information and ensuring transparency in our data practices. This policy applies to all participants, including DAIICT students, non-DAIICT students, and IEEE members.
+              We are committed to protecting your personal information and ensuring transparency in our data practices. This policy applies to all participants, including DAU students, non-DAU students, and IEEE members.
             </span>
           </div>
         </div>
@@ -84,17 +84,17 @@ const PrivacyPolicy: FC = () => {
             <h3 className="text-xl font-medium text-cyan-400 mb-3">Privacy Contact Information</h3>
             <p className="text-gray-300">For privacy-related questions, concerns, or requests:</p>
             <ul className="list-none space-y-2 mt-2 text-gray-300">
-              <li><strong className="text-cyan-400">Privacy Officer Email:</strong> privacy@ifest25.daiict.ac.in</li>
-              <li><strong className="text-cyan-400">General Contact:</strong> ifest25@daiict.ac.in</li>
-              <li><strong className="text-cyan-400">Phone:</strong> +91-79-6826-1700</li>
-              <li><strong className="text-cyan-400">Address:</strong> DAIICT, Near Indroda Circle, Gandhinagar, Gujarat 382007</li>
+              <li><strong className="text-cyan-400">Privacy Officer Email:</strong> privacy@ifest.dau.ac.in</li>
+              <li><strong className="text-cyan-400">General Contact:</strong> ifest@dau.ac.in</li>
+              <li><strong className="text-cyan-400">Phone:</strong> Harshil: +91-1234567891, Poorva: +91-1234567892</li>
+              <li><strong className="text-cyan-400">Address:</strong> DAU, Near Indroda Circle, Gandhinagar, Gujarat 382007</li>
             </ul>
           </div>
         </div>
       </section>
 
       <footer className="text-center text-gray-400 mt-8 p-4 border-t border-gray-800">
-        <p>&copy; 2025 DAIICT i'Fest'25. All rights reserved.</p>
+        <p>&copy; 2025 DAU i'Fest'25. All rights reserved.</p>
         <p className="text-sm">This Privacy Policy is effective as of December 2025 and may be updated without prior notice.</p>
       </footer>
     </div>

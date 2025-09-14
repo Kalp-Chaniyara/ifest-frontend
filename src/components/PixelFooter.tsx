@@ -1,4 +1,4 @@
-import { MapPin, Mail } from 'lucide-react';
+import { MapPin, Mail, Phone } from 'lucide-react';
 
 export const PixelFooter = () => {
   return (
@@ -13,7 +13,7 @@ export const PixelFooter = () => {
               <MapPin className="w-4 h-4 text-pacman-yellow mt-1 flex-shrink-0" />
               <div className="space-y-1">
                 <p className="text-pixel-white">
-                  Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT)<br />
+                  Dhirubhai Ambani University (DAU)<br />
                   Near Indroda Circle<br />
                   Gandhinagar - 382007, Gujarat, India
                 </p>
@@ -43,7 +43,7 @@ export const PixelFooter = () => {
                 <span>Instagram</span>
               </a>
               <a 
-                href="https://www.linkedin.com/company/ieeesbdaiict/" 
+                href="https://www.linkedin.com/company/ieeesbdau/" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-secondary hover:text-neon-cyan transition-colors flex items-center space-x-2"
@@ -61,11 +61,19 @@ export const PixelFooter = () => {
               <div className="flex items-center space-x-3">
                 <Mail className="w-4 h-4 text-pacman-yellow" />
                 <a 
-                  href="mailto:info@ifest25.tech" 
+                  href="mailto:ifest@dau.ac.in" 
                   className="text-secondary hover:text-neon-cyan transition-colors"
                 >
-                  info@ifest25.tech
+                  ifest@dau.ac.in
                 </a>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Phone className="w-4 h-4 text-pacman-yellow" />
+                <span className="text-secondary">Harshil: +91-1234567891</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Phone className="w-4 h-4 text-pacman-yellow" />
+                <span className="text-secondary">Poorva: +91-1234567892</span>
               </div>
               <div className="flex flex-col space-y-2 mt-4">
                 <a 

@@ -8,7 +8,7 @@ const TermsAndConditions: FC = () => {
         <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-500 to-purple-400 bg-clip-text text-transparent">
           Terms and Conditions
         </h1>
-        <p className="text-gray-400">i'Fest'25 Cyber Pac Blueprint - DAIICT</p>
+        <p className="text-gray-400">i'Fest'25 Pixel Paradox - DAU</p>
         <div className="text-sm text-gray-400 italic">
           Last Updated: December 2025
         </div>
@@ -18,12 +18,12 @@ const TermsAndConditions: FC = () => {
         <div className="bg-black/50 p-6 rounded-lg border border-indigo-500/20">
           <h2 className="text-2xl font-semibold text-indigo-400 mb-4">1. Acceptance of Terms</h2>
           <p className="text-gray-300">
-            By accessing and using the i'Fest'25 Cyber Pac Blueprint registration portal and participating in the festival events, you agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not register for the festival.
+            By accessing and using the i'Fest'25 Pixel Paradox registration portal and participating in the festival events, you agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not register for the festival.
           </p>
           <div className="mt-4 p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
             <strong className="text-yellow-400">Important:</strong>{' '}
             <span className="text-gray-300">
-              These terms apply to all participants, including DAIICT students, non-DAIICT students, and IEEE members.
+              These terms apply to all participants, including DAU students, non-DAU students, and IEEE members.
             </span>
           </div>
         </div>
@@ -34,14 +34,14 @@ const TermsAndConditions: FC = () => {
           <h3 className="text-xl font-medium text-indigo-300 mb-3">2.1 Registration Requirements</h3>
           <ul className="list-disc list-inside space-y-2 text-gray-300">
             <li>All participants must provide accurate and complete registration information</li>
-            <li>DAIICT students must use their official institute email address</li>
+            <li>DAU students must use their official institute email address</li>
             <li>IEEE members must provide valid IEEE membership ID for discounted passes</li>
             <li>Participants must be at least 16 years old or have parental consent</li>
           </ul>
 
           <h3 className="text-xl font-medium text-indigo-300 mt-4 mb-3">2.2 Pass Categories and Pricing</h3>
           <ul className="list-disc list-inside space-y-2 text-gray-300">
-            <li><strong className="text-indigo-400">Silver Pass:</strong> Available for non-DAIICT students only</li>
+            <li><strong className="text-indigo-400">Silver Pass:</strong> Available for non-DAU students only</li>
             <li><strong className="text-indigo-400">Gold Pass:</strong> Available for all participant categories</li>
             <li>Pricing varies based on student category and IEEE membership status</li>
             <li>All prices include applicable taxes</li>
@@ -82,17 +82,17 @@ const TermsAndConditions: FC = () => {
             <h3 className="text-xl font-medium text-cyan-400 mb-3">Contact Information</h3>
             <p className="text-gray-300">If you have any questions about these Terms and Conditions, please contact us:</p>
             <ul className="list-none space-y-2 mt-2 text-gray-300">
-              <li><strong className="text-cyan-400">Email:</strong> ifest25@daiict.ac.in</li>
-              <li><strong className="text-cyan-400">Phone:</strong> +91-79-6826-1700</li>
-              <li><strong className="text-cyan-400">Address:</strong> DAIICT, Near Indroda Circle, Gandhinagar, Gujarat 382007</li>
-              <li><strong className="text-cyan-400">Website:</strong> https://ifest25.daiict.ac.in</li>
+              <li><strong className="text-cyan-400">Email:</strong> ifest@dau.ac.in</li>
+              <li><strong className="text-cyan-400">Phone:</strong> Harshil: +91-1234567891, Poorva: +91-1234567892</li>
+              <li><strong className="text-cyan-400">Address:</strong> DAU, Near Indroda Circle, Gandhinagar, Gujarat 382007</li>
+              <li><strong className="text-cyan-400">Website:</strong> https://ifest25.dau.ac.in</li>
             </ul>
           </div>
         </div>
       </section>
 
       <footer className="text-center text-gray-400 mt-8 p-4 border-t border-gray-800">
-        <p>&copy; 2025 DAIICT i'Fest'25. All rights reserved.</p>
+        <p>&copy; 2025 DAU i'Fest'25. All rights reserved.</p>
         <p className="text-sm">These Terms and Conditions are effective as of December 2025.</p>
       </footer>
     </div>

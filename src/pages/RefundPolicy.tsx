@@ -8,7 +8,7 @@ const RefundPolicy: FC = () => {
         <h1 className="text-4xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
           Refund Policy
         </h1>
-        <p className="text-gray-400">i'Fest'25 Cyber Pac Blueprint - DAIICT</p>
+        <p className="text-gray-400">i'Fest'25 Pixel Paradox - DAU</p>
         <div className="text-sm text-gray-400 italic">
           Last Updated: December 2025
         </div>
@@ -18,7 +18,7 @@ const RefundPolicy: FC = () => {
         <div className="bg-black/50 p-6 rounded-lg border border-red-500/20">
           <h2 className="text-2xl font-semibold text-red-400 mb-4">1. Refund Policy Overview</h2>
           <p className="text-gray-300">
-            This Refund Policy outlines the terms and conditions for i'Fest'25 Cyber Pac Blueprint registrations. Please read this policy carefully before making your registration payment.
+            This Refund Policy outlines the terms and conditions for i'Fest'25 Pixel Paradox registrations. Please read this policy carefully before making your registration payment.
           </p>
           <div className="mt-4 p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
             <strong className="text-red-400">NO REFUND POLICY:</strong>{' '}
@@ -42,13 +42,13 @@ const RefundPolicy: FC = () => {
               </thead>
               <tbody>
                 <tr className="border-t border-red-500/10">
-                  <td className="px-4 py-3 text-gray-300">DAIICT Students</td>
+                  <td className="px-4 py-3 text-gray-300">DAU Students</td>
                   <td className="px-4 py-3 text-gray-300">Gold Pass (₹100)</td>
                   <td className="px-4 py-3 text-red-400">NO REFUND</td>
                   <td className="px-4 py-3 text-gray-300">Final</td>
                 </tr>
                 <tr className="border-t border-red-500/10">
-                  <td className="px-4 py-3 text-gray-300">Non-DAIICT Students</td>
+                  <td className="px-4 py-3 text-gray-300">Non-DAU Students</td>
                   <td className="px-4 py-3 text-gray-300">Silver Pass (₹150)</td>
                   <td className="px-4 py-3 text-red-400">NO REFUND</td>
                   <td className="px-4 py-3 text-gray-300">Final</td>
@@ -85,17 +85,17 @@ const RefundPolicy: FC = () => {
             <h3 className="text-xl font-medium text-cyan-400 mb-3">General Support Contact</h3>
             <p className="text-gray-300">For general inquiries and support (NOT refunds):</p>
             <ul className="list-none space-y-2 mt-2 text-gray-300">
-              <li><strong className="text-cyan-400">Email:</strong> ifest25@daiict.ac.in</li>
-              <li><strong className="text-cyan-400">Phone:</strong> +91-79-6826-1700</li>
+              <li><strong className="text-cyan-400">Email:</strong> ifest@dau.ac.in</li>
+              <li><strong className="text-cyan-400">Phone:</strong> Harshil: +91-1234567891, Poorva: +91-1234567892</li>
               <li><strong className="text-cyan-400">Business Hours:</strong> Monday to Friday, 9:00 AM - 5:00 PM IST</li>
-              <li><strong className="text-cyan-400">Address:</strong> DAIICT, Near Indroda Circle, Gandhinagar, Gujarat 382007</li>
+              <li><strong className="text-cyan-400">Address:</strong> DAU, Near Indroda Circle, Gandhinagar, Gujarat 382007</li>
             </ul>
           </div>
         </div>
       </section>
 
       <footer className="text-center text-gray-400 mt-8 p-4 border-t border-gray-800">
-        <p>&copy; 2025 DAIICT i'Fest'25. All rights reserved.</p>
+        <p>&copy; 2025 DAU i'Fest'25. All rights reserved.</p>
         <p className="text-sm">This Refund Policy is effective as of December 2025 and may be updated without prior notice.</p>
       </footer>
     </div>
