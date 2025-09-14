@@ -65,7 +65,7 @@ const Index = () => {
 
   return (
     <>
-      <RevealEffect />
+      
       <PixelHeader />
       
       {/* Hero Section */}
