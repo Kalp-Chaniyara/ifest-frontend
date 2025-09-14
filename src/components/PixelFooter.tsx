@@ -69,11 +69,11 @@ export const PixelFooter = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-4 h-4 text-pacman-yellow" />
-                <span className="text-secondary">Harshil: +91-1234567891</span>
+                <span className="text-secondary">Harshil: +91 70416 12868</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-4 h-4 text-pacman-yellow" />
-                <span className="text-secondary">Poorva: +91-1234567892</span>
+                <span className="text-secondary">Poorva: +91 78029 21067</span>
               </div>
               <div className="flex flex-col space-y-2 mt-4">
                 <a 
