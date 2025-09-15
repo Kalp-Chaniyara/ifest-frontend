@@ -20,6 +20,7 @@ const Index = () => {
   const [loading, setLoading] = useState(true);
   const [showContent, setShowContent] = useState(false);
   const { isLoggedIn, isLoading } = useAuth();
+  const SHOW_LOGIN_CTA = true;
 
   useEffect(() => {
     if (!loading && showContent) {
@@ -125,12 +126,22 @@ const Index = () => {
                   Enter the Paradox →
                 </Link>
               ) : (
-                <Link 
-                  to="/register" 
-                  className="pixel-button-primary text-lg md:text-xl px-8 py-4 hover:animate-pixel-glitch inline-block"
-                >
-                  Enter the Paradox →
-                </Link>
+                <div className="flex items-center justify-center gap-4">
+                  <Link 
+                    to="/register" 
+                    className="pixel-button-primary text-lg md:text-xl px-8 py-4 hover:animate-pixel-glitch inline-block"
+                  >
+                    Register
+                  </Link>
+                  {SHOW_LOGIN_CTA && (
+                    <Link 
+                      to="/login" 
+                      className="pixel-button-secondary text-lg md:text-xl px-8 py-4 hover:animate-pixel-glitch inline-block"
+                    >
+                      Login
+                    </Link>
+                  )}
+                </div>
               )
             )}
           </div>
@@ -232,7 +243,7 @@ const Index = () => {
             
             <div className="pixel-card p-6 text-center hover:animate-pixel-scale-in hover:bg-black">
               <div className="w-12 h-12 bg-neon-cyan mx-auto mb-4"></div>
-              <h3 className="text-neon-cyan mb-2">50+ Events</h3>
+              <h3 className="text-neon-cyan mb-2">20+ Events</h3>
               <p className="text-ghost-grey">
                 Coding challenges, tech talks, gaming tournaments, and innovation showcases
               </p>
@@ -240,7 +251,7 @@ const Index = () => {
             
             <div className="pixel-card p-6 text-center hover:animate-pixel-scale-in hover:bg-black">
               <div className="w-12 h-12 bg-pacman-yellow mx-auto mb-4"></div>
-              <h3 className="text-pacman-yellow mb-2">1000+ Participants</h3>
+              <h3 className="text-pacman-yellow mb-2">10000+ Participants</h3>
               <p className="text-ghost-grey">
                 Students, professionals, and tech enthusiasts from across the region
               </p>

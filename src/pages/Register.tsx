@@ -66,12 +66,8 @@ const createPasses = (categoryId: string): PassType[] => {
       price: getPassPrice(categoryId, 'silver'),
       description: 'Essential access to core festival events',
       features: [
-        'Access to all workshops',
-        'General seating at keynotes',
-        'Basic networking sessions',
-        'Festival merchandise pack',
-        'Digital certificate',
-        'Event recordings access'
+        "Access to all events",
+     "(No access for Concert, Standup)"
       ],
       icon: <Star className="w-6 h-6" />,
       color: 'neon-cyan'
@@ -85,8 +81,9 @@ const createPasses = (categoryId: string): PassType[] => {
     price: getPassPrice(categoryId, 'gold'),
     description: categoryId === 'dau' ? 'Complete festival access for DAU students' : 'Premium experience with exclusive benefits',
     features: categoryId === 'dau' ? [
-      "Access to all events",
-     "(No access for Concert, Standup)"
+      "All benifits of silver pass",
+      "Access to Concert", "EDM night", "Standup Night", 
+      "Also all the event"
  
     ] : [
       "All benifits of silver pass",
