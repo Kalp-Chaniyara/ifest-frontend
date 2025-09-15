@@ -18,7 +18,7 @@ interface MerchandiseItem {
 const merchandise: MerchandiseItem = {
   name: "i'Fest'25 Official T-Shirt",
   description: "Limited edition i'Fest'25 t-shirt featuring our exclusive pixel art design. Be part of the digital revolution with our signature merchandise that combines style with gaming aesthetics.",
-  price: "₹499",
+  price: "₹350",
   image: "/tShirt.png", // Add your actual image path
   features: [
     "100% Premium Cotton",
