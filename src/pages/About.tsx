@@ -173,7 +173,7 @@ const About = () => {
                   Event Location
                 </h3>
                 <div className="space-y-2 text-pixel-white">
-                  <p>Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT)</p>
+                  <p>Dhirubhai Ambani University (DAU)</p>
                   <p>Near Indroda Circle</p>
                   <p>Gandhinagar - 382007, Gujarat, India</p>
                   <div className="mt-4">

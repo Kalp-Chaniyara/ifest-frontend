@@ -22,6 +22,7 @@ const merchandise: MerchandiseItem = {
   image: "/tShirt.png", // Add your actual image path
   features: [
     "100% Premium Cotton",
+    "Oversize Fit",
     "Exclusive Pixel Art Design",
     "Limited Edition Release",
     "Official i'Fest'25 Merchandise",

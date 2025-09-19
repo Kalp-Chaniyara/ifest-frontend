@@ -43,7 +43,7 @@ export const PixelFooter = () => {
                 <span>Instagram</span>
               </a>
               <a 
-                href="https://www.linkedin.com/company/ieeesbdau/" 
+                href="https://www.linkedin.com/company/ieeesbdaiict/" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-secondary hover:text-neon-cyan transition-colors flex items-center space-x-2"

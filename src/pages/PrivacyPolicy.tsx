@@ -86,7 +86,7 @@ const PrivacyPolicy: FC = () => {
             <ul className="list-none space-y-2 mt-2 text-gray-300">
               <li><strong className="text-cyan-400">Privacy Officer Email:</strong> privacy@ifest.dau.ac.in</li>
               <li><strong className="text-cyan-400">General Contact:</strong> ifest@dau.ac.in</li>
-              <li><strong className="text-cyan-400">Phone:</strong> Harshil: +91-1234567891, Poorva: +91-1234567892</li>
+              <li><strong className="text-cyan-400">Phone:</strong> Harshil: +91-1234567891, Manan: +91 93137 48496</li>
               <li><strong className="text-cyan-400">Address:</strong> DAU, Near Indroda Circle, Gandhinagar, Gujarat 382007</li>
             </ul>
           </div>
