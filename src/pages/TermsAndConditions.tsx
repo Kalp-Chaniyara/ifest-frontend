@@ -81,6 +81,7 @@ const TermsAndConditions: FC = () => {
           <div className="bg-cyan-500/10 p-4 rounded-lg border border-cyan-500/20">
             <h3 className="text-xl font-medium text-cyan-400 mb-3">Contact Information</h3>
             <p className="text-gray-300">If you have any questions about these Terms and Conditions, please contact us:</p>
+            <p className="text-gray-300">This website is managed by <strong className="text-cyan-400">JEET MODI</strong> </p>
             <ul className="list-none space-y-2 mt-2 text-gray-300">
               <li><strong className="text-cyan-400">Email:</strong> ifest@dau.ac.in</li>
               <li><strong className="text-cyan-400">Phone:</strong> Harshil: +91-1234567891, Manan: +91 93137 48496</li>

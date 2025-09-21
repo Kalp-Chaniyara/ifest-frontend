@@ -84,7 +84,7 @@ export const PixelHeader = () => {
           >
             Team
           </Link>
-          <Link 
+          {/* <Link 
             to="/merchandise" 
             className={`
               relative transition-all duration-150
@@ -92,7 +92,7 @@ export const PixelHeader = () => {
             `}
           >
             Merchandise
-          </Link>
+          </Link> */}
           {!isLoading && (
             isLoggedIn ? (
               <Link 
