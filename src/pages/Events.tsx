@@ -34,8 +34,8 @@ const events: Event[] = [
     color: 'neon-cyan',
     prize: 'TBA',
     participants: 'Individual',
-    time: 'TBA',
-    location: 'TBA',
+    time: '14th November',
+    location: 'Computer Lab 1',
     rules: ['Details coming soon'],
     category: 'coding',
     size: 'medium'
@@ -48,8 +48,8 @@ const events: Event[] = [
     color: 'neon-magenta',
     prize: 'TBA',
     participants: 'Individual/Team',
-    time: 'TBA',
-    location: 'TBA',
+    time: '15th November',
+    location: 'Main Campus',
     rules: ['Details coming soon'],
     category: 'innovation',
     size: 'medium'
@@ -62,8 +62,8 @@ const events: Event[] = [
     color: 'pacman-yellow',
     prize: 'TBA',
     participants: 'Individual',
-    time: 'TBA',
-    location: 'TBA',
+    time: '16th November',
+    location: 'Computer Lab 2',
     rules: ['Details coming soon'],
     category: 'coding',
     size: 'large'
@@ -76,8 +76,8 @@ const events: Event[] = [
     color: 'neon-cyan',
     prize: 'TBA',
     participants: 'Individual',
-    time: 'TBA',
-    location: 'TBA',
+    time: '14th November',
+    location: 'Main Auditorium',
     rules: ['Details coming soon'],
     category: 'coding',
     size: 'large'
@@ -90,8 +90,8 @@ const events: Event[] = [
     color: 'neon-magenta',
     prize: 'TBA',
     participants: 'Team',
-    time: 'TBA',
-    location: 'TBA',
+    time: '15th November',
+    location: 'Conference Hall',
     rules: ['Details coming soon'],
     category: 'coding',
     size: 'medium'
@@ -104,8 +104,8 @@ const events: Event[] = [
     color: 'pacman-yellow',
     prize: 'TBA',
     participants: 'Individual',
-    time: 'TBA',
-    location: 'TBA',
+    time: '16th November',
+    location: 'Innovation Lab',
     rules: ['Details coming soon'],
     category: 'innovation',
     size: 'small'
@@ -118,8 +118,8 @@ const events: Event[] = [
     color: 'neon-cyan',
     prize: 'TBA',
     participants: 'Individual',
-    time: 'TBA',
-    location: 'TBA',
+    time: '14th November',
+    location: 'Library',
     rules: ['Details coming soon'],
     category: 'innovation',
     size: 'small'
@@ -132,8 +132,8 @@ const events: Event[] = [
     color: 'neon-magenta',
     prize: 'TBA',
     participants: 'Individual',
-    time: 'TBA',
-    location: 'TBA',
+    time: '15th November',
+    location: 'Photography Studio',
     rules: ['Details coming soon'],
     category: 'innovation',
     size: 'medium'
@@ -146,8 +146,8 @@ const events: Event[] = [
     color: 'pacman-yellow',
     prize: 'TBA',
     participants: 'Individual/Team',
-    time: 'TBA',
-    location: 'TBA',
+    time: '16th November',
+    location: 'Cybersecurity Lab',
     rules: ['Details coming soon'],
     category: 'security',
     size: 'large'
@@ -160,8 +160,8 @@ const events: Event[] = [
     color: 'neon-cyan',
     prize: 'TBA',
     participants: 'Individual/Team',
-    time: 'TBA',
-    location: 'TBA',
+    time: '14th November',
+    location: 'Business Center',
     rules: ['Details coming soon'],
     category: 'innovation',
     size: 'medium'
@@ -174,8 +174,8 @@ const events: Event[] = [
     color: 'neon-magenta',
     prize: 'TBA',
     participants: 'Team',
-    time: 'TBA',
-    location: 'TBA',
+    time: '15th November',
+    location: 'Robotics Lab',
     rules: ['Details coming soon'],
     category: 'innovation',
     size: 'large'
@@ -188,8 +188,8 @@ const events: Event[] = [
     color: 'pacman-yellow',
     prize: 'TBA',
     participants: 'Individual',
-    time: 'TBA',
-    location: 'TBA',
+    time: '16th November',
+    location: 'Gaming Zone',
     rules: ['Details coming soon'],
     category: 'gaming',
     size: 'small'
@@ -202,8 +202,8 @@ const events: Event[] = [
     color: 'neon-cyan',
     prize: 'TBA',
     participants: 'Individual',
-    time: 'TBA',
-    location: 'TBA',
+    time: '14th November',
+    location: 'Finance Lab',
     rules: ['Details coming soon'],
     category: 'innovation',
     size: 'medium'
@@ -216,8 +216,8 @@ const events: Event[] = [
     color: 'neon-magenta',
     prize: 'TBA',
     participants: 'Team',
-    time: 'TBA',
-    location: 'TBA',
+    time: '15th November',
+    location: 'Campus Grounds',
     rules: ['Details coming soon'],
     category: 'innovation',
     size: 'medium'
@@ -230,8 +230,8 @@ const events: Event[] = [
     color: 'pacman-yellow',
     prize: 'TBA',
     participants: 'Individual',
-    time: 'TBA',
-    location: 'TBA',
+    time: '16th November',
+    location: 'Math Lab',
     rules: ['Details coming soon'],
     category: 'quiz',
     size: 'medium'
@@ -244,8 +244,8 @@ const events: Event[] = [
     color: 'neon-cyan',
     prize: 'TBA',
     participants: 'Individual/Team',
-    time: 'TBA',
-    location: 'TBA',
+    time: '14th November',
+    location: 'Transportation Hub',
     rules: ['Details coming soon'],
     category: 'innovation',
     size: 'medium'
@@ -258,8 +258,8 @@ const events: Event[] = [
     color: 'neon-magenta',
     prize: 'TBA',
     participants: 'Individual/Team',
-    time: 'TBA',
-    location: 'TBA',
+    time: '15th November',
+    location: 'AI Lab',
     rules: ['Details coming soon'],
     category: 'ai',
     size: 'medium'
@@ -272,8 +272,8 @@ const events: Event[] = [
     color: 'pacman-yellow',
     prize: 'TBA',
     participants: 'Individual/Team',
-    time: 'TBA',
-    location: 'TBA',
+    time: '16th November',
+    location: 'Media Studio',
     rules: ['Details coming soon'],
     category: 'innovation',
     size: 'large'
@@ -286,8 +286,8 @@ const events: Event[] = [
     color: 'neon-cyan',
     prize: 'TBA',
     participants: 'Individual/Team',
-    time: 'TBA',
-    location: 'TBA',
+    time: '14th November',
+    location: 'Quiz Hall',
     rules: ['Details coming soon'],
     category: 'quiz',
     size: 'medium'
@@ -300,8 +300,8 @@ const events: Event[] = [
     color: 'neon-magenta',
     prize: 'TBA',
     participants: 'Individual',
-    time: 'TBA',
-    location: 'TBA',
+    time: '15th November',
+    location: 'Programming Lab',
     rules: ['Details coming soon'],
     category: 'coding',
     size: 'medium'
@@ -314,8 +314,8 @@ const events: Event[] = [
     color: 'pacman-yellow',
     prize: 'TBA',
     participants: 'Individual',
-    time: 'TBA',
-    location: 'TBA',
+    time: '16th November',
+    location: 'Security Lab',
     rules: ['Details coming soon'],
     category: 'coding',
     size: 'medium'
@@ -328,8 +328,8 @@ const events: Event[] = [
     color: 'neon-cyan',
     prize: 'TBA',
     participants: 'Individual/Team',
-    time: 'TBA',
-    location: 'TBA',
+    time: '14th November',
+    location: 'AI Research Center',
     rules: ['Details coming soon'],
     category: 'ai',
     size: 'large'
@@ -342,8 +342,8 @@ const events: Event[] = [
     color: 'neon-magenta',
     prize: 'TBA',
     participants: 'Individual',
-    time: 'TBA',
-    location: 'TBA',
+    time: '15th November',
+    location: 'AI Lab',
     rules: ['Details coming soon'],
     category: 'ai',
     size: 'medium'
@@ -495,12 +495,11 @@ const Events = () => {
                 <p className="text-ghost-grey">{selectedEvent.description}</p>
               </div>
 
-              {/* Coming Soon Message */}
-              <div className="bg-void-black/50 border-2 border-neon-magenta p-6 text-center">
-                <h4 className="text-neon-magenta text-xl font-bold mb-2">Event Details Coming Soon!</h4>
+              {/* Event Dates */}
+              <div className="bg-void-black/50 border-2 border-neon-cyan p-6 text-center">
+                <h4 className="text-neon-cyan text-xl font-bold mb-2">Event Details</h4>
                 <p className="text-ghost-grey">
-                  We're working hard to bring you detailed information about this event. 
-                  Check back soon for complete rules, prizes, and registration details.
+                  Join us for this exciting event on <span className="text-pacman-yellow font-bold">{selectedEvent.time}</span>
                 </p>
               </div>
 
@@ -510,12 +509,10 @@ const Events = () => {
                   className="flex-1 pixel-button-primary"
                   onClick={() => {
                     setIsDialogOpen(false);
-                    // Future: Navigate to event details page
-                    // window.location.href = `/event/${selectedEvent.id}`;
+                    window.location.href = '/register';
                   }}
-                  disabled
                 >
-                  Register (Coming Soon)
+                  Register
                 </Button>
                 <Button 
                   variant="outline" 
