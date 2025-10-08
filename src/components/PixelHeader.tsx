@@ -76,6 +76,15 @@ export const PixelHeader = () => {
             Events
           </Link>
           <Link 
+            to="/robo-events" 
+            className={`
+              relative transition-all duration-150
+              ${isActive('/robo-events') ? 'text-primary' : 'text-secondary hover:text-neon-cyan'}
+            `}
+          >
+            Robo Events
+          </Link>
+          <Link 
             to="/team" 
             className={`
               relative transition-all duration-150
@@ -143,6 +152,14 @@ export const PixelHeader = () => {
                     className={`text-lg ${isActive('/events') ? 'text-primary' : 'text-secondary hover:text-neon-cyan'}`}
                   >
                     Events
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link 
+                    to="/robo-events"
+                    className={`text-lg ${isActive('/robo-events') ? 'text-primary' : 'text-secondary hover:text-neon-cyan'}`}
+                  >
+                    Robo Events
                   </Link>
                 </SheetClose>
                 <SheetClose asChild>

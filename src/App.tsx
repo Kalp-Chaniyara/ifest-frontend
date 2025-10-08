@@ -9,6 +9,8 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Events from "./pages/Events";
 import EventDetails from "./pages/EventDetails";
+import RoboEvents from "./pages/RoboEvents";
+import RoboEventDetails from "./pages/RoboEventDetails";
 import Team from "./pages/Team";
 import Gallery from "./pages/Gallery";
 import Register from "./pages/Register";
@@ -36,6 +38,8 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/events" element={<Events />} />
             <Route path="/event/:id" element={<EventDetails />} />
+            <Route path="/robo-events" element={<RoboEvents />} />
+            <Route path="/robo-events/:id" element={<RoboEventDetails />} />
             <Route path="/team" element={<Team />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/register" element={<Register />} />

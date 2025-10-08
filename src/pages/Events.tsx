@@ -167,20 +167,6 @@ const events: Event[] = [
     size: 'medium'
   },
   {
-    id: '11',
-    name: 'RoboClash',
-    description: 'Robotics and automation competition.',
-    icon: <Gamepad2 className="w-8 h-8" />,
-    color: 'neon-magenta',
-    prize: 'TBA',
-    participants: 'Team',
-    time: '15th November',
-    location: 'Robotics Lab',
-    rules: ['Details coming soon'],
-    category: 'innovation',
-    size: 'large'
-  },
-  {
     id: '12',
     name: 'Chess64',
     description: 'Chess tournament with digital twist.',
@@ -251,21 +237,7 @@ const events: Event[] = [
     size: 'medium'
   },
   {
-    id: '17',
-    name: 'i.Bot',
-    description: 'AI chatbot development competition.',
-    icon: <Brain className="w-8 h-8" />,
-    color: 'neon-magenta',
-    prize: 'TBA',
-    participants: 'Individual/Team',
-    time: '15th November',
-    location: 'AI Lab',
-    rules: ['Details coming soon'],
-    category: 'ai',
-    size: 'medium'
-  },
-  {
-    id: '18',
+    id: '16',
     name: 'CineCraft',
     description: 'Video editing and filmmaking contest.',
     icon: <Gamepad2 className="w-8 h-8" />,
@@ -279,7 +251,7 @@ const events: Event[] = [
     size: 'large'
   },
   {
-    id: '19',
+    id: '17',
     name: 'i.Quiz',
     description: 'Technology and general knowledge quiz.',
     icon: <Trophy className="w-8 h-8" />,
@@ -293,7 +265,7 @@ const events: Event[] = [
     size: 'medium'
   },
   {
-    id: '20',
+    id: '18',
     name: 'BlindC',
     description: 'C programming challenge with special constraints.',
     icon: <Code className="w-8 h-8" />,
@@ -307,7 +279,7 @@ const events: Event[] = [
     size: 'medium'
   },
   {
-    id: '21',
+    id: '19',
     name: 'Reverse Coding',
     description: 'Reverse engineering and code analysis challenge.',
     icon: <Shield className="w-8 h-8" />,
@@ -321,7 +293,7 @@ const events: Event[] = [
     size: 'medium'
   },
   {
-    id: '22',
+    id: '20',
     name: 'AI Triathlon',
     description: 'Three-stage AI development marathon.',
     icon: <Brain className="w-8 h-8" />,
@@ -335,7 +307,7 @@ const events: Event[] = [
     size: 'large'
   },
   {
-    id: '23',
+    id: '21',
     name: 'i.Prompt',
     description: 'AI prompt engineering and optimization contest.',
     icon: <Zap className="w-8 h-8" />,
@@ -363,14 +335,14 @@ const Events = () => {
     setIsDialogOpen(true);
   };
 
-  const getCardSize = (size: string) => {
-    switch (size) {
-      case 'small': return 'col-span-1 row-span-1';
-      case 'medium': return 'col-span-1 row-span-2';
-      case 'large': return 'col-span-2 row-span-2';
-      default: return 'col-span-1 row-span-1';
-    }
-  };
+   const getCardSize = (size: string) => {
+     switch (size) {
+       case 'small': return 'col-span-1 row-span-1';
+       case 'medium': return 'col-span-1 sm:col-span-1 row-span-1 sm:row-span-2';
+       case 'large': return 'col-span-1 sm:col-span-2 row-span-1 sm:row-span-2';
+       default: return 'col-span-1 row-span-1';
+     }
+   };
 
   return (
     <>
@@ -379,28 +351,28 @@ const Events = () => {
       <main className="pt-24 pb-12 min-h-screen bg-transparent">
         <div className="container mx-auto px-6">
           
-          {/* Page Header */}
-          <div className="text-center mb-16">
-            <h1 className="mb-6 pixel-glow-magenta text-4xl md:text-6xl">
-              Digital Fragments
-            </h1>
-            <p className="text-ghost-grey text-lg max-w-2xl mx-auto">
-              Navigate through the glitch. Each fragment holds a piece of the paradox.
-            </p>
-          </div>
+           {/* Page Header */}
+           <div className="text-center mb-12 sm:mb-16 px-4">
+             <h1 className="mb-4 sm:mb-6 pixel-glow-magenta text-3xl sm:text-4xl lg:text-6xl">
+               Digital Fragments
+             </h1>
+             <p className="text-ghost-grey text-base sm:text-lg max-w-2xl mx-auto">
+               Navigate through the glitch. Each fragment holds a piece of the paradox.
+             </p>
+           </div>
 
-          {/* Events Grid */}
-          <div 
-            ref={containerRef}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 auto-rows-[200px]"
-          >
+           {/* Events Grid */}
+           <div 
+             ref={containerRef}
+             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 auto-rows-[180px] sm:auto-rows-[200px]"
+           >
             {events.map((event) => (
                 <div
                   key={event.id}
                   className={`
                   event-card relative group cursor-pointer
                   ${getCardSize(event.size)}
-                  pixel-card p-6 overflow-hidden
+                  pixel-card p-4 sm:p-6 overflow-hidden
                   transition-all duration-300
                   hover:scale-105 hover:z-10
                   ${hoveredEvent === event.id ? 'glitch-active' : ''}
@@ -408,6 +380,7 @@ const Events = () => {
                   hover:border-2 hover:border-neon-cyan
                   hover:shadow-[0_0_20px_rgba(0,255,255,0.6),0_0_40px_rgba(0,255,255,0.3)]
                   hover:bg-void-black/95
+                  min-h-[160px] sm:min-h-[180px]
                 `}
                 onMouseEnter={() => setHoveredEvent(event.id)}
                 onMouseLeave={() => setHoveredEvent(null)}
@@ -418,30 +391,30 @@ const Events = () => {
                 
                 {/* Content */}
                 <div className="relative z-10 h-full flex flex-col">
-                  {/* Icon */}
-                  <div className={`
-                    w-12 h-12 mb-4 transition-all duration-300
-                    group-hover:scale-125 group-hover:rotate-12
-                    ${event.color === 'neon-magenta' ? 'text-neon-magenta' : ''}
-                    ${event.color === 'neon-cyan' ? 'text-neon-cyan' : ''}
-                    ${event.color === 'pacman-yellow' ? 'text-pacman-yellow' : ''}
-                  `}>
-                    {event.icon}
-          </div>
+                   {/* Icon */}
+                   <div className={`
+                     w-10 h-10 sm:w-12 sm:h-12 mb-3 sm:mb-4 transition-all duration-300
+                     group-hover:scale-125 group-hover:rotate-12
+                     ${event.color === 'neon-magenta' ? 'text-neon-magenta' : ''}
+                     ${event.color === 'neon-cyan' ? 'text-neon-cyan' : ''}
+                     ${event.color === 'pacman-yellow' ? 'text-pacman-yellow' : ''}
+                   `}>
+                     {event.icon}
+           </div>
 
                   {/* Title */}
-                  <h3 className="text-pixel-white font-bold mb-2 group-hover:text-neon-magenta transition-colors">
+                  <h3 className="text-pixel-white font-bold mb-2 text-sm sm:text-base group-hover:text-neon-magenta transition-colors line-clamp-2">
                     {event.name}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-ghost-grey text-sm flex-grow line-clamp-3">
+                  <p className="text-ghost-grey text-xs sm:text-sm flex-grow line-clamp-2 sm:line-clamp-3 leading-relaxed">
                     {event.description}
                   </p>
 
                   {/* Prize */}
-                  <div className="mt-4 flex items-center justify-between">
-                    <span className="text-pacman-yellow font-bold">
+                  <div className="mt-3 sm:mt-4 flex items-center justify-between">
+                    <span className="text-pacman-yellow font-bold text-xs sm:text-sm">
                       {event.prize}
                     </span>
                     <span className="text-ghost-grey text-xs">

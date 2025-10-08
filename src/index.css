@@ -1621,3 +1621,9 @@
     }
   }
 }
+
+@layer utilities {
+  /* Force all grey text utilities to render white without changing borders */
+  .text-ghost-grey { color: hsl(var(--pixel-white)) !important; }
+  .text-muted { color: hsl(var(--pixel-white)) !important; }
+}
