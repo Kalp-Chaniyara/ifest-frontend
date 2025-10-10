@@ -125,6 +125,17 @@ const RoboEvents = () => {
             </p>
           </div>
 
+        {/* Offer Note */}
+        <div className="max-w-3xl mx-auto px-4 mb-8">
+          <Card className="border-pacman-yellow/40 bg-void-black/70">
+            <CardContent className="py-4">
+              <p className="text-pixel-white text-sm sm:text-base">
+                <span className="text-pacman-yellow font-bold">Note:</span> Per team you will get <span className="text-pacman-yellow font-extrabold">5 Gold Pass</span> free on registration of any Robo event.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
           {/* Events Grid */}
           <div className="grid grid-cols-1 gap-6 lg:gap-8 max-w-3xl mx-auto px-4">
             {roboEvents.map((event) => (

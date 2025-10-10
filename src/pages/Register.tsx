@@ -67,6 +67,7 @@ const createPasses = (categoryId: string): PassType[] => {
       description: 'Essential access to core festival events',
       features: [
         "Access to all events",
+        "No participation in robo events (View only)",
      "(No access for Concert, Standup)"
       ],
       icon: <Star className="w-6 h-6" />,
@@ -83,12 +84,14 @@ const createPasses = (categoryId: string): PassType[] => {
     features: categoryId === 'dau' ? [
       "All benifits of silver pass",
       "Access to Concert", "EDM night", "Standup Night", 
-      "Also all the event"
+      "Also all the event",
+      "No participation in robo events (View only)",
  
     ] : [
       "All benifits of silver pass",
       "Access to Concert", "EDM night", "Standup Night", 
-      "Also all the event"
+      "Also all the event",
+      "No participation in robo events (View only)",
     ],
     icon: <Crown className="w-6 h-6" />,
     color: 'pacman-yellow',

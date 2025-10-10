@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { 
   Calendar, 
   Trophy, 
@@ -19,8 +18,7 @@ import {
   ArrowLeft,
   CheckCircle,
   AlertCircle,
-  BookOpen,
-  Code
+  BookOpen
 } from 'lucide-react';
 
 interface RoboEvent {
@@ -36,6 +34,7 @@ interface RoboEvent {
   registrationForm: string;
   rules: string[];
   requirements: string[];
+  coordinators?: Array<{ name: string; phone: string }>;
   icon: React.ReactNode;
   color: string;
   detailedDescription: string;
@@ -46,6 +45,7 @@ interface RoboEvent {
     fee: string;
     rulesSummary: string;
     registrationLink: string;
+    rulebookUrl?: string;
     rulebookShort?: string[];
     rulebookLong?: string[];
   }>;
@@ -60,10 +60,14 @@ const roboEventsData: RoboEvent[] = [
     poster: '/events/roboclash.png',
     time: '15th November',
     prize: 'Category-wise',
-    participants: 'Team (up to 5 members)',
-    location: 'Robotics Arena',
+    participants: 'Team (2-4 members)',
+    location: 'Open Air Theatre(OAT), DAU',
     category: 'robotics',
     registrationForm: '',
+    coordinators: [
+      { name: 'Param', phone: '+91 6355161862' },
+      { name: 'Aayush', phone: '+91 6351019814' }
+    ],
     rules: [
       'All bots must pass safety inspection and have kill switch or U-link',
       'Wireless control only; binding and override capability required',
@@ -77,9 +81,8 @@ const roboEventsData: RoboEvent[] = [
       'Adherence to arena and safety rules',
     ],
     schedule: [
-      'Fixtures drawn by judges with organizing team',
-      'At least 45 minutes break between matches for repairs',
-      'Match duration: 3 minutes',
+      '15th November',
+      'Complete timeline will be shared later'
     ],
     judgingCriteria: [
       'Damage (0-5): minimal to massive impact on systems',
@@ -92,6 +95,7 @@ const roboEventsData: RoboEvent[] = [
         fee: '₹1000',
         rulesSummary: 'Max 1.5 kg with 1% tolerance; 8 ft enclosed arena; 36V max.',
         registrationLink: 'https://forms.gle/HUwVMa3XGfLweiFP6',
+        rulebookUrl: 'https://docs.google.com/document/d/1TtIFpJpeIwTQN460INFDOo-_R_yvfxqy6w7f0Nw65x8/edit?usp=sharing',
         rulebookShort: [
           'Bot fits within 30cm x 30cm start square; 25cm x 25cm x 25cm max',
           'Mobility: wheeled/non-wheeled/jumping; flying and suction not allowed',
@@ -106,6 +110,7 @@ const roboEventsData: RoboEvent[] = [
         fee: '₹1250',
         rulesSummary: 'Max 8 kg (1% tol); 16 ft arena; 52V max; ground mobility.',
         registrationLink: 'https://forms.gle/YSmhV2G6ZgyUqLPo8',
+        rulebookUrl: 'https://docs.google.com/document/d/1jFt8Kl8t7r3HabQcXXuVzzYt261tGLAWTwH3HEWPSdI/edit?usp=drivesdk',
         rulebookLong: [
           'Machine fits 75cm x 75cm x 100cm box at start; RC excluded',
           'Visible, controlled mobility required; rolling, legs, jumping allowed',
@@ -124,6 +129,7 @@ const roboEventsData: RoboEvent[] = [
         fee: '₹1500',
         rulesSummary: 'Max 15 kg (1% tol); 16 ft arena; 52V max; ground mobility.',
         registrationLink: 'https://forms.gle/oeycVoQnLdC7Aggg8',
+        rulebookUrl: 'https://docs.google.com/document/d/1jFt8Kl8t7r3HabQcXXuVzzYt261tGLAWTwH3HEWPSdI/edit?usp=drivesdk',
         rulebookLong: [
           'Machine fits 75cm x 75cm x 100cm box at start; RC excluded',
           'Wireless only; binding; E-stop via radio; kill switch or U-link within 20s',
@@ -148,6 +154,10 @@ const roboEventsData: RoboEvent[] = [
     location: 'AI Lab',
     category: 'ai',
     registrationForm: 'https://forms.gle/8TxHJtSonxQSNhGK8',
+    coordinators: [
+      { name: 'Coordinator Alpha', phone: '+91 90000 00011' },
+      { name: 'Coordinator Beta', phone: '+91 90000 00012' }
+    ],
     rules: [
       'Individual or team participation allowed (max 3 members)',
       'Must use provided AI frameworks and APIs',
@@ -324,6 +334,22 @@ const RoboEventDetails = () => {
                       <div className="text-pixel-white font-semibold text-lg">{event.participants}</div>
                     </div>
                   </div>
+                  {event.coordinators && event.coordinators.length > 0 && (
+                    <div className="flex items-start space-x-3 p-3 bg-void-black/50 rounded">
+                      <Users className="w-6 h-6 text-neon-cyan mt-1" />
+                      <div>
+                        <div className="text-ghost-grey text-sm">Coordinators</div>
+                        <div className="text-pixel-white font-semibold text-sm space-y-1">
+                          {event.coordinators.map((c, i) => (
+                            <div key={i} className="flex items-center gap-2">
+                              <span>{c.name}</span>
+                              <a href={`tel:${c.phone.replace(/\s/g, '')}`} className="text-neon-cyan hover:underline">{c.phone}</a>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </Card>
 
@@ -368,7 +394,7 @@ const RoboEventDetails = () => {
                       <div className="flex flex-col sm:flex-row gap-3">
                         <Button
                           className="pixel-button-secondary"
-                          onClick={() => setOpenIndex(idx)}
+                          onClick={() => window.location.assign(cat.rulebookUrl || '#')}
                         >
                           View Rulebook
                         </Button>
@@ -380,30 +406,6 @@ const RoboEventDetails = () => {
                           Register for {cat.name}
                         </Button>
                       </div>
-
-                      {/* Modal for rulebook */}
-                      <Dialog open={openIndex === idx} onOpenChange={(open) => setOpenIndex(open ? idx : null)}>
-                        <DialogContent className="max-w-2xl">
-                          <DialogHeader>
-                            <DialogTitle className="text-neon-cyan">{cat.name} – Full Rulebook</DialogTitle>
-                            <DialogDescription className="text-ghost-grey">Please review carefully before registering.</DialogDescription>
-                          </DialogHeader>
-                          <div className="mt-2 max-h-[60vh] overflow-auto pr-2 space-y-3">
-                            {(cat.rulebookLong && cat.rulebookLong.length > 0 ? cat.rulebookLong : (cat.rulebookShort || [])).map((r, rIdx) => (
-                              <div key={rIdx} className="flex items-start space-x-2">
-                                <div className="w-1.5 h-1.5 mt-2 bg-neon-cyan rounded-full" />
-                                <span className="text-ghost-grey text-sm leading-relaxed">{r}</span>
-                              </div>
-                            ))}
-                          </div>
-                          <DialogFooter className="mt-4">
-                            <Button className="pixel-button-primary" onClick={() => window.open(cat.registrationLink, '_blank')}>
-                              <ExternalLink className="w-4 h-4 mr-2" />
-                              Proceed to Register
-                            </Button>
-                          </DialogFooter>
-                        </DialogContent>
-                      </Dialog>
                     </div>
                   ))}
                 </div>
@@ -448,68 +450,7 @@ const RoboEventDetails = () => {
               </CardContent>
             </Card>
 
-            {/* Rules */}
-            <Card className="pixel-card">
-              <CardHeader>
-                <CardTitle className="text-neon-cyan flex items-center">
-                  <AlertCircle className="w-5 h-5 mr-2" />
-                  Rules & Guidelines
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  {event.rules.map((rule, index) => (
-                    <div key={index} className="flex items-start space-x-3">
-                      <CheckCircle className="w-4 h-4 text-success-green mt-0.5 flex-shrink-0" />
-                      <span className="text-ghost-grey text-sm">{rule}</span>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Requirements */}
-            <Card className="pixel-card">
-              <CardHeader>
-                <CardTitle className="text-neon-cyan flex items-center">
-                  <Code className="w-5 h-5 mr-2" />
-                  Requirements
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  {event.requirements.map((req, index) => (
-                    <div key={index} className="flex items-start space-x-3">
-                      <div className="w-2 h-2 bg-pacman-yellow rounded-full mt-2 flex-shrink-0" />
-                      <span className="text-ghost-grey text-sm">{req}</span>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
           </div>
-
-          {/* Judging Criteria */}
-          <Card className="pixel-card mt-8">
-            <CardHeader>
-              <CardTitle className="text-neon-cyan flex items-center">
-                <Trophy className="w-5 h-5 mr-2" />
-                Judging Criteria
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {event.judgingCriteria.map((criteria, index) => (
-                  <div key={index} className="flex items-center space-x-3 p-3 bg-void-black/50 rounded">
-                    <div className="w-8 h-8 bg-neon-cyan text-void-black rounded-full flex items-center justify-center font-bold text-sm">
-                      {index + 1}
-                    </div>
-                    <span className="text-ghost-grey">{criteria}</span>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
 
           {/* Important Notice */}
           <Alert className="mt-8 border-warning-yellow bg-warning-yellow/20">
