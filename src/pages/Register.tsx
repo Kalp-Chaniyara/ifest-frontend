@@ -312,7 +312,7 @@ const Register = () => {
           </div>
 
           {/* Special Combo Offer */}
-          <div className="max-w-4xl mx-auto mb-16">
+          {/* <div className="max-w-4xl mx-auto mb-16">
             <Card className="pixel-card bg-gradient-to-r from-neon-magenta/20 to-neon-cyan/20 border-2 border-pacman-yellow">
               <CardHeader className="text-center">
                 <CardTitle className="text-2xl text-pacman-yellow flex items-center justify-center gap-2">
@@ -359,7 +359,7 @@ const Register = () => {
                 </a>
               </CardContent>
             </Card>
-          </div>
+          </div> */}
 
           {/* Step 1: Category Selection */}
           {currentStep === 'category' && (
