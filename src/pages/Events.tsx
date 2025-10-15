@@ -356,7 +356,7 @@ const Events = () => {
              <h1 className="mb-4 sm:mb-6 pixel-glow-magenta text-3xl sm:text-4xl lg:text-6xl">
                Digital Fragments
              </h1>
-             <p className="text-ghost-grey text-base sm:text-lg max-w-2xl mx-auto">
+             <p className="text-ghost-grey text-lg sm:text-xl max-w-2xl mx-auto">
                Navigate through the glitch. Each fragment holds a piece of the paradox.
              </p>
            </div>

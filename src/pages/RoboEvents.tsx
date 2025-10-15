@@ -59,33 +59,32 @@ const roboEvents: RoboEvent[] = [
     icon: <Bot className="w-8 h-8" />,
     color: 'neon-magenta'
   },
-  // {
-  //   id: 'ibot',
-  //   name: 'i.Bot',
-  //   description: 'AI chatbot development competition focusing on natural language processing and conversational AI.',
-  //   poster: '/tShirt.png', // Using existing image as placeholder
-  //   time: '15th November',
-  //   prize: '₹12,000',
-  //   participants: 'Individual/Team (1-3 members)',
-  //   location: 'AI Lab',
-  //   category: 'ai',
-  //   registrationForm: 'https://forms.gle/8TxHJtSonxQSNhGK8', // Replace with actual form
-  //   rules: [
-  //     'Individual or team participation allowed',
-  //     'Must use provided AI frameworks',
-  //     'Chatbot must respond to predefined scenarios',
-  //     'No pre-trained models allowed',
-  //     'Code must be original'
-  //   ],
-  //   requirements: [
-  //     'Python programming knowledge',
-  //     'Understanding of NLP concepts',
-  //     'Basic machine learning knowledge',
-  //     'API integration skills'
-  //   ],
-  //   icon: <Zap className="w-8 h-8" />,
-  //   color: 'neon-cyan'
-  // }
+  {
+    id: 'robosoccer',
+    name: 'ROBO SOCCER',
+    description: 'Robot soccer competition where autonomous robots compete to score goals in a football-style match.',
+    poster: '/events/robosoccer2.png', // Using same poster for now
+    time: '15th November',
+    prize: 'TBA',
+    participants: 'Team (up to 4 members)',
+    location: 'Robotics Arena',
+    category: 'robotics',
+    registrationForm: 'https://forms.gle/2LdFH9MvmQGp3vNw7',
+    rules: [
+      'Robot dimensions must not exceed 30cm x 30cm x 30cm',
+      'Maximum weight 5kg with 5% tolerance',
+      'Maximum voltage 25.2V for batteries',
+      'Standard football scoring rules apply',
+    ],
+    requirements: [
+      'Both wired and wireless robots allowed',
+      '4-wheel or 2-wheel drive mechanism required',
+      'Dribbler mechanisms are allowed',
+      'Robot body must not be from readymade toys',
+    ],
+    icon: <Bot className="w-8 h-8" />,
+    color: 'neon-cyan'
+  },
 ];
 
 const RoboEvents = () => {
@@ -119,7 +118,7 @@ const RoboEvents = () => {
             <h1 className="mb-4 sm:mb-6 pixel-glow-magenta text-3xl sm:text-4xl lg:text-6xl">
               Robo Events
             </h1>
-            <p className="text-ghost-grey text-base sm:text-lg max-w-2xl mx-auto">
+            <p className="text-ghost-grey text-lg sm:text-xl max-w-2xl mx-auto">
               Where artificial intelligence meets mechanical precision. 
               Compete in cutting-edge robotics and AI challenges.
             </p>
@@ -129,7 +128,7 @@ const RoboEvents = () => {
         <div className="max-w-3xl mx-auto px-4 mb-8">
           <Card className="border-pacman-yellow/40 bg-void-black/70">
             <CardContent className="py-4">
-              <p className="text-pixel-white text-sm sm:text-base">
+              <p className="text-pixel-white text-base sm:text-lg">
                 <span className="text-pacman-yellow font-bold">Note:</span> Per team you will get <span className="text-pacman-yellow font-extrabold">5 Gold Pass</span> free on registration of any Robo event.
               </p>
             </CardContent>
@@ -183,12 +182,12 @@ const RoboEvents = () => {
                         {event.name}
                       </CardTitle>
                       
-                      <CardDescription className="text-ghost-grey text-sm md:text-base mb-6 line-clamp-3">
+                      <CardDescription className="text-ghost-grey text-base md:text-lg mb-6 line-clamp-3">
                         {event.description}
                       </CardDescription>
 
                       {/* Event Details */}
-                      <div className="grid grid-cols-2 gap-3 md:gap-4 text-xs md:text-sm mb-6">
+                      <div className="grid grid-cols-2 gap-3 md:gap-4 text-sm md:text-base mb-6">
                         <div className="flex items-center space-x-2">
                           <Calendar className="w-3 h-3 md:w-4 md:h-4 text-neon-cyan" />
                           <span className="text-ghost-grey">{event.time}</span>
@@ -203,7 +202,7 @@ const RoboEvents = () => {
                         </div>
                         <div className="flex items-center space-x-2">
                           <Users className="w-3 h-3 md:w-4 md:h-4 text-neon-cyan" />
-                          <span className="text-ghost-grey text-xs">{event.participants}</span>
+                          <span className="text-ghost-grey text-sm">{event.participants}</span>
                         </div>
                       </div>
                     </div>
@@ -214,12 +213,12 @@ const RoboEvents = () => {
                         to={`/robo-events/${event.id}`}
                         className="flex-1"
                       >
-                        <Button className="w-full pixel-button-primary text-sm py-2">
+                        <Button className="w-full pixel-button-primary text-base py-2">
                           View Details
                         </Button>
                       </Link>
                       <Button
-                        className="pixel-button-secondary text-sm py-2 px-4"
+                        className="pixel-button-secondary text-base py-2 px-4"
                         onClick={() => window.location.assign(`/robo-events/${event.id}`)}
                       >
                         <ExternalLink className="w-4 h-4 mr-2" />

@@ -153,11 +153,26 @@ const About = () => {
               
               {/* Past Year Video */}
               <section className="pixel-card p-8 hover:bg-black">
-                <h3 className="text-neon-cyan mb-6">Highlights</h3>
+                <h3 className="text-neon-cyan mb-6">Highlights of 2024</h3>
                 <div className="relative aspect-video bg-void-black border-2 border-ghost-grey">
                   <iframe
                     src="https://www.youtube.com/embed/zOu8dTKQlwU"
                     title="i'Fest'24 Recap Video"
+                    className="w-full h-full"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </section>
+
+              {/* Retro Media Hub */}
+              <section className="pixel-card p-8 hover:bg-black">
+                <h3 className="text-neon-cyan mb-6">Retro Media Hub</h3>
+                <div className="relative aspect-video bg-void-black border-2 border-ghost-grey">
+                  <iframe
+                    src="https://www.youtube.com/embed/leuMlC5C6as"
+                    title="Retro Media Hub - i'Fest'25"
                     className="w-full h-full"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

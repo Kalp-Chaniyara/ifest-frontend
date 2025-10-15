@@ -143,58 +143,58 @@ const roboEventsData: RoboEvent[] = [
     color: 'neon-magenta'
   },
   {
-    id: 'ibot',
-    name: 'i.Bot',
-    description: 'AI chatbot development competition focusing on natural language processing and conversational AI.',
-    detailedDescription: 'i.Bot is an AI chatbot development competition that challenges participants to create intelligent conversational agents. Participants will develop chatbots that can understand context, maintain conversations, and provide helpful responses across various scenarios. The competition tests skills in natural language processing, machine learning, and user experience design.',
-    poster: '/tShirt.png',
+    id: 'robosoccer',
+    name: 'ROBO SOCCER',
+    description: 'Robot soccer competition where autonomous robots compete to score goals in a football-style match.',
+    detailedDescription: 'Build and program a robot to play soccer! Your robot will compete against others in a football-style match on a specially designed arena. The robot must be able to move, kick the ball, and score goals while following all the specified rules and regulations.',
+    poster: '/events/robosoccer.png',
     time: '15th November',
-    prize: '₹12,000',
-    participants: 'Individual/Team (1-3 members)',
-    location: 'AI Lab',
-    category: 'ai',
-    registrationForm: 'https://forms.gle/8TxHJtSonxQSNhGK8',
+    prize: 'TBA',
+    participants: 'Team (up to 4 members)',
+    location: 'Robotics Arena',
+    category: 'robotics',
+    registrationForm: 'https://forms.gle/2LdFH9MvmQGp3vNw7',
     coordinators: [
-      { name: 'Coordinator Alpha', phone: '+91 90000 00011' },
-      { name: 'Coordinator Beta', phone: '+91 90000 00012' }
+      { name: 'Preet', phone: '+91 9313153988' },
+      { name: 'Jeet', phone: '+91 9978617561' }
     ],
     rules: [
-      'Individual or team participation allowed (max 3 members)',
-      'Must use provided AI frameworks and APIs',
-      'Chatbot must respond to predefined scenarios',
-      'No pre-trained commercial models allowed',
-      'Code must be original and developed during competition',
-      'Maximum response time: 3 seconds per query',
-      'Must handle at least 5 different conversation topics',
-      'Documentation and code comments required'
+      'Robot dimensions must not exceed 30cm x 30cm x 30cm at any point (5% tolerance)',
+      'Maximum weight 5kg with 5% tolerance',
+      'Maximum voltage 25.2V for batteries and any two points of circuit',
+      'Both wired and wireless robots are allowed',
+      '4-wheel drive or 2-wheel drive mechanism required; all tyres must contribute to motion',
+      'Robot body must not be from readymade toys; robot making kits can be used',
+      'Dribbler mechanisms are allowed',
+      'Standard football scoring rules apply',
+      'Bot must not hold ball for more than 10 seconds in stationary position',
+      'Immobilization of bot for 40 seconds leads to disqualification',
     ],
     requirements: [
-      'Python programming knowledge',
-      'Understanding of NLP concepts',
-      'Basic machine learning knowledge',
-      'API integration skills',
-      'Familiarity with chatbot frameworks',
-      'Understanding of conversation design principles'
+      'Wired control: minimum 6 meters wire length, routed through pole 45cm high',
+      'Wireless control: must support dual-frequency operation to avoid interference',
+      'RF modules from toy cars may be used',
+      'No IC engines and LEGO kits allowed',
+      'Robot should be as per given specifications',
+      'Each team can have maximum 4 members',
+      'Students from different institutes can form a team',
     ],
     schedule: [
-      '10:00 AM - Registration and Problem Statement',
-      '10:30 AM - Development Environment Setup',
-      '11:00 AM - Development Phase Begins',
-      '01:00 PM - Lunch Break',
-      '02:00 PM - Continued Development',
-      '04:00 PM - Testing and Debugging',
-      '05:00 PM - Presentation and Demo',
-      '06:00 PM - Judging and Awards'
+      '15th November',
+      'Match duration: approximately 6 minutes (varies based on number of teams)',
+      'Complete timeline will be shared later'
     ],
     judgingCriteria: [
-      'Conversation quality and relevance (35%)',
-      'Technical implementation (30%)',
-      'User experience and interface (20%)',
-      'Innovation and creativity (15%)'
+      'Standard football scoring rules apply',
+      'Team scoring most goals by end of full time wins',
+      'Ball must cross the goal line to be considered a goal',
+      'Direct goals are valid',
+      'Technical timeout: 1 minute free, extra timeout considered as goal for opponent',
     ],
-    icon: <Zap className="w-8 h-8" />,
+    icon: <Bot className="w-8 h-8" />,
     color: 'neon-cyan'
-  }
+  },
+  
 ];
 
 const RoboEventDetails = () => {
@@ -300,7 +300,7 @@ const RoboEventDetails = () => {
                   {event.icon}
                   <h1 className="text-4xl font-bold">{event.name}</h1>
                 </div>
-                <p className="text-ghost-grey text-lg mb-6">{event.description}</p>
+                <p className="text-ghost-grey text-xl mb-6">{event.description}</p>
               </div>
 
               {/* Quick Details */}
@@ -309,37 +309,37 @@ const RoboEventDetails = () => {
                   <div className="flex items-center space-x-3 p-3 bg-void-black/50 rounded">
                     <Calendar className="w-6 h-6 text-neon-cyan" />
                     <div>
-                      <div className="text-ghost-grey text-sm">Date</div>
-                      <div className="text-pixel-white font-semibold text-lg">{event.time}</div>
+                      <div className="text-ghost-grey text-base">Date</div>
+                      <div className="text-pixel-white font-semibold text-xl">{event.time}</div>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3 p-3 bg-void-black/50 rounded">
                     <MapPin className="w-6 h-6 text-neon-cyan" />
                     <div>
-                      <div className="text-ghost-grey text-sm">Location</div>
-                      <div className="text-pixel-white font-semibold text-lg">{event.location}</div>
+                      <div className="text-ghost-grey text-base">Location</div>
+                      <div className="text-pixel-white font-semibold text-xl">{event.location}</div>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3 p-3 bg-void-black/50 rounded">
                     <Trophy className="w-6 h-6 text-pacman-yellow" />
                     <div>
-                      <div className="text-ghost-grey text-sm">Prize</div>
-                      <div className="text-pacman-yellow font-bold text-lg">{event.prize}</div>
+                      <div className="text-ghost-grey text-base">Prize</div>
+                      <div className="text-pacman-yellow font-bold text-xl">{event.prize}</div>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3 p-3 bg-void-black/50 rounded">
                     <Users className="w-6 h-6 text-neon-cyan" />
                     <div>
-                      <div className="text-ghost-grey text-sm">Participants</div>
-                      <div className="text-pixel-white font-semibold text-lg">{event.participants}</div>
+                      <div className="text-ghost-grey text-base">Participants</div>
+                      <div className="text-pixel-white font-semibold text-xl">{event.participants}</div>
                     </div>
                   </div>
                   {event.coordinators && event.coordinators.length > 0 && (
                     <div className="flex items-start space-x-3 p-3 bg-void-black/50 rounded">
                       <Users className="w-6 h-6 text-neon-cyan mt-1" />
                       <div>
-                        <div className="text-ghost-grey text-sm">Coordinators</div>
-                        <div className="text-pixel-white font-semibold text-sm space-y-1">
+                        <div className="text-ghost-grey text-base">Coordinators</div>
+                        <div className="text-pixel-white font-semibold text-base space-y-1">
                           {event.coordinators.map((c, i) => (
                             <div key={i} className="flex items-center gap-2">
                               <span>{c.name}</span>
@@ -353,18 +353,42 @@ const RoboEventDetails = () => {
                 </div>
               </Card>
 
-              {/* Register Button (hidden when categories exist) */}
-              {(!event.categories || event.categories.length === 0) && event.registrationForm && (
-                <Button
-                  className="w-full pixel-button-primary text-lg py-6"
-                  onClick={() => window.open(event.registrationForm, '_blank')}
-                >
-                  <ExternalLink className="w-5 h-5 mr-2" />
-                  Register Now
-                </Button>
-              )}
             </div>
           </div>
+
+          {/* Rulebook Section for ROBO SOCCER */}
+          {event.id === 'robosoccer' && (
+            <Card className="pixel-card mb-8">
+              <CardHeader>
+                <CardTitle className="text-neon-cyan">Rulebook & Registration</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="p-5 rounded border border-void-black/60 bg-void-black/60">
+                    <h3 className="text-pixel-white font-extrabold text-xl mb-3">ROBO SOCCER</h3>
+                    <p className="text-ghost-grey text-base mb-4">
+                      Complete rulebook with arena specifications, robot requirements, and gameplay rules.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <Button
+                        className="pixel-button-secondary"
+                        onClick={() => window.open('https://docs.google.com/document/d/1rFKIIrklQ0ermKzTdH0aqRX7IryAVuWlbhaPOql8Gs0/edit?usp=sharing', '_blank')}
+                      >
+                        View Rulebook
+                      </Button>
+                      <Button
+                        className="pixel-button-primary"
+                        onClick={() => window.open('https://forms.gle/2LdFH9MvmQGp3vNw7', '_blank')}
+                      >
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        Register Now
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
 
           {/* Detailed Information */}
           {/* Roboclash Categories (if any) */}
@@ -424,7 +448,7 @@ const RoboEventDetails = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-ghost-grey leading-relaxed">
+                <p className="text-ghost-grey leading-relaxed text-lg">
                   {event.detailedDescription}
                 </p>
               </CardContent>
@@ -443,7 +467,7 @@ const RoboEventDetails = () => {
                   {event.schedule.map((item, index) => (
                     <div key={index} className="flex items-center space-x-3">
                       <div className="w-2 h-2 bg-neon-cyan rounded-full flex-shrink-0" />
-                      <span className="text-ghost-grey">{item}</span>
+                      <span className="text-ghost-grey text-base">{item}</span>
                     </div>
                   ))}
                 </div>

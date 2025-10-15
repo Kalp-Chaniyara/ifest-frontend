@@ -71,7 +71,7 @@ const Merchandise = () => {
                   
                   <CardContent className="p-0 space-y-6">
                     {/* Description */}
-                    <p className="text-ghost-grey text-lg">
+                    <p className="text-ghost-grey text-xl">
                       {merchandise.description}
                     </p>
 
@@ -80,7 +80,7 @@ const Merchandise = () => {
                       <h3 className="text-neon-cyan mb-2">Features:</h3>
                       <div className="flex flex-wrap gap-2">
                         {merchandise.features.map((feature, index) => (
-                          <Badge key={index} variant="secondary" className="text-sm">
+                          <Badge key={index} variant="secondary" className="text-base">
                             {feature}
                           </Badge>
                         ))}

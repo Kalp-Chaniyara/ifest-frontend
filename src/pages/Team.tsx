@@ -95,7 +95,7 @@ const Team = () => {
             <h1 className="mb-6 text-4xl md:text-6xl pixel-glow-magenta">
               Meet the Team
             </h1>
-            <p className="text-ghost-grey text-lg max-w-2xl mx-auto">
+            <p className="text-ghost-grey text-xl max-w-2xl mx-auto">
               The brilliant minds behind i'Fest'25. Each pixel of this experience has been crafted with passion and innovation.
             </p>
             <div className="mt-6 text-neon-cyan text-xl font-bold">

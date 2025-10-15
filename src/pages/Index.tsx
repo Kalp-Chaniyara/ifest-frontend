@@ -177,53 +177,92 @@ const Index = () => {
           </div>
 
           <div className="flex justify-center">
-            {/* CRT TV Frame */}
-            <div className="relative max-w-4xl w-full">
-              {/* TV Bezel */}
-              <div className="relative bg-gradient-to-b from-gray-800 to-gray-900 p-8 rounded-lg shadow-2xl">
-                {/* TV Screen */}
-                <div className="relative aspect-video bg-void-black overflow-hidden rounded-sm">
-                  {/* CRT Screen Effect */}
-                  <div className="absolute inset-0 crt-screen"></div>
-                  
-                  {/* Video Container */}
-                  <div className="relative z-10 w-full h-full">
-                    <iframe
-                      src="https://www.youtube.com/embed/zOu8dTKQlwU?autoplay=0&mute=1"
-                      title="i'Fest 2024 Highlights"
-                      className="w-full h-full"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
+            {/* Two Separate CRT TV Frames */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl w-full">
+              
+              {/* First CRT TV Frame - New Video */}
+              <div className="relative">
+                {/* TV Bezel */}
+                <div className="relative bg-gradient-to-b from-gray-800 to-gray-900 p-6 rounded-lg shadow-2xl">
+                  {/* TV Screen */}
+                  <div className="relative aspect-video bg-void-black overflow-hidden rounded-sm">
+                    {/* CRT Screen Effect */}
+                    <div className="absolute inset-0 crt-screen"></div>
+                    
+                    {/* Video Container */}
+                    <div className="relative z-10 w-full h-full">
+                      <iframe
+                        src="https://www.youtube.com/embed/leuMlC5C6as?autoplay=0&mute=1"
+                        title="Retro Media Hub - i'Fest'25"
+                        className="w-full h-full"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                    
+                    {/* Scanlines Overlay */}
+                    <div className="absolute inset-0 scanlines-overlay pointer-events-none"></div>
+                    
+                    {/* Screen Glow */}
+                    <div className="absolute inset-0 screen-glow pointer-events-none"></div>
                   </div>
-                  
-                  {/* Scanlines Overlay */}
-                  <div className="absolute inset-0 scanlines-overlay pointer-events-none"></div>
-                  
-                  {/* Screen Glow */}
-                  <div className="absolute inset-0 screen-glow pointer-events-none"></div>
-                </div>
 
-                {/* TV Controls */}
-                <div className="flex justify-center mt-6 space-x-6">
-                  <div className="w-6 h-6 bg-neon-magenta rounded-full animate-pulse"></div>
-                  <div className="w-6 h-6 bg-neon-cyan rounded-full animate-pulse"></div>
-                  <div className="w-6 h-6 bg-pacman-yellow rounded-full animate-pulse"></div>
-                  <div className="w-6 h-6 bg-ghost-grey rounded-full"></div>
-                </div>
+                  {/* TV Controls */}
+                  <div className="flex justify-center mt-4 space-x-4">
+                    <div className="w-4 h-4 bg-neon-magenta rounded-full animate-pulse"></div>
+                    <div className="w-4 h-4 bg-neon-cyan rounded-full animate-pulse"></div>
+                    <div className="w-4 h-4 bg-pacman-yellow rounded-full animate-pulse"></div>
+                  </div>
 
-                {/* TV Brand */}
-                <div className="absolute bottom-2 right-4 text-ghost-grey text-xs font-mono">
-                  PIXEL-VISION 2000
+                  {/* TV Brand */}
+                  <div className="absolute bottom-2 right-4 text-ghost-grey text-xs font-mono">
+                    PIXEL-VISION 2000
+                  </div>
                 </div>
               </div>
 
-              {/* Floating Elements */}
-              <div className="absolute -top-4 -left-4 w-8 h-8 bg-neon-magenta animate-pixel-float"></div>
-              <div className="absolute -top-4 -right-4 w-8 h-8 bg-neon-cyan animate-pixel-float" style={{animationDelay: '1s'}}></div>
-              <div className="absolute -bottom-4 -left-4 w-8 h-8 bg-pacman-yellow animate-pixel-float" style={{animationDelay: '2s'}}></div>
-              <div className="absolute -bottom-4 -right-4 w-8 h-8 bg-ghost-grey animate-pixel-float" style={{animationDelay: '3s'}}></div>
+              {/* Second CRT TV Frame - Original Video */}
+              <div className="relative">
+                {/* TV Bezel */}
+                <div className="relative bg-gradient-to-b from-gray-800 to-gray-900 p-6 rounded-lg shadow-2xl">
+                  {/* TV Screen */}
+                  <div className="relative aspect-video bg-void-black overflow-hidden rounded-sm">
+                    {/* CRT Screen Effect */}
+                    <div className="absolute inset-0 crt-screen"></div>
+                    
+                    {/* Video Container */}
+                    <div className="relative z-10 w-full h-full">
+                      <iframe
+                        src="https://www.youtube.com/embed/zOu8dTKQlwU?autoplay=0&mute=1"
+                        title="i'Fest 2024 Highlights"
+                        className="w-full h-full"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                    
+                    {/* Scanlines Overlay */}
+                    <div className="absolute inset-0 scanlines-overlay pointer-events-none"></div>
+                    
+                    {/* Screen Glow */}
+                    <div className="absolute inset-0 screen-glow pointer-events-none"></div>
+                  </div>
+
+                  {/* TV Controls */}
+                  <div className="flex justify-center mt-4 space-x-4">
+                    <div className="w-4 h-4 bg-neon-magenta rounded-full animate-pulse"></div>
+                    <div className="w-4 h-4 bg-neon-cyan rounded-full animate-pulse"></div>
+                    <div className="w-4 h-4 bg-pacman-yellow rounded-full animate-pulse"></div>
+                  </div>
+
+                  {/* TV Brand */}
+                  <div className="absolute bottom-2 right-4 text-ghost-grey text-xs font-mono">
+                    PIXEL-VISION 2000
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
