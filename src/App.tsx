@@ -21,19 +21,22 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import RefundPolicy from "./pages/RefundPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import Merchandise from "./pages/Merchandise";
+import PaymentResult from "./pages/PaymentResult";
+import { PaymentProvider } from "./contexts/PaymentContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <CursorTrail />
-      <ParticlesBackground />
-      <div className="relative z-10">
-        <BrowserRouter basename={import.meta.env.BASE_URL || "/"}>
-          <Routes>
+      <PaymentProvider>
+        <Toaster />
+        <Sonner />
+        <CursorTrail />
+        <ParticlesBackground />
+        <div className="relative z-10">
+          <BrowserRouter basename={import.meta.env.BASE_URL || "/"}>
+            <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
             <Route path="/events" element={<Events />} />
@@ -49,11 +52,13 @@ const App = () => (
             <Route path="/refund-policy" element={<RefundPolicy />} />
             <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
             <Route path="/merchandise" element={<Merchandise />} />
+            <Route path="/payment/result" element={<PaymentResult />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
+            </Routes>
+          </BrowserRouter>
+        </div>
+      </PaymentProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

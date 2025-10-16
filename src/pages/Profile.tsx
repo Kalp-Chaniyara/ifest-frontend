@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { useAuth } from '@/hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import { usePaymentStatus } from '@/contexts/PaymentContext';
 import { 
   User, 
   Mail, 
@@ -49,6 +50,7 @@ const Profile = () => {
   const [user, setUser] = useState<UserData | null>(null);
   const [registeredEvents, setRegisteredEvents] = useState<EventRegistration[]>([]);
   const { logout } = useAuth();
+  const { clearPaymentStatus } = usePaymentStatus();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -97,6 +99,8 @@ const Profile = () => {
     try {
       // Clear auth state
       logout();
+      // Clear payment status so header shows Register instead of Profile
+      clearPaymentStatus();
       // Optionally keep registrationUser for read-only; do not remove registeredEvents
     } finally {
       navigate('/');

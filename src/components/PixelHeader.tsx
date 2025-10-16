@@ -3,11 +3,13 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, User } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { useAuth } from '@/hooks/useAuth';
+import { usePaymentStatus } from '@/contexts/PaymentContext';
 
 export const PixelHeader = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const { isLoggedIn, isLoading } = useAuth();
+  const { paymentStatus } = usePaymentStatus();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +21,14 @@ export const PixelHeader = () => {
   }, []);
 
   const isActive = (path: string) => location.pathname === path;
+
+  // Determine whether to show Profile or Register button
+  const shouldShowProfile = () => {
+    // Show Profile if:
+    // 1. User is logged in, OR
+    // 2. Payment was successful (even if not logged in yet)
+    return isLoggedIn || paymentStatus === 'success';
+  };
 
   return (
     <header 
@@ -103,7 +113,7 @@ export const PixelHeader = () => {
             Merchandise
           </Link> */}
           {!isLoading && (
-            isLoggedIn ? (
+            shouldShowProfile() ? (
               <Link 
                 to="/profile" 
                 className="pixel-button-primary hover:animate-pixel-glitch flex items-center space-x-2"
@@ -179,7 +189,7 @@ export const PixelHeader = () => {
                   </Link>
                 </SheetClose>
                 {!isLoading && (
-                  isLoggedIn ? (
+                  shouldShowProfile() ? (
                     <SheetClose asChild>
                       <Link 
                         to="/profile"

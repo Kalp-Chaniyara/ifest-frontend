@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { PixelHeader } from '@/components/PixelHeader';
 import { PixelFooter } from '@/components/PixelFooter';
 import { Button } from '@/components/ui/button';
@@ -9,6 +9,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Check, Star, Zap, Crown, Users, Calendar, Trophy, Ticket } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import { usePaymentStatus } from '@/contexts/PaymentContext';
 import PaymentFlow from '@/components/PaymentFlow';
 
 interface PassType {
@@ -107,6 +108,7 @@ const Register = () => {
   const [quantity, setQuantity] = useState(1);
   const [currentStep, setCurrentStep] = useState<'category' | 'selection' | 'details' | 'payment'>('category');
   const { login } = useAuth();
+  const { clearPaymentStatus } = usePaymentStatus();
   const navigate = useNavigate();
   
   const [userDetails, setUserDetails] = useState({
@@ -122,6 +124,11 @@ const Register = () => {
 
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [acceptTerms, setAcceptTerms] = useState(false);
+
+  // Clear payment status when starting a new registration
+  useEffect(() => {
+    clearPaymentStatus();
+  }, [clearPaymentStatus]);
 
   const handleCategorySelection = (category: UserCategory) => {
     setSelectedCategory(category);
@@ -223,9 +230,54 @@ const Register = () => {
         throw new Error(data?.message || 'Registration failed');
       }
 
-      setCurrentStep('payment');
-    } catch (err: any) {
-      setFormErrors({ general: err?.message || 'Registration failed. Please try again.' });
+      // setCurrentStep('payment');
+
+      const paymentPayload = {
+        pass_type: selectedPass?.id || 'gold',
+        college_type: selectedCategory?.id 
+      };
+
+      const payres = await fetch(`${API_BASE}/payment/pay-service`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(paymentPayload)
+      });
+
+      // console.log("Payment response: ", payres);
+
+      const data = await payres.json().catch(() => null);
+      if(!payres.ok) {
+        throw new Error(data?.message || 'Payment failed');
+      }
+
+      // Store registration data BEFORE redirecting to payment
+      const registrationUser = {
+        fullName: userDetails.fullName,
+        email: userDetails.email,
+        phone: userDetails.phone,
+        college: userDetails.college,
+        year: userDetails.year,
+        registrationDate: new Date().toISOString()
+      };
+      
+      try {
+        localStorage.setItem('registrationUser', JSON.stringify(registrationUser));
+        // Keep previously saved events if any, else empty list
+        const existingEvents = localStorage.getItem('registeredEvents');
+        if (!existingEvents) {
+          localStorage.setItem('registeredEvents', JSON.stringify([]));
+        }
+      } catch (error) {
+        console.warn('Failed to store registration data:', error);
+      }
+
+      const reUrl = data.checkoutPageUrl;
+      window.open(reUrl, '_self');
+
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Registration failed. Please try again.';
+      setFormErrors({ general: errorMessage });
     }
   };
 
@@ -253,7 +305,9 @@ const Register = () => {
       if (!existingEvents) {
         localStorage.setItem('registeredEvents', JSON.stringify([]));
       }
-    } catch {}
+    } catch (error) {
+      console.warn('Failed to store registration data in handlePaymentComplete:', error);
+    }
     
     // Update auth state and redirect
     login({ 
