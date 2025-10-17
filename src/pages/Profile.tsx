@@ -100,7 +100,7 @@ const Profile = () => {
       // Clear auth state
       logout();
       // Clear payment status so header shows Register instead of Profile
-      clearPaymentStatus();
+      await clearPaymentStatus();
       // Optionally keep registrationUser for read-only; do not remove registeredEvents
     } finally {
       navigate('/');

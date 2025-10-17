@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { usePaymentStatus } from '@/contexts/PaymentContext';
 
 interface AuthState {
   isLoggedIn: boolean;
@@ -8,6 +7,8 @@ interface AuthState {
     username?: string;
     email?: string;
     fullName?: string;
+    phone?: string;
+    mobile_number?: string;
     isGuest?: boolean;
   } | null;
 }
@@ -19,8 +20,6 @@ export const useAuth = () => {
     user: null
   });
 
-  // Get payment status context
-  const { clearPaymentStatus } = usePaymentStatus();
 
   useEffect(() => {
     const checkAuthStatus = async () => {
@@ -72,7 +71,7 @@ export const useAuth = () => {
     checkAuthStatus();
   }, []);
 
-  const login = (userData: { username?: string; email?: string; fullName?: string; isGuest?: boolean }) => {
+  const login = (userData: { username?: string; email?: string; fullName?: string; phone?: string; mobile_number?: string; isGuest?: boolean }) => {
     localStorage.setItem('isLoggedIn', 'true');
     setAuthState({
       isLoggedIn: true,
@@ -88,8 +87,7 @@ export const useAuth = () => {
       isLoading: false,
       user: null
     });
-    // Clear payment status when logging out
-    clearPaymentStatus();
+    // Note: Payment status clearing will be handled by components that use both useAuth and usePaymentStatus
   };
 
   return {

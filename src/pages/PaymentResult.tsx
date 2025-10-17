@@ -13,19 +13,62 @@ type PaymentStatus = 'pending' | 'success' | 'failure' | 'verifying';
 const PaymentResult = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, user } = useAuth();
   const { paymentStatus: globalPaymentStatus, setPaymentStatus: setGlobalPaymentStatus } = usePaymentStatus();
   const [paymentStatus, setPaymentStatus] = useState<PaymentStatus>('verifying');
   const [countdown, setCountdown] = useState(5);
   const [merchantId, setMerchantId] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
 
-  // Extract merchantId from URL
+  // Extract merchantId from URL and get username
   useEffect(() => {
     const merchantIdParam = searchParams.get('merchantId');
     if (merchantIdParam) {
       setMerchantId(merchantIdParam);
     }
-  }, [searchParams]);
+
+    // Get username from multiple sources with fallbacks
+    const getUsername = () => {
+      // 1. First try from authenticated user
+      if (user?.username) {
+        return user.username;
+      }
+      
+      // 2. Try from user object phone/mobile_number
+      if (user?.mobile_number) {
+        return user.mobile_number.trim();
+      }
+      if (user?.phone) {
+        return user.phone.trim();
+      }
+      
+      // 3. Fallback to localStorage registrationUser
+      try {
+        const storedUser = localStorage.getItem('registrationUser');
+        if (storedUser) {
+          const parsedUser = JSON.parse(storedUser);
+          if (parsedUser.phone) {
+            return parsedUser.phone.trim();
+          }
+        }
+      } catch (error) {
+        console.warn('Failed to parse stored user:', error);
+      }
+      
+      // 4. Try to get from URL parameters as last resort
+      const urlUsername = searchParams.get('username');
+      if (urlUsername) {
+        return urlUsername.trim();
+      }
+      
+      return null;
+    };
+
+    const foundUsername = getUsername();
+    if (foundUsername) {
+      setUsername(foundUsername);
+    }
+  }, [searchParams, user]);
 
   // Payment verification process
   useEffect(() => {
@@ -54,30 +97,41 @@ const PaymentResult = () => {
         const data = await response.json();
         setPaymentStatus(data.status);
         
-        // Update global payment status
-        setGlobalPaymentStatus(data.status === 'success' ? 'success' : 
-                              data.status === 'failure' ? 'failure' : 'pending');
+        // Update global payment status with username for API storage
+        const status = data.status === 'success' ? 'success' : 
+                      data.status === 'failure' ? 'failure' : 'pending';
+        await setGlobalPaymentStatus(status, username);
 
       } catch (error) {
         console.error('Payment verification failed:', error);
         setPaymentStatus('failure');
-        setGlobalPaymentStatus('failure');
+        await setGlobalPaymentStatus('failure', username);
       }
     };
 
-    // Check if payment status is provided in URL parameters first
-    const urlStatus = searchParams.get('status');
-    if (urlStatus) {
-      const status = urlStatus.toLowerCase();
-      if (['success', 'failure', 'pending'].includes(status)) {
-        setPaymentStatus(status as PaymentStatus);
-        setGlobalPaymentStatus(status as 'success' | 'failure' | 'pending');
-        return;
+    const handleUrlStatus = async () => {
+      // Check if payment status is provided in URL parameters first
+      const urlStatus = searchParams.get('status');
+      if (urlStatus) {
+        const status = urlStatus.toLowerCase();
+        if (['success', 'failure', 'pending'].includes(status)) {
+          setPaymentStatus(status as PaymentStatus);
+          await setGlobalPaymentStatus(status as 'success' | 'failure' | 'pending', username);
+          return true;
+        }
       }
-    }
+      return false;
+    };
 
-    verifyPayment();
-  }, [searchParams, setGlobalPaymentStatus]);
+    const runVerification = async () => {
+      const urlHandled = await handleUrlStatus();
+      if (!urlHandled) {
+        await verifyPayment();
+      }
+    };
+
+    runVerification();
+  }, [searchParams, setGlobalPaymentStatus, username]);
 
   const handleRedirect = () => {
     if (paymentStatus === 'success') {
