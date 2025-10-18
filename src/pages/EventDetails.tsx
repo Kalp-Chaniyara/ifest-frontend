@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '@/hooks/useAuth';
 import { PixelHeader } from '@/components/PixelHeader';
 import { PixelFooter } from '@/components/PixelFooter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Badge } from '@/components/ui/badge';
 import { 
   Calendar, 
   MapPin, 
@@ -13,11 +14,15 @@ import {
   Trophy, 
   Clock, 
   FileText, 
-  Image, 
-  Info,
   ArrowLeft,
-  Download,
-  ExternalLink
+  CheckCircle,
+  ExternalLink,
+  BookOpen,
+  Code,
+  Zap,
+  Brain,
+  Shield,
+  Gamepad2
 } from 'lucide-react';
 
 interface EventDetails {
@@ -30,9 +35,15 @@ interface EventDetails {
   participants: string;
   prize: string;
   rules: string[];
-  gallery: string[];
   organizers: string[];
   requirements: string[];
+  registrationStarted: boolean;
+  poster: string;
+  category: string;
+  icon: React.ReactNode;
+  color: string;
+  coordinators: Array<{ name: string; phone: string }>;
+  rulebookUrl?: string;
   schedule: {
     time: string;
     activity: string;
@@ -42,113 +53,680 @@ interface EventDetails {
 const eventDetails: Record<string, EventDetails> = {
   '1': {
     id: '1',
-    name: 'Code Rush',
-    description: 'Speed coding challenge where participants solve algorithmic problems under time pressure.',
-    longDescription: `Code Rush is the ultimate test of programming prowess and problem-solving skills. 
-    Participants will face a series of challenging algorithmic problems that must be solved within a strict time limit. 
-    This event combines the excitement of competitive programming with the pressure of real-world coding scenarios.
-    
-    The competition features multiple rounds, each with increasing difficulty levels. Participants can use any programming 
-    language of their choice, but must rely solely on their coding skills - no external libraries or frameworks are allowed. 
-    The event tests not just coding ability, but also logical thinking, algorithm optimization, and time management skills.`,
-    time: 'Day 1, 10:00 AM - 12:00 PM',
-    location: 'Main Arena',
-    participants: 'Individual (50 max)',
-    prize: '₹15,000',
+    name: 'FizzBuzz',
+    description: 'Classic programming challenge with a modern twist.',
+    longDescription: 'A competitive programming event where participants solve five programming problems on HackerRank platform. This individual contest tests coding skills, algorithmic thinking, and problem-solving abilities using various programming languages. Perfect for showcasing your programming expertise in a competitive environment.',
+    time: '14th November',
+    location: 'HackerRank Platform',
+    participants: 'Individual',
+    prize: 'TBD',
     rules: [
-      'Solo participation only - no teams allowed',
-      'Any programming language is permitted',
-      'No external libraries or frameworks',
-      'Internet access is restricted during the competition',
-      '5 problems must be solved within 2 hours',
-      'Submissions are judged on correctness and efficiency',
-      'Ties are broken by submission time',
-      'Final decisions by judges are binding'
+      'Individual participation only - no teams allowed',
+      'Platform: HackerRank online contest',
+      'Five programming problems to solve',
+      'Languages: C/C++, Java, Python, JavaScript, Rust',
+      'Original code required - no plagiarism or code-sharing',
+      'Contest duration and scoring announced before event',
+      'Coordinators\' decision is final for any disputes'
     ],
-    gallery: [
-      'https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=800',
-      'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800',
-      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800',
-      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800'
-    ],
-    organizers: [
-      'Prof. Dr. Sarah Chen - Head Judge',
-      'Alex Rodriguez - Technical Lead',
-      'Priya Patel - Event Coordinator'
-    ],
+    organizers: ['Programming Team'],
     requirements: [
-      'Laptop with preferred IDE installed',
-      'Basic knowledge of algorithms and data structures',
-      'Familiarity with at least one programming language',
-      'Valid college ID required'
+      'All registered students eligible',
+      'Individual registration mandatory',
+      'Valid HackerRank account required',
+      'Basic programming knowledge in any supported language',
+      'Stable internet connection',
+      'No team participation allowed'
     ],
+    registrationStarted: true,
+    poster: '/events/placeholder.png',
+    category: 'coding',
+    icon: <Code className="w-8 h-8" />,
+    color: 'neon-cyan',
+    coordinators: [
+      { name: 'Manthan', phone: '+91 6352931262' },
+      { name: 'Abhishek', phone: '+91 8238259415' }
+    ],
+    rulebookUrl: 'https://docs.google.com/document/d/1-yKEQIXDiAtD2KyiUrbpW6MdpXl1AM2lCaWSKzBSfDA/edit?usp=sharing',
     schedule: [
-      { time: '9:30 AM', activity: 'Registration and Setup' },
-      { time: '10:00 AM', activity: 'Competition Begins' },
-      { time: '11:00 AM', activity: 'Mid-competition Break' },
-      { time: '12:00 PM', activity: 'Competition Ends' },
-      { time: '12:30 PM', activity: 'Results Announcement' }
+      { time: 'TBA', activity: 'Details coming soon' }
     ]
   },
   '2': {
     id: '2',
-    name: 'AI Innovation Showcase',
-    description: 'Premier presentation of cutting-edge AI projects with industry expert judging.',
-    longDescription: `The AI Innovation Showcase is the flagship event that brings together the brightest minds in artificial 
-    intelligence and machine learning. Teams will present their original AI projects to a panel of industry experts, 
-    showcasing innovative solutions to real-world problems.
-    
-    This event emphasizes both technical excellence and practical application. Projects must demonstrate working prototypes 
-    and clear business or social impact. The judging criteria include innovation, technical complexity, real-world relevance, 
-    and presentation quality.`,
-    time: 'Day 2, 2:00 PM - 5:00 PM',
-    location: 'Innovation Hub',
-    participants: 'Teams of 3-5 (20 teams max)',
-    prize: '₹50,000',
-    rules: [
-      'Original AI/ML project required - no plagiarism',
-      '15-minute presentation followed by 5-minute Q&A',
-      'Working prototype must be demonstrated',
-      'Code review by technical experts',
-      'Project documentation must be submitted',
-      'Team members must be present for presentation',
-      'No pre-built solutions or templates allowed',
-      'Judges decision is final'
+    name: 'i.Ohunt',
+    description: 'Digital treasure hunt with technology challenges.',
+    longDescription: 'Details coming soon.',
+    time: '15th November',
+    location: 'Main Campus',
+    participants: 'Individual/Team',
+    prize: 'TBD',
+    rules: ['Details coming soon'],
+    organizers: ['Details coming soon'],
+    requirements: ['Details coming soon'],
+    registrationStarted: false,
+    poster: '/events/placeholder.png',
+    category: 'innovation',
+    icon: <Zap className="w-8 h-8" />,
+    color: 'neon-magenta',
+    coordinators: [
+      { name: 'Varshil', phone: '+91 9601991253' },
+      { name: 'Vidur', phone: '+91 8320106416' }
     ],
-    gallery: [
-      'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800',
-      'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800',
-      'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800',
-      'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800'
-    ],
-    organizers: [
-      'Dr. Michael Chang - AI Research Director',
-      'Dr. Emily Watson - Machine Learning Expert',
-      'Rajesh Kumar - Industry Partner'
-    ],
-    requirements: [
-      'Team of 3-5 members',
-      'Original AI/ML project',
-      'Working prototype',
-      'Project documentation',
-      'Presentation slides'
-    ],
+    rulebookUrl: 'https://drive.google.com/file/d/1OaDVA5i10-I6BbI5uKlDlB5GPmjfJ-Tr/view?usp=sharing',
     schedule: [
-      { time: '1:30 PM', activity: 'Setup and Testing' },
-      { time: '2:00 PM', activity: 'Opening Ceremony' },
-      { time: '2:15 PM', activity: 'Presentations Begin' },
-      { time: '4:30 PM', activity: 'Judging Deliberation' },
-      { time: '5:00 PM', activity: 'Awards Ceremony' }
+      { time: 'TBA', activity: 'Details coming soon' }
+    ]
+  },
+  '3': {
+    id: '3',
+    name: 'RepoReboot',
+    description: 'Code repository challenge and optimization contest.',
+    longDescription: 'Details coming soon.',
+    time: '16th November',
+    location: 'Computer Lab 2',
+    participants: 'Individual',
+    prize: 'TBD',
+    rules: ['Details coming soon'],
+    organizers: ['Details coming soon'],
+    requirements: ['Details coming soon'],
+    registrationStarted: false,
+    poster: '/events/placeholder.png',
+    category: 'coding',
+    icon: <Code className="w-8 h-8" />,
+    color: 'pacman-yellow',
+    coordinators: [
+      { name: 'Dhruvish', phone: '+91 7046525524' },
+      { name: 'Tirth', phone: '+91 7984574445' }
+    ],
+    rulebookUrl: 'https://docs.google.com/document/d/1-mfQgc34wk0tjnpSS3UwFwSwhP4RNPyE/edit?usp=sharing&ouid=105561346511769055672&rtpof=true&sd=true',
+    schedule: [
+      { time: 'TBA', activity: 'Details coming soon' }
+    ]
+  },
+  '4': {
+    id: '4',
+    name: 'i.Clash',
+    description: 'Competitive programming tournament.',
+    longDescription: 'Details coming soon.',
+    time: '14th November',
+    location: 'Main Auditorium',
+    participants: 'Individual',
+    prize: 'TBD',
+    rules: ['Details coming soon'],
+    organizers: ['Details coming soon'],
+    requirements: ['Details coming soon'],
+    registrationStarted: false,
+    poster: '/events/placeholder.png',
+    category: 'coding',
+    icon: <Code className="w-8 h-8" />,
+    color: 'pacman-yellow',
+    coordinators: [
+      { name: 'Vismay', phone: '+91 6353395772' },
+      { name: 'Niranjan', phone: '+91 8988390934' }
+    ],
+    rulebookUrl: 'https://docs.google.com/document/d/1avoTLmdZEzxnLS_6V162T9N-jTwDPNHHDcRbGJVZTsY/edit?tab=t.0',
+    schedule: [
+      { time: 'TBA', activity: 'Details coming soon' }
+    ]
+  },
+  '5': {
+    id: '5',
+    name: 'i.Relay',
+    description: 'Team-based relay coding competition.',
+    longDescription: 'Details coming soon.',
+    time: '15th November',
+    location: 'Conference Hall',
+    participants: 'Team',
+    prize: 'TBD',
+    rules: ['Details coming soon'],
+    organizers: ['Details coming soon'],
+    requirements: ['Details coming soon'],
+    registrationStarted: false,
+    poster: '/events/placeholder.png',
+    category: 'coding',
+    icon: <Code className="w-8 h-8" />,
+    color: 'pacman-yellow',
+    coordinators: [
+      { name: 'Madhav', phone: '+91 7041937131' },
+      { name: 'Krish', phone: '+91 9327702659' }
+    ],
+    rulebookUrl: 'https://docs.google.com/document/d/1avoTLmdZEzxnLS_6V162T9N-jTwDPNHHDcRbGJVZTsY/edit?tab=t.0',
+    schedule: [
+      { time: 'TBA', activity: 'Details coming soon' }
+    ]
+  },
+  '6': {
+    id: '6',
+    name: 'i.Cube',
+    description: '3D problem solving and spatial reasoning challenge.',
+    longDescription: 'Details coming soon.',
+    time: '16th November',
+    location: 'Innovation Lab',
+    participants: 'Individual',
+    prize: 'TBD',
+    rules: ['Details coming soon'],
+    organizers: ['Details coming soon'],
+    requirements: ['Details coming soon'],
+    registrationStarted: false,
+    poster: '/events/placeholder.png',
+    category: 'coding',
+    icon: <Code className="w-8 h-8" />,
+    color: 'pacman-yellow',
+    coordinators: [
+      { name: 'Yashvi', phone: '+91 8128074477' },
+      { name: 'Muktik', phone: '+91 9638783511' }
+    ],
+    rulebookUrl: 'https://drive.google.com/file/d/1lW5LFssVVH8oCKWL8qmt0D4h6n09FK2f/view?usp=sharing',
+    schedule: [
+      { time: 'TBA', activity: 'Details coming soon' }
+    ]
+  },
+  '7': {
+    id: '7',
+    name: 'i.Papyrus',
+    description: 'Creative writing and documentation challenge.',
+    longDescription: 'Details coming soon.',
+    time: '14th November',
+    location: 'Library',
+    participants: 'Individual',
+    prize: 'TBD',
+    rules: ['Details coming soon'],
+    organizers: ['Details coming soon'],
+    requirements: ['Details coming soon'],
+    registrationStarted: false,
+    poster: '/events/placeholder.png',
+    category: 'coding',
+    icon: <Code className="w-8 h-8" />,
+    color: 'pacman-yellow',
+    coordinators: [
+      { name: 'Avantika', phone: '+91 7668720907' },
+      { name: 'Dinesh', phone: '+91 7012438105' }
+    ],
+    rulebookUrl: 'https://docs.google.com/document/d/1NTHEGB4Avr-sUZpKJ9tM0s6hZt1ApaabcQBiF7Hv0M8/edit?usp=sharing',
+    schedule: [
+      { time: 'TBA', activity: 'Details coming soon' }
+    ]
+  },
+  '8': {
+    id: '8',
+    name: 'i.Capture',
+    description: 'Digital photography and image processing contest.',
+    longDescription: 'A two-round photography competition featuring MACRO-PHOTOGRAPHY in Round 1 (before i.Fest) and LONG EXPOSURE in Round 2 (during i.Fest). Round 1 entries will be displayed at DAU campus with 15 entries qualifying for Round 2. Top three entries will receive prize money.',
+    time: '15th November',
+    location: 'DAU Campus',
+    participants: 'Individual',
+    prize: 'Cash Prizes for Top 3',
+    rules: [
+      'Round 1: MACRO-PHOTOGRAPHY theme (week before i.Fest)',
+      'Round 2: LONG EXPOSURE theme (during i.Fest)',
+      'Submit entries via Google Forms',
+      'Human subjects require consent',
+      'Edited photos must include raw photograph',
+      'No cheating or plagiarism allowed',
+      'Updates via WhatsApp group'
+    ],
+    organizers: ['Photography Team'],
+    requirements: [
+      'Mandatory registration before deadline',
+      'Digital camera or smartphone with good camera',
+      'Basic photography skills',
+      'Join WhatsApp group for updates',
+      'Submit both edited and raw photos if edited',
+      'Obtain consent for human subjects'
+    ],
+    registrationStarted: false,
+    poster: '/events/placeholder.png',
+    category: 'innovation',
+    icon: <Code className="w-8 h-8" />,
+    color: 'pacman-yellow',
+    coordinators: [
+      { name: 'Hari', phone: '+91 9106854849' },
+      { name: 'Bhavi', phone: '+91 8780152628' }
+    ],
+    rulebookUrl: 'https://drive.google.com/file/d/1qFi6NqXFYVnzDMa77gbwfS1oeyGxT4YS/view?usp=sharing',
+    schedule: [
+      { time: 'TBA', activity: 'Details coming soon' }
+    ]
+  },
+  '9': {
+    id: '9',
+    name: 'Catch The Flag',
+    description: 'Cybersecurity capture the flag competition.',
+    longDescription: 'Details coming soon.',
+    time: '16th November',
+    location: 'Cybersecurity Lab',
+    participants: 'Individual/Team',
+    prize: 'TBD',
+    rules: ['Details coming soon'],
+    organizers: ['Details coming soon'],
+    requirements: ['Details coming soon'],
+    registrationStarted: false,
+    poster: '/events/placeholder.png',
+    category: 'coding',
+    icon: <Code className="w-8 h-8" />,
+    color: 'pacman-yellow',
+    coordinators: [
+      { name: 'Kasak', phone: '+91 7574897644' },
+      { name: 'Ayush', phone: '+91 9624695698' }
+    ],
+    rulebookUrl: 'https://docs.google.com/document/d/1oGC7q2NJ9oRKPFKUZ3Wc9TaxyzrHz9-4/edit?usp=sharing&ouid=105561346511769055672&rtpof=true&sd=true',
+    schedule: [
+      { time: 'TBA', activity: 'Details coming soon' }
+    ]
+  },
+  '10': {
+    id: '10',
+    name: 'SellOut',
+    description: 'Business pitch and entrepreneurship challenge.',
+    longDescription: 'Details coming soon.',
+    time: '14th November',
+    location: 'Business Center',
+    participants: 'Individual/Team',
+    prize: 'TBD',
+    rules: ['Details coming soon'],
+    organizers: ['Details coming soon'],
+    requirements: ['Details coming soon'],
+    registrationStarted: false,
+    poster: '/events/placeholder.png',
+    category: 'coding',
+    icon: <Code className="w-8 h-8" />,
+    color: 'pacman-yellow',
+    coordinators: [
+      { name: 'Daksh', phone: '+91 6351871877' },
+      { name: 'Yuvansh', phone: '+91 9909236023' }
+    ],
+    rulebookUrl: 'https://drive.google.com/file/d/1da7fmvzjS54t6PLG7Lrg9xH15Osgma8D/view?usp=sharing',
+    schedule: [
+      { time: 'TBA', activity: 'Details coming soon' }
+    ]
+  },
+  '11': {
+    id: '11',
+    name: 'Chess64',
+    description: 'Chess tournament with digital twist.',
+    longDescription: 'The tournament will be conducted in two parts: knockout rounds and Swiss rounds. Each player must turn up on time with a 15-minute walk-over system. The knockout rounds will be on Lichess or Chess.com website. Players must set up their accounts and download the Chess Clock app before the tournament begins.',
+    time: '16th November',
+    location: 'Gaming Zone',
+    participants: 'Individual',
+    prize: 'TBD',
+    rules: [
+      'Tournament conducted in knockout rounds and Swiss rounds',
+      '15-minute walk-over system for late arrivals',
+      '5-6 knockout rounds and 3 Swiss rounds (subject to change)',
+      'Time Control: First 3 Knockouts - 3min + 2sec, Next 3 Knockouts - 5min + 3sec, Swiss - 10min + 5sec',
+      'Draw in knockout rounds: Tiebreaker 3min + 2sec, then Armageddon 4min vs 3min',
+      'All standard FIDE rules apply',
+      'Organizers\' decision is final in case of disputes'
+    ],
+    organizers: ['Gaming Zone Team'],
+    requirements: [
+      'Individual participation only',
+      'Must set up Lichess or Chess.com account before tournament',
+      'Download Chess Clock app on phone',
+      'Physical presence required at venue',
+      'Inform coordinators about unavailability'
+    ],
+    registrationStarted: false,
+    poster: '/events/placeholder.png',
+    category: 'gaming',
+    icon: <Brain className="w-8 h-8" />,
+    color: 'pacman-yellow',
+    coordinators: [
+      { name: 'Tirth', phone: '+91 9687532568' },
+      { name: 'Abhyudit', phone: '+91 9054110450' }
+    ],
+    rulebookUrl: 'https://drive.google.com/file/d/1LaCVv6uQOlyYPE8_leKac1DBV8uFQ0Fv/view?usp=sharing',
+    schedule: [
+      { time: 'TBA', activity: 'Details coming soon' }
+    ]
+  },
+  '12': {
+    id: '12',
+    name: 'CryptoTrade',
+    description: 'Cryptocurrency trading simulation challenge.',
+    longDescription: 'A 72-hour virtual crypto trading event using the Roostoo Mock Crypto Trading App. Participants will use virtual currency to trade real cryptocurrency in a simulated environment, aiming to maximize returns with strategic trades. This educational event helps participants learn about cryptocurrency trading in a risk-free environment.',
+    time: '14th November',
+    location: 'Online Platform (Roostoo App)',
+    participants: 'Individual',
+    prize: '₹3,000 Total Prize Pool',
+    rules: [
+      '72-hour continuous trading event',
+      'Platform: Roostoo Mock Crypto Trading App',
+      'Event Code: IFEST (to join competition)',
+      'Virtual money provided for trading real-time market data',
+      'Winners determined by highest virtual profit',
+      'Tie-breaker: highest number of successful trades',
+      'No multiple accounts or cheating allowed'
+    ],
+    organizers: ['Finance Team'],
+    requirements: [
+      'College students registered in i.Fest \'24',
+      'Download Roostoo app and enter code "IFEST"',
+      'Create account and join CryptoTrade competition',
+      'Complete full 72 hours of trading',
+      'Follow all trading guidelines',
+      'Valid contact information for prize eligibility'
+    ],
+    registrationStarted: false,
+    poster: '/events/placeholder.png',
+    category: 'innovation',
+    icon: <Code className="w-8 h-8" />,
+    color: 'pacman-yellow',
+    coordinators: [
+      { name: 'Daksh', phone: '+91 6351871877' },
+      { name: 'Satvik', phone: '+91 6261695658' }
+    ],
+    rulebookUrl: 'https://drive.google.com/file/d/1CiWQ41STBYNQbIJspeQadTXfYq63lvq1/view?usp=sharing',
+    schedule: [
+      { time: 'TBA', activity: 'Details coming soon' }
+    ]
+  },
+  '13': {
+    id: '13',
+    name: 'Treasure Hunt',
+    description: 'Digital treasure hunt adventure.',
+    longDescription: 'Details coming soon.',
+    time: '15th November',
+    location: 'Campus Grounds',
+    participants: 'Team',
+    prize: 'TBD',
+    rules: ['Details coming soon'],
+    organizers: ['Details coming soon'],
+    requirements: ['Details coming soon'],
+    registrationStarted: false,
+    poster: '/events/placeholder.png',
+    category: 'coding',
+    icon: <Code className="w-8 h-8" />,
+    color: 'pacman-yellow',
+    coordinators: [
+      { name: 'Sumit', phone: '+91 9664515557' },
+      { name: 'Madhav', phone: '+91 9227013499' }
+    ],
+    rulebookUrl: 'https://docs.google.com/document/d/130-QkspKqkSETqfPmG-xLXNetmGUUJwW/edit?usp=sharing&ouid=105561346511769055672&rtpof=true&sd=true',
+    schedule: [
+      { time: 'TBA', activity: 'Details coming soon' }
+    ]
+  },
+  '14': {
+    id: '14',
+    name: 'i.Ganith',
+    description: 'Mathematical problem solving competition.',
+    longDescription: 'Details coming soon.',
+    time: '16th November',
+    location: 'Math Lab',
+    participants: 'Individual',
+    prize: 'TBD',
+    rules: ['Details coming soon'],
+    organizers: ['Details coming soon'],
+    requirements: ['Details coming soon'],
+    registrationStarted: false,
+    poster: '/events/placeholder.png',
+    category: 'coding',
+    icon: <Code className="w-8 h-8" />,
+    color: 'pacman-yellow',
+    coordinators: [
+      { name: 'Om', phone: '+91 9104006647' },
+      { name: 'Shubh', phone: '+91 8200026151' }
+    ],
+    rulebookUrl: '',
+    schedule: [
+      { time: 'TBA', activity: 'Details coming soon' }
+    ]
+  },
+  '15': {
+    id: '15',
+    name: 'i.Ride',
+    description: 'Transportation and logistics innovation challenge.',
+    longDescription: 'Details coming soon.',
+    time: '14th November',
+    location: 'Transportation Hub',
+    participants: 'Individual/Team',
+    prize: 'TBD',
+    rules: ['Details coming soon'],
+    organizers: ['Details coming soon'],
+    requirements: ['Details coming soon'],
+    registrationStarted: false,
+    poster: '/events/placeholder.png',
+    category: 'coding',
+    icon: <Code className="w-8 h-8" />,
+    color: 'pacman-yellow',
+    coordinators: [
+      { name: 'Soumya', phone: '+91 8758746506' },
+      { name: 'Priyansh', phone: '+91 9664988761' }
+    ],
+    rulebookUrl: 'https://docs.google.com/document/d/1HdQo7pYSlcVWoubXMwXITUTTcdqgAVybIunCTNn32Rg/edit?usp=sharing',
+    schedule: [
+      { time: 'TBA', activity: 'Details coming soon' }
+    ]
+  },
+  '16': {
+    id: '16',
+    name: 'CineCraft',
+    description: 'Video editing and filmmaking contest.',
+    longDescription: 'Welcome to CineCraft, the official "Pixel Paradox" Reel Competition of iFest \'25! Create a dynamic Instagram Reel that captures the spirit and energy of our festival, inspired by the theme of "Pixel Paradox." Showcase your creativity through innovative video storytelling that represents the innovation and atmosphere of iFest \'25.',
+    time: '16th November',
+    location: 'Online Submission',
+    participants: 'Individual/Team (up to 3 members)',
+    prize: 'Cash Prizes + Certificates',
+    rules: [
+      'Deadline: 23rd November 2025, 11:59 PM IST',
+      'Duration: 15 to 60 seconds (vertical 9:16 aspect ratio)',
+      'Submit via official Google Form only',
+      'Original work required - no plagiarism allowed',
+      'Use Instagram library audio or original creations',
+      'No obscene, defamatory, or inappropriate content',
+      'One entry per individual/team maximum'
+    ],
+    organizers: ['Media Team'],
+    requirements: [
+      'Open to all iFest \'25 participants',
+      'Individual or team participation (max 3 members)',
+      'Original Instagram Reel creation',
+      'Google Form submission required',
+      'Theme: "Pixel Paradox" interpretation',
+      'Proper audio rights and permissions'
+    ],
+    registrationStarted: false,
+    poster: '/events/placeholder.png',
+    category: 'innovation',
+    icon: <Gamepad2 className="w-8 h-8" />,
+    color: 'pacman-yellow',
+    coordinators: [
+      { name: 'Aditya', phone: '+91 8849739593' },
+      { name: 'Khanjan', phone: '+91 9409133900' }
+    ],
+    rulebookUrl: 'https://docs.google.com/document/d/1j8aV5eQ9QxWrMwmo2CkB8sAc8A8Q_Si8Ni5pN6yPeE4/edit?usp=sharing',
+    schedule: [
+      { time: 'TBA', activity: 'Details coming soon' }
+    ]
+  },
+  '17': {
+    id: '17',
+    name: 'i.Quiz',
+    description: 'Technology and general knowledge quiz.',
+    longDescription: 'Details coming soon.',
+    time: '14th November',
+    location: 'Quiz Hall',
+    participants: 'Individual/Team',
+    prize: 'TBD',
+    rules: ['Details coming soon'],
+    organizers: ['Details coming soon'],
+    requirements: ['Details coming soon'],
+    registrationStarted: false,
+    poster: '/events/placeholder.png',
+    category: 'coding',
+    icon: <Code className="w-8 h-8" />,
+    color: 'pacman-yellow',
+    coordinators: [
+      { name: 'Prithviraj', phone: '+91 6358849146' },
+      { name: 'Nikhil', phone: '+91 9149083243' }
+    ],
+    rulebookUrl: 'https://docs.google.com/document/d/1GjPFYKtk8W_umGBTnmD2FxgDEXNkgBquQp34oA8I6nk/edit?usp=sharing',
+    schedule: [
+      { time: 'TBA', activity: 'Details coming soon' }
+    ]
+  },
+  '18': {
+    id: '18',
+    name: 'BlindC',
+    description: 'C programming challenge with special constraints.',
+    longDescription: 'This is an individual event open to all registered students. The coding contest will be hosted on Hackerrank where participants can code in any language. The contest contains 3-4 coding questions with progressive difficulty levels and lasts for 1 hour. Participants will explore cybersecurity, problem-solving, and digital forensics through challenges that simulate real-world cases.',
+    time: '15th November',
+    location: 'Programming Lab (AC Lab, DAU Campus)',
+    participants: 'Individual',
+    prize: 'TBD',
+    rules: [
+      'Display of computer is turned off during the event',
+      'There will be penalties for incorrect solutions',
+      'Use of AI/Online resources are prohibited - direct disqualification',
+      'Call the coordinator to submit your code (do not submit yourself)',
+      'Top 3 students on final leaderboard will be eligible for prizes',
+      'Must be physically present at venue to receive prizes',
+      'Coordinators\' decision will be final in case of discrepancies'
+    ],
+    organizers: ['Programming Lab Team'],
+    requirements: [
+      'Individual participation only',
+      'Must be registered via official i.Fest website',
+      'Physical presence required at DAU Campus AC Lab',
+      'Basic programming knowledge in any language',
+      'No on-spot entries allowed'
+    ],
+    registrationStarted: false,
+    poster: '/events/placeholder.png',
+    category: 'coding',
+    icon: <Code className="w-8 h-8" />,
+    color: 'pacman-yellow',
+    coordinators: [
+      { name: 'Aditya', phone: '+91 7984257713' },
+      { name: 'Raj', phone: '+91 9426625583' }
+    ],
+    rulebookUrl: 'https://docs.google.com/document/d/13xGILzHjpTsfrISOqApNIZuit6FwSbfHLosYfWC0QGk/edit?usp=sharing',
+    schedule: [
+      { time: 'TBA', activity: 'Details coming soon' }
+    ]
+  },
+  '19': {
+    id: '19',
+    name: 'Reverse Coding',
+    description: 'Reverse engineering and code analysis challenge.',
+    longDescription: 'Details coming soon.',
+    time: '16th November',
+    location: 'Security Lab',
+    participants: 'Individual',
+    prize: 'TBD',
+    rules: ['Details coming soon'],
+    organizers: ['Details coming soon'],
+    requirements: ['Details coming soon'],
+    registrationStarted: false,
+    poster: '/events/placeholder.png',
+    category: 'coding',
+    icon: <Code className="w-8 h-8" />,
+    color: 'pacman-yellow',
+    coordinators: [
+      { name: 'Mahek', phone: '+91 9601594723' },
+      { name: 'Zeel', phone: '+91 9913531830' }
+    ],
+    rulebookUrl: 'https://docs.google.com/document/d/1bEF-cYPYuIk6258gO-bWuFZqAMrcFMKq/edit?usp=sharing&ouid=105561346511769055672&rtpof=true&sd=true',
+    schedule: [
+      { time: 'TBA', activity: 'Details coming soon' }
+    ]
+  },
+  '20': {
+    id: '20',
+    name: 'AI Triathlon',
+    description: 'Three-stage AI development marathon.',
+    longDescription: 'The AI Triathlon is not just a quiz; it\'s a multi-stage challenge that mirrors the journey of an AI professional. You\'ll start with a test of your foundational knowledge, move on to deeper conceptual problems, and finally, put your skills to the test in a real-world coding challenge. This event is open to all students who have an interest in Artificial Intelligence, Machine Learning, and Data Science. Whether you\'re a beginner who has just started exploring the field or an experienced coder, the triathlon has a challenge for you!',
+    time: '14th November',
+    location: 'AI Research Center',
+    participants: 'Individual',
+    prize: 'TBD',
+    rules: [
+      'Participation is on an individual basis. Teamwork or collaboration is not permitted.',
+      'You must have a stable internet connection for the online rounds.',
+      'Any form of plagiarism or malpractice will lead to immediate disqualification.',
+      'All decisions made by the organizing committee regarding scoring, qualification, and rule enforcement are final and binding.',
+      'Round 1: The Knowledge Dash (Online Speed Quiz) - 30 mins duration',
+      'Round 2: The Deep Dive (Conceptual Challenge) - 45 mins duration',
+      'Round 3: The AI Hot Seat (The Grand Finale) - 1.5 to 2 hours duration'
+    ],
+    organizers: ['AI Research Center Team'],
+    requirements: [
+      'Basic knowledge of Artificial Intelligence and Machine Learning concepts',
+      'Stable internet connection for online rounds',
+      'Individual participation (no teams allowed)',
+      'Interest in AI, ML, and Data Science fields'
+    ],
+    registrationStarted: false,
+    poster: '/events/placeholder.png',
+    category: 'ai',
+    icon: <Brain className="w-8 h-8" />,
+    color: 'neon-cyan',
+    coordinators: [
+      { name: 'Vedant', phone: '+91 9023095963' },
+      { name: 'Aaditya', phone: '+91 8529451266' }
+    ],
+    rulebookUrl: 'https://docs.google.com/document/d/1dkMaRZfas1TB5re1t87jmCQ36UgCyPNH/edit?usp=sharing&ouid=105561346511769055672&rtpof=true&sd=true',
+    schedule: [
+      { time: 'Round 1: 10:00 AM', activity: 'The Knowledge Dash (Online Speed Quiz) - Top 50% advance' },
+      { time: 'Round 2: 11:30 AM', activity: 'The Deep Dive (Conceptual Challenge) - Select finalists chosen' },
+      { time: 'Round 3: 2:00 PM', activity: 'The AI Hot Seat (Live Finale) - Top 3 winners crowned' }
+    ]
+  },
+  '21': {
+    id: '21',
+    name: 'i.Prompt',
+    description: 'AI prompt engineering and optimization contest.',
+    longDescription: 'Details coming soon.',
+    time: '15th November',
+    location: 'AI Lab',
+    participants: 'Individual',
+    prize: 'TBD',
+    rules: ['Details coming soon'],
+    organizers: ['Details coming soon'],
+    requirements: ['Details coming soon'],
+    registrationStarted: false,
+    poster: '/events/placeholder.png',
+    category: 'ai',
+    icon: <Zap className="w-8 h-8" />,
+    color: 'neon-magenta',
+    coordinators: [
+      { name: 'Shlok', phone: '+91 9173539599' },
+      { name: 'Anmol', phone: '+91 8329284778' }
+    ],
+    rulebookUrl: '',
+    schedule: [
+      { time: 'TBA', activity: 'Details coming soon' }
     ]
   }
 };
 
 const EventDetails = () => {
   const { id } = useParams<{ id: string }>();
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
+  const { isLoggedIn } = useAuth();
+  const navigate = useNavigate();
   
   const event = eventDetails[id || '1'];
+
+  const getEventColor = (color: string) => {
+    switch (color) {
+      case 'neon-magenta': return 'text-neon-magenta';
+      case 'neon-cyan': return 'text-neon-cyan';
+      case 'pacman-yellow': return 'text-pacman-yellow';
+      default: return 'text-neon-cyan';
+    }
+  };
+
+  const getBorderColor = (color: string) => {
+    switch (color) {
+      case 'neon-magenta': return 'border-neon-magenta';
+      case 'neon-cyan': return 'border-neon-cyan';
+      case 'pacman-yellow': return 'border-pacman-yellow';
+      default: return 'border-neon-cyan';
+    }
+  };
 
   if (!event) {
     return (
@@ -175,170 +753,158 @@ const EventDetails = () => {
         <div className="container mx-auto px-6">
           
           {/* Back Button */}
+          <div className="mb-8">
           <Link 
             to="/events" 
-            className="inline-flex items-center text-neon-cyan hover:text-neon-magenta transition-colors mb-8"
+              className="inline-flex items-center space-x-2 text-ghost-grey hover:text-neon-cyan transition-colors"
           >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Events
+              <ArrowLeft className="w-4 h-4" />
+              <span>Back to Events</span>
           </Link>
+          </div>
 
           {/* Event Header */}
-          <div className="mb-12">
-            <h1 className="text-4xl md:text-6xl mb-4 pixel-glow-magenta">
-              {event.name}
-            </h1>
-            <p className="text-ghost-grey text-lg max-w-3xl">
-              {event.description}
-            </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            {/* Event Poster */}
+            <div className="relative">
+              <img
+                src={event.poster}
+                alt={`${event.name} poster`}
+                className="w-full h-auto max-h-[600px] object-contain rounded-lg"
+              />
+              <div className="absolute top-4 right-4">
+                <Badge 
+                  className={`
+                    bg-${event.color}/20 text-${event.color} border-${event.color}/50
+                    backdrop-blur-sm
+                  `}
+                >
+                  {event.category.toUpperCase()}
+                </Badge>
+              </div>
+            </div>
+
+            {/* Event Info */}
+            <div className="space-y-6 flex flex-col justify-center">
+              <div>
+                <div className={`flex items-center space-x-3 mb-4 ${getEventColor(event.color)}`}>
+                  {event.icon}
+                  <h1 className="text-4xl font-bold">{event.name}</h1>
+                </div>
+                <p className="text-ghost-grey text-xl mb-6">{event.description}</p>
           </div>
 
-          {/* Event Info Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            <Card className="pixel-card">
-              <CardContent className="p-6">
-                <div className="flex items-center space-x-3">
+              {/* Quick Details */}
+              <Card className="pixel-card p-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <div className="flex items-center space-x-3 p-3 bg-void-black/50 rounded">
                   <Calendar className="w-6 h-6 text-neon-cyan" />
                   <div>
-                    <p className="text-ghost-grey text-sm">Time</p>
-                    <p className="text-pixel-white font-semibold">{event.time}</p>
+                      <div className="text-ghost-grey text-base">Date</div>
+                      <div className="text-pixel-white font-semibold text-xl">{event.time}</div>
+                    </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="pixel-card">
-              <CardContent className="p-6">
-                <div className="flex items-center space-x-3">
+                  <div className="flex items-center space-x-3 p-3 bg-void-black/50 rounded">
                   <MapPin className="w-6 h-6 text-neon-cyan" />
                   <div>
-                    <p className="text-ghost-grey text-sm">Location</p>
-                    <p className="text-pixel-white font-semibold">{event.location}</p>
+                      <div className="text-ghost-grey text-base">Location</div>
+                      <div className="text-pixel-white font-semibold text-xl">{event.location}</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-3 p-3 bg-void-black/50 rounded">
+                    <Trophy className="w-6 h-6 text-pacman-yellow" />
+                    <div>
+                      <div className="text-ghost-grey text-base">Prize</div>
+                      <div className="text-pacman-yellow font-bold text-xl">{event.prize}</div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-
-            <Card className="pixel-card">
-              <CardContent className="p-6">
-                <div className="flex items-center space-x-3">
+                  <div className="flex items-center space-x-3 p-3 bg-void-black/50 rounded">
                   <Users className="w-6 h-6 text-neon-cyan" />
                   <div>
-                    <p className="text-ghost-grey text-sm">Participants</p>
-                    <p className="text-pixel-white font-semibold">{event.participants}</p>
+                      <div className="text-ghost-grey text-base">Participants</div>
+                      <div className="text-pixel-white font-semibold text-xl">{event.participants}</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-3 p-3 bg-void-black/50 rounded">
+                    {event.registrationStarted ? (
+                      <CheckCircle className="w-6 h-6 text-success-green" />
+                    ) : (
+                      <Clock className="w-6 h-6 text-pacman-yellow" />
+                    )}
+                    <div>
+                      <div className="text-ghost-grey text-base">Registration</div>
+                      <div className={`font-semibold text-xl ${event.registrationStarted ? 'text-success-green' : 'text-pacman-yellow'}`}>
+                        {event.registrationStarted ? 'Started' : 'Not Started'}
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-
-            <Card className="pixel-card">
-              <CardContent className="p-6">
-                <div className="flex items-center space-x-3">
-                  <Trophy className="w-6 h-6 text-pacman-yellow" />
-                  <div>
-                    <p className="text-ghost-grey text-sm">Prize Pool</p>
-                    <p className="text-pacman-yellow font-semibold">{event.prize}</p>
                   </div>
+                  {event.coordinators && event.coordinators.length > 0 && (
+                    <div className="flex items-start space-x-3 p-3 bg-void-black/50 rounded col-span-1 lg:col-span-2">
+                      <Users className="w-6 h-6 text-neon-cyan mt-1" />
+                      <div>
+                        <div className="text-ghost-grey text-base">Coordinators</div>
+                        <div className="text-pixel-white font-semibold text-base space-y-1">
+                          {event.coordinators.map((coord, i) => (
+                            <div key={i} className="flex items-center gap-2">
+                              <span>{coord.name}</span>
+                              <a href={`tel:${coord.phone.replace(/\s/g, '')}`} className="text-neon-cyan hover:underline">{coord.phone}</a>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </CardContent>
             </Card>
+            </div>
           </div>
 
-          {/* Tabs */}
-          <Tabs defaultValue="details" className="space-y-8">
-            <TabsList className="grid w-full grid-cols-4 bg-void-black border border-ghost-grey">
-              <TabsTrigger value="details" className="data-[state=active]:bg-neon-magenta data-[state=active]:text-void-black">
-                <Info className="w-4 h-4 mr-2" />
-                Details
-              </TabsTrigger>
-              <TabsTrigger value="gallery" className="data-[state=active]:bg-neon-magenta data-[state=active]:text-void-black">
-                <Image className="w-4 h-4 mr-2" />
-                Gallery
-              </TabsTrigger>
-              <TabsTrigger value="rules" className="data-[state=active]:bg-neon-magenta data-[state=active]:text-void-black">
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <Button 
+              className="pixel-button-primary"
+              disabled={!event.registrationStarted}
+              onClick={() => {
+                if (event.registrationStarted) {
+                  setIsRegistrationOpen(true);
+                }
+              }}
+            >
+              {event.registrationStarted ? 'Register for Event' : 'Registration Not Started'}
+            </Button>
+            {event.rulebookUrl && (
+              <Button 
+                className="pixel-button-secondary"
+                onClick={() => window.open(event.rulebookUrl, '_blank')}
+              >
                 <FileText className="w-4 h-4 mr-2" />
-                Rules
-              </TabsTrigger>
-              <TabsTrigger value="schedule" className="data-[state=active]:bg-neon-magenta data-[state=active]:text-void-black">
-                <Clock className="w-4 h-4 mr-2" />
-                Schedule
-              </TabsTrigger>
-            </TabsList>
+                View Rulebook
+              </Button>
+            )}
+          </div>
 
-            <TabsContent value="details" className="space-y-8">
-              <Card className="pixel-card">
+          {/* Description */}
+          <Card className="pixel-card mb-8">
                 <CardHeader>
-                  <CardTitle className="text-neon-cyan">About the Event</CardTitle>
+              <CardTitle className="text-neon-cyan flex items-center">
+                <BookOpen className="w-5 h-5 mr-2" />
+                About This Event
+              </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-ghost-grey leading-relaxed whitespace-pre-line">
+              <p className="text-ghost-grey leading-relaxed text-lg">
                     {event.longDescription}
                   </p>
                 </CardContent>
               </Card>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <Card className="pixel-card">
+          {/* Rules */}
+          <Card className="pixel-card mb-8">
                   <CardHeader>
-                    <CardTitle className="text-neon-cyan">Requirements</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2">
-                      {event.requirements.map((req, index) => (
-                        <li key={index} className="flex items-start">
-                          <span className="w-2 h-2 bg-neon-magenta mt-2 mr-3 flex-shrink-0"></span>
-                          <span className="text-ghost-grey">{req}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
-
-                <Card className="pixel-card">
-                  <CardHeader>
-                    <CardTitle className="text-neon-cyan">Organizers</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2">
-                      {event.organizers.map((organizer, index) => (
-                        <li key={index} className="flex items-start">
-                          <span className="w-2 h-2 bg-neon-magenta mt-2 mr-3 flex-shrink-0"></span>
-                          <span className="text-ghost-grey">{organizer}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
-              </div>
-            </TabsContent>
-
-            <TabsContent value="gallery" className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {event.gallery.map((image, index) => (
-                  <div 
-                    key={index}
-                    className="relative aspect-video overflow-hidden pixel-card cursor-pointer hover:scale-105 transition-transform duration-300"
-                    onClick={() => setSelectedImage(image)}
-                  >
-                    <img 
-                      src={image} 
-                      alt={`${event.name} - Image ${index + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
-                      <div className="opacity-0 hover:opacity-100 transition-opacity duration-300">
-                        <ExternalLink className="w-8 h-8 text-pixel-white" />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </TabsContent>
-
-            <TabsContent value="rules" className="space-y-6">
-              <Card className="pixel-card">
-                <CardHeader>
-                  <CardTitle className="text-neon-cyan">Event Rules</CardTitle>
+              <CardTitle className="text-neon-cyan flex items-center">
+                <FileText className="w-5 h-5 mr-2" />
+                Event Rules
+              </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-4">
@@ -354,80 +920,27 @@ const EventDetails = () => {
                 </CardContent>
               </Card>
 
-              <div className="flex justify-center">
-                <Button className="pixel-button-primary">
-                  <Download className="w-4 h-4 mr-2" />
-                  Download Rulebook (PDF)
-                </Button>
-              </div>
-            </TabsContent>
-
-            <TabsContent value="schedule" className="space-y-6">
+          {/* Schedule */}
               <Card className="pixel-card">
                 <CardHeader>
-                  <CardTitle className="text-neon-cyan">Event Schedule</CardTitle>
+              <CardTitle className="text-neon-cyan flex items-center">
+                <Clock className="w-5 h-5 mr-2" />
+                Event Schedule
+              </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-4">
+              <div className="space-y-3">
                     {event.schedule.map((item, index) => (
-                      <div key={index} className="flex items-center space-x-4 p-4 border border-ghost-grey rounded">
-                        <div className="w-20 text-neon-magenta font-bold text-center">
-                          {item.time}
-                        </div>
-                        <div className="flex-1">
-                          <p className="text-pixel-white font-semibold">{item.activity}</p>
-                        </div>
+                  <div key={index} className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-neon-cyan rounded-full flex-shrink-0" />
+                    <span className="text-ghost-grey text-base">{item.time} - {item.activity}</span>
                       </div>
                     ))}
                   </div>
                 </CardContent>
               </Card>
-            </TabsContent>
-          </Tabs>
-
-          {/* Registration Section */}
-          <div className="mt-16 text-center">
-            <Card className="pixel-card max-w-2xl mx-auto">
-              <CardContent className="p-8">
-                <h3 className="text-2xl text-neon-magenta mb-4">Ready to Participate?</h3>
-                <p className="text-ghost-grey mb-6">
-                  Join the competition and showcase your skills in this exciting event!
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button 
-                    className="pixel-button-primary"
-                    onClick={() => setIsRegistrationOpen(true)}
-                  >
-                    Register for Event
-                  </Button>
-                  <Button variant="outline" className="border-ghost-grey text-ghost-grey hover:border-neon-cyan hover:text-neon-cyan">
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    Share Event
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
         </div>
       </main>
-
-      {/* Image Modal */}
-      <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
-        <DialogContent className="bg-void-black border-2 border-ghost-grey max-w-4xl">
-          <DialogHeader>
-            <DialogTitle className="text-neon-magenta">{event.name} - Gallery</DialogTitle>
-          </DialogHeader>
-          {selectedImage && (
-            <div className="relative aspect-video">
-              <img 
-                src={selectedImage} 
-                alt="Event Gallery"
-                className="w-full h-full object-contain"
-              />
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
 
       {/* Registration Modal */}
       <Dialog open={isRegistrationOpen} onOpenChange={setIsRegistrationOpen}>
@@ -449,9 +962,16 @@ const EventDetails = () => {
               <Button 
                 variant="outline" 
                 className="flex-1 border-ghost-grey text-ghost-grey hover:border-neon-cyan hover:text-neon-cyan"
-                onClick={() => window.location.href = '/register'}
+                onClick={() => {
+                  setIsRegistrationOpen(false);
+                  if (isLoggedIn) {
+                    navigate('/profile');
+                  } else {
+                    navigate('/register');
+                  }
+                }}
               >
-                General Registration
+                {isLoggedIn ? 'Go to Profile' : 'General Registration'}
               </Button>
             </div>
           </div>

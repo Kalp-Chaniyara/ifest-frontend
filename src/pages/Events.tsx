@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { PixelHeader } from '@/components/PixelHeader';
 import { PixelFooter } from '@/components/PixelFooter';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Gamepad2, Code, Shield, Trophy, Brain, Zap, Users, Calendar, MapPin } from 'lucide-react';
+import { Gamepad2, Code, Shield, Trophy, Brain, Zap, Users, Calendar, MapPin, CheckCircle, Clock } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useAuth } from '@/hooks/useAuth';
+import { eventsData } from '@/data/eventsData';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,310 +25,18 @@ interface Event {
   rules: string[];
   category: 'gaming' | 'coding' | 'security' | 'ai' | 'quiz' | 'innovation';
   size: 'small' | 'medium' | 'large';
+  registrationStarted: boolean;
 }
 
-const events: Event[] = [
-  {
-    id: '1',
-    name: 'FizzBuzz',
-    description: 'Classic programming challenge with a modern twist.',
-    icon: <Code className="w-8 h-8" />,
-    color: 'neon-cyan',
-    prize: 'TBA',
-    participants: 'Individual',
-    time: '14th November',
-    location: 'Computer Lab 1',
-    rules: ['Details coming soon'],
-    category: 'coding',
-    size: 'medium'
-  },
-  {
-    id: '2',
-    name: 'i.Ohunt',
-    description: 'Digital treasure hunt with technology challenges.',
-    icon: <Zap className="w-8 h-8" />,
-    color: 'neon-magenta',
-    prize: 'TBA',
-    participants: 'Individual/Team',
-    time: '15th November',
-    location: 'Main Campus',
-    rules: ['Details coming soon'],
-    category: 'innovation',
-    size: 'medium'
-  },
-  {
-    id: '3',
-    name: 'RepoReboot',
-    description: 'Code repository challenge and optimization contest.',
-    icon: <Code className="w-8 h-8" />,
-    color: 'pacman-yellow',
-    prize: 'TBA',
-    participants: 'Individual',
-    time: '16th November',
-    location: 'Computer Lab 2',
-    rules: ['Details coming soon'],
-    category: 'coding',
-    size: 'large'
-  },
-  {
-    id: '4',
-    name: 'i.Clash',
-    description: 'Competitive programming tournament.',
-    icon: <Trophy className="w-8 h-8" />,
-    color: 'neon-cyan',
-    prize: 'TBA',
-    participants: 'Individual',
-    time: '14th November',
-    location: 'Main Auditorium',
-    rules: ['Details coming soon'],
-    category: 'coding',
-    size: 'large'
-  },
-  {
-    id: '5',
-    name: 'i.Relay',
-    description: 'Team-based relay coding competition.',
-    icon: <Users className="w-8 h-8" />,
-    color: 'neon-magenta',
-    prize: 'TBA',
-    participants: 'Team',
-    time: '15th November',
-    location: 'Conference Hall',
-    rules: ['Details coming soon'],
-    category: 'coding',
-    size: 'medium'
-  },
-  {
-    id: '6',
-    name: 'i.Cube',
-    description: '3D problem solving and spatial reasoning challenge.',
-    icon: <Brain className="w-8 h-8" />,
-    color: 'pacman-yellow',
-    prize: 'TBA',
-    participants: 'Individual',
-    time: '16th November',
-    location: 'Innovation Lab',
-    rules: ['Details coming soon'],
-    category: 'innovation',
-    size: 'small'
-  },
-  {
-    id: '7',
-    name: 'i.Papyrus',
-    description: 'Creative writing and documentation challenge.',
-    icon: <Zap className="w-8 h-8" />,
-    color: 'neon-cyan',
-    prize: 'TBA',
-    participants: 'Individual',
-    time: '14th November',
-    location: 'Library',
-    rules: ['Details coming soon'],
-    category: 'innovation',
-    size: 'small'
-  },
-  {
-    id: '8',
-    name: 'i.Capture',
-    description: 'Digital photography and image processing contest.',
-    icon: <Gamepad2 className="w-8 h-8" />,
-    color: 'neon-magenta',
-    prize: 'TBA',
-    participants: 'Individual',
-    time: '15th November',
-    location: 'Photography Studio',
-    rules: ['Details coming soon'],
-    category: 'innovation',
-    size: 'medium'
-  },
-  {
-    id: '9',
-    name: 'Catch The Flag',
-    description: 'Cybersecurity capture the flag competition.',
-    icon: <Shield className="w-8 h-8" />,
-    color: 'pacman-yellow',
-    prize: 'TBA',
-    participants: 'Individual/Team',
-    time: '16th November',
-    location: 'Cybersecurity Lab',
-    rules: ['Details coming soon'],
-    category: 'security',
-    size: 'large'
-  },
-  {
-    id: '10',
-    name: 'SellOut',
-    description: 'Business pitch and entrepreneurship challenge.',
-    icon: <Trophy className="w-8 h-8" />,
-    color: 'neon-cyan',
-    prize: 'TBA',
-    participants: 'Individual/Team',
-    time: '14th November',
-    location: 'Business Center',
-    rules: ['Details coming soon'],
-    category: 'innovation',
-    size: 'medium'
-  },
-  {
-    id: '12',
-    name: 'Chess64',
-    description: 'Chess tournament with digital twist.',
-    icon: <Brain className="w-8 h-8" />,
-    color: 'pacman-yellow',
-    prize: 'TBA',
-    participants: 'Individual',
-    time: '16th November',
-    location: 'Gaming Zone',
-    rules: ['Details coming soon'],
-    category: 'gaming',
-    size: 'small'
-  },
-  {
-    id: '13',
-    name: 'CryptoTrade',
-    description: 'Cryptocurrency trading simulation challenge.',
-    icon: <Zap className="w-8 h-8" />,
-    color: 'neon-cyan',
-    prize: 'TBA',
-    participants: 'Individual',
-    time: '14th November',
-    location: 'Finance Lab',
-    rules: ['Details coming soon'],
-    category: 'innovation',
-    size: 'medium'
-  },
-  {
-    id: '14',
-    name: 'Treasure Hunt',
-    description: 'Digital treasure hunt adventure.',
-    icon: <Users className="w-8 h-8" />,
-    color: 'neon-magenta',
-    prize: 'TBA',
-    participants: 'Team',
-    time: '15th November',
-    location: 'Campus Grounds',
-    rules: ['Details coming soon'],
-    category: 'innovation',
-    size: 'medium'
-  },
-  {
-    id: '15',
-    name: 'i.Ganith',
-    description: 'Mathematical problem solving competition.',
-    icon: <Brain className="w-8 h-8" />,
-    color: 'pacman-yellow',
-    prize: 'TBA',
-    participants: 'Individual',
-    time: '16th November',
-    location: 'Math Lab',
-    rules: ['Details coming soon'],
-    category: 'quiz',
-    size: 'medium'
-  },
-  {
-    id: '16',
-    name: 'i.Ride',
-    description: 'Transportation and logistics innovation challenge.',
-    icon: <Zap className="w-8 h-8" />,
-    color: 'neon-cyan',
-    prize: 'TBA',
-    participants: 'Individual/Team',
-    time: '14th November',
-    location: 'Transportation Hub',
-    rules: ['Details coming soon'],
-    category: 'innovation',
-    size: 'medium'
-  },
-  {
-    id: '16',
-    name: 'CineCraft',
-    description: 'Video editing and filmmaking contest.',
-    icon: <Gamepad2 className="w-8 h-8" />,
-    color: 'pacman-yellow',
-    prize: 'TBA',
-    participants: 'Individual/Team',
-    time: '16th November',
-    location: 'Media Studio',
-    rules: ['Details coming soon'],
-    category: 'innovation',
-    size: 'large'
-  },
-  {
-    id: '17',
-    name: 'i.Quiz',
-    description: 'Technology and general knowledge quiz.',
-    icon: <Trophy className="w-8 h-8" />,
-    color: 'neon-cyan',
-    prize: 'TBA',
-    participants: 'Individual/Team',
-    time: '14th November',
-    location: 'Quiz Hall',
-    rules: ['Details coming soon'],
-    category: 'quiz',
-    size: 'medium'
-  },
-  {
-    id: '18',
-    name: 'BlindC',
-    description: 'C programming challenge with special constraints.',
-    icon: <Code className="w-8 h-8" />,
-    color: 'neon-magenta',
-    prize: 'TBA',
-    participants: 'Individual',
-    time: '15th November',
-    location: 'Programming Lab',
-    rules: ['Details coming soon'],
-    category: 'coding',
-    size: 'medium'
-  },
-  {
-    id: '19',
-    name: 'Reverse Coding',
-    description: 'Reverse engineering and code analysis challenge.',
-    icon: <Shield className="w-8 h-8" />,
-    color: 'pacman-yellow',
-    prize: 'TBA',
-    participants: 'Individual',
-    time: '16th November',
-    location: 'Security Lab',
-    rules: ['Details coming soon'],
-    category: 'coding',
-    size: 'medium'
-  },
-  {
-    id: '20',
-    name: 'AI Triathlon',
-    description: 'Three-stage AI development marathon.',
-    icon: <Brain className="w-8 h-8" />,
-    color: 'neon-cyan',
-    prize: 'TBA',
-    participants: 'Individual/Team',
-    time: '14th November',
-    location: 'AI Research Center',
-    rules: ['Details coming soon'],
-    category: 'ai',
-    size: 'large'
-  },
-  {
-    id: '21',
-    name: 'i.Prompt',
-    description: 'AI prompt engineering and optimization contest.',
-    icon: <Zap className="w-8 h-8" />,
-    color: 'neon-magenta',
-    prize: 'TBA',
-    participants: 'Individual',
-    time: '15th November',
-    location: 'AI Lab',
-    rules: ['Details coming soon'],
-    category: 'ai',
-    size: 'medium'
-  }
-];
+const events: Event[] = eventsData;
 
 const Events = () => {
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [hoveredEvent, setHoveredEvent] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const { isLoggedIn } = useAuth();
+  const navigate = useNavigate();
 
   // Removed GSAP scroll animations - all events now load immediately
 
@@ -460,6 +170,19 @@ const Events = () => {
                       <Trophy className="w-4 h-4 text-pacman-yellow" />
                   <span className="text-pacman-yellow font-bold">{selectedEvent.prize}</span>
                   </div>
+                <div className="flex items-center space-x-2 col-span-2">
+                  {selectedEvent.registrationStarted ? (
+                    <>
+                      <CheckCircle className="w-4 h-4 text-success-green" />
+                      <span className="text-success-green font-bold">Registration Started</span>
+                    </>
+                  ) : (
+                    <>
+                      <Clock className="w-4 h-4 text-pacman-yellow" />
+                      <span className="text-pacman-yellow font-bold">Registration Not Started</span>
+                    </>
+                  )}
+                </div>
                 </div>
                 
               {/* Description */}
@@ -480,12 +203,20 @@ const Events = () => {
               <div className="flex space-x-4 pt-4">
                 <Button 
                   className="flex-1 pixel-button-primary"
+                  disabled={!selectedEvent?.registrationStarted}
                   onClick={() => {
-                    setIsDialogOpen(false);
-                    window.location.href = '/register';
+                    if (selectedEvent?.registrationStarted) {
+                      setIsDialogOpen(false);
+                      // Main functionality: Check if user is logged in
+                      if (isLoggedIn) {
+                        navigate(`/event/${selectedEvent?.id}`);
+                      } else {
+                        navigate('/login');
+                      }
+                    }
                   }}
                 >
-                  Register
+                  {selectedEvent?.registrationStarted ? 'Register for Event' : 'Registration Not Started'}
                 </Button>
                 <Button 
                   variant="outline" 

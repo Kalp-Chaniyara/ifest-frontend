@@ -40,6 +40,7 @@ interface RoboEvent {
   detailedDescription: string;
   schedule: string[];
   judgingCriteria: string[];
+  rulebookUrl?: string;
   categories?: Array<{
     name: string;
     fee: string;
@@ -193,6 +194,60 @@ const roboEventsData: RoboEvent[] = [
     ],
     icon: <Bot className="w-8 h-8" />,
     color: 'neon-cyan'
+  },
+  {
+    id: 'ibot',
+    name: 'i.Bot',
+    description: 'Design a manually controlled wired or wireless robot that has the capacity to cover the maximum distance in the shortest time.',
+    detailedDescription: 'Design a manually controlled wired or wireless robot that has the capacity to cover the maximum distance in the shortest time. But here\'s the twist, the track isn\'t going to be straightforward. Participate in i.Bot to be a part of this venturous race! This is a racing event, so the fastest and most balanced robot will win. The track will test speed, control, and stability, not just raw acceleration.',
+    poster: '/events/placeholder.png',
+    time: '15th November',
+    prize: 'TBA',
+    participants: 'Team (up to 4 members)',
+    location: 'Robotics Arena',
+    category: 'robotics',
+    registrationForm: '',
+    coordinators: [
+      { name: 'Shyam', phone: '+91 9265876690' },
+      { name: 'Ruchir', phone: '+91 6352524988' }
+    ],
+    rules: [
+      'This is a racing event, so the fastest and most balanced robot will win',
+      'At once only one bot can run on track and its time will be recorded',
+      'The robot would be checked for its safety before the competition',
+      'The robot should not damage the arena',
+      'Judges\' decisions shall be treated as final and binding on all',
+      'The robot must not leave behind any of its parts during the run',
+      'The track will test speed, control, and stability, not just raw acceleration',
+      'Only AC supply will be provided (no other variables would be provided by Organisation)',
+      'The organizers reserve the right to change any or all of the above rules as they deem fit',
+      'Violation of any of the above rules will lead to disqualification',
+    ],
+    requirements: [
+      'Maximum dimension of the robot can be 30 cm x 20cm x15 cm (l x b x h)',
+      '5% tolerance will be given',
+      'The robot may be wired or wireless',
+      'The length of the wire (for wired bots) should be long enough to cover the whole track',
+      'The wire should remain slack during the complete run',
+      'Maximum weight must not exceed 3 kg',
+      'The bot can have 4-wheel drive or 2-wheel drive',
+      'All tyres must contribute to motion',
+      'The machine must not be made from Lego parts, or any ready-made kit',
+      'A team may consist of a maximum of 4 participants, all from the same/different institute',
+    ],
+    schedule: [
+      '15th November',
+      'Complete timeline will be shared later'
+    ],
+    judgingCriteria: [
+      'The robot that covers the track in the least time will win',
+      'If any bot gets stuck at some part of the track, limited hand touches will be allowed along with its penalty',
+      'Bonus points will be given several opportunities while racing',
+      'Bonus points will be declared at the time of the event',
+    ],
+    rulebookUrl: 'https://drive.google.com/file/d/1esioD9onRef90NYvB35guQ4ihou_P7ny/view',
+    icon: <Bot className="w-8 h-8" />,
+    color: 'pacman-yellow'
   },
   
 ];
@@ -379,6 +434,40 @@ const RoboEventDetails = () => {
                       <Button
                         className="pixel-button-primary"
                         onClick={() => window.open('https://forms.gle/2LdFH9MvmQGp3vNw7', '_blank')}
+                      >
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        Register Now
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Rulebook Section for i.Bot */}
+          {event.id === 'ibot' && (
+            <Card className="pixel-card mb-8">
+              <CardHeader>
+                <CardTitle className="text-neon-cyan">Rulebook & Registration</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="p-5 rounded border border-void-black/60 bg-void-black/60">
+                    <h3 className="text-pixel-white font-extrabold text-xl mb-3">i.Bot</h3>
+                    <p className="text-ghost-grey text-base mb-4">
+                      Complete rulebook with robot specifications, racing rules, and judging criteria.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <Button
+                        className="pixel-button-secondary"
+                        onClick={() => window.open('https://drive.google.com/file/d/1esioD9onRef90NYvB35guQ4ihou_P7ny/view', '_blank')}
+                      >
+                        View Rulebook
+                      </Button>
+                      <Button
+                        className="pixel-button-primary"
+                        onClick={() => window.open('#', '_blank')}
                       >
                         <ExternalLink className="w-4 h-4 mr-2" />
                         Register Now

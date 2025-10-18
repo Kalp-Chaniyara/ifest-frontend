@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { LogIn, Eye, EyeOff, Gamepad2, Shield } from 'lucide-react';
+import { LogIn, Eye, EyeOff, Shield } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 
@@ -88,17 +88,6 @@ const Login = () => {
     }
   };
 
-  const handleGuestLogin = () => {
-    // For demo purposes
-    login({ 
-      username: 'guest', 
-      email: 'guest@ifest25.com',
-      isGuest: true 
-    });
-    
-    alert('Guest login successful! 🎮');
-    navigate('/profile');
-  };
 
   return (
     <>
@@ -223,26 +212,6 @@ const Login = () => {
                   </Button>
                 </form>
 
-                {/* Divider */}
-                <div className="relative my-6">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-ghost-grey/30"></div>
-                  </div>
-                  <div className="relative flex justify-center text-sm">
-                    <span className="bg-void-black px-4 text-ghost-grey">या</span>
-                  </div>
-                </div>
-
-                {/* Guest Login */}
-                <Button
-                  type="button"
-                  onClick={handleGuestLogin}
-                  className="pixel-button-secondary w-full"
-                  disabled={isLoading}
-                >
-                  <Gamepad2 className="w-4 h-4 mr-2" />
-                  Guest के रूप में Login करें
-                </Button>
 
                 {/* Security Note */}
                 <div className="mt-6 text-center">
