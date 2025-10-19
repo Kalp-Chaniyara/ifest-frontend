@@ -270,7 +270,7 @@ const RoboEventDetails = () => {
                       </Button>
                       <Button
                         className="pixel-button-primary"
-                        onClick={() => window.open('#', '_blank')}
+                        onClick={() => window.open('https://forms.gle/KQaaNxddrs9pGNvz8', '_blank')}
                       >
                         <ExternalLink className="w-4 h-4 mr-2" />
                         Register Now

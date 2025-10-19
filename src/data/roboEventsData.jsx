@@ -52,34 +52,34 @@ export const roboEventsData = [
     icon: <Bot className="w-8 h-8" />,
     color: 'neon-cyan'
   },
-  // {
-  //   id: 'ibot',
-  //   name: 'i.Bot',
-  //   description: 'Design a manually controlled wired or wireless robot that has the capacity to cover the maximum distance in the shortest time.',
-  //   poster: '/events/I.BOT2.png',
-  //   time: '15th November',
-  //   prize: 'TBA',
-  //   participants: 'Team (up to 4 members)',
-  //   location: 'Robotics Arena',
-  //   category: 'robotics',
-  //   registrationForm: '',
-  //   rules: [
-  //     'Maximum dimension: 30cm x 20cm x 15cm (5% tolerance)',
-  //     'Maximum weight: 3kg',
-  //     'Robot may be wired or wireless',
-  //     '4-wheel drive or 2-wheel drive allowed',
-  //     'No Lego parts or ready-made kits',
-  //   ],
-  //   requirements: [
-  //     'Team may consist of maximum 4 participants',
-  //     'All from same/different institute allowed',
-  //     'AC supply will be provided by organization',
-  //     'Wire length should cover whole track for wired bots',
-  //   ],
-  //   rulebookUrl: 'https://drive.google.com/file/d/1esioD9onRef90NYvB35guQ4ihou_P7ny/view',
-  //   icon: <Bot className="w-8 h-8" />,
-  //   color: 'pacman-yellow'
-  // },
+  {
+    id: 'ibot',
+    name: 'i.Bot',
+    description: 'Design a manually controlled wired or wireless robot that has the capacity to cover the maximum distance in the shortest time.',
+    poster: '/events/I.BOT2.png',
+    time: '15th November',
+    prize: 'TBA',
+    participants: 'Team (up to 4 members)',
+    location: 'Robotics Arena',
+    category: 'robotics',
+    registrationForm: 'https://forms.gle/KQaaNxddrs9pGNvz8',
+    rules: [
+      'Maximum dimension: 30cm x 20cm x 15cm (5% tolerance)',
+      'Maximum weight: 3kg',
+      'Robot may be wired or wireless',
+      '4-wheel drive or 2-wheel drive allowed',
+      'No Lego parts or ready-made kits',
+    ],
+    requirements: [
+      'Team may consist of maximum 4 participants',
+      'All from same/different institute allowed',
+      'AC supply will be provided by organization',
+      'Wire length should cover whole track for wired bots',
+    ],
+    rulebookUrl: 'https://drive.google.com/file/d/1esioD9onRef90NYvB35guQ4ihou_P7ny/view',
+    icon: <Bot className="w-8 h-8" />,
+    color: 'pacman-yellow'
+  },
 ];
 // [
 //   {
