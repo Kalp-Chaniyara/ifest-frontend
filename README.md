@@ -1,23 +1,6 @@
-# Welcome to your Lovable project
+# Welcome to your Ifest'25
 
 ## Project info
-
-
-
-
-
-
-**URL**: https://lovable.dev/projects/d10c966e-ab36-42b3-9e6d-147bb314afd3
-
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/d10c966e-ab36-42b3-9e6d-147bb314afd3) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
 
 **Use your preferred IDE**
 
