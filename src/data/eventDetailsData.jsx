@@ -29,7 +29,7 @@ export const eventDetailsData ={
       'Stable internet connection',
       'No team participation allowed'
     ],
-    registrationStarted: true,
+    registrationStarted: false,
     poster: '/events/placeholder.png',
     category: 'coding',
     icon: <Code className="w-8 h-8" />,
