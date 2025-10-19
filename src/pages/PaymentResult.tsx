@@ -81,7 +81,7 @@ const PaymentResult = () => {
           throw new Error('Payment verification failed');
         }
 
-        console.log("Payment response: ", response);
+        // console.log("Payment response: ", response);
 
         const data = await response.json();
         setPaymentStatus(data.status);

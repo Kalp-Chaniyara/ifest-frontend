@@ -97,7 +97,7 @@ const Profile = () => {
         });
         if (resp.ok) {
           const data = await resp.json();
-          console.log("Profile data: ", data);
+          // console.log("Profile data: ", data);
           if (data?.user) {
             setUser({
               fullName: data.user.full_name || data.user.fullName || '',
@@ -129,7 +129,7 @@ const Profile = () => {
         });
         if (resp.ok) {
           const data = await resp.json();
-          console.log("Registered events data: ", data);
+          // console.log("Registered events data: ", data);
           
           // Get event IDs from the response
           const eventIds = data.registeredEvents || [];

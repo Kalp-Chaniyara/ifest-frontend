@@ -86,7 +86,7 @@ const EventDetails = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Registration status data: ", data);
+        // console.log("Registration status data: ", data);
         setIsRegistered(data.isRegistered || false);
       }
     } catch (error) {
