@@ -148,7 +148,7 @@ export const roboEventDetailsData = [
     name: 'i.Bot',
     description: 'Design a manually controlled wired or wireless robot that has the capacity to cover the maximum distance in the shortest time.',
     detailedDescription: 'Design a manually controlled wired or wireless robot that has the capacity to cover the maximum distance in the shortest time. But here\'s the twist, the track isn\'t going to be straightforward. Participate in i.Bot to be a part of this venturous race! This is a racing event, so the fastest and most balanced robot will win. The track will test speed, control, and stability, not just raw acceleration.',
-    poster: '/events/placeholder.png',
+    poster: '/events/I.BOT.png',
     time: '15th November',
     prize: 'TBA',
     participants: 'Team (up to 4 members)',

@@ -240,7 +240,6 @@ const Profile = () => {
           <div className="flex justify-between items-center mb-12">
             <div>
               <h1 className="mb-2 pixel-glow-cyan">Profile</h1>
-              <h2 className="text-ghost-grey">Registration से आई read-only details</h2>
             </div>
             <div>
               <Button className="pixel-button-secondary" onClick={handleLogout}>Logout</Button>
@@ -264,7 +263,7 @@ const Profile = () => {
                     <User className="w-5 h-5 mr-3" />
                     Personal Information
                   </CardTitle>
-                  <CardDescription>Registration form की details (edit disabled)</CardDescription>
+                 
                 </CardHeader>
                 
                 <CardContent className="space-y-6">
@@ -324,7 +323,7 @@ const Profile = () => {
                       <Ticket className="w-5 h-5 mr-3" />
                       Registered Events ({registeredEvents.length})
                     </CardTitle>
-                    <CardDescription>सिर्फ viewing के लिए (edit disabled)</CardDescription>
+                    
                   </CardHeader>
                   
                   <CardContent>
@@ -345,12 +344,12 @@ const Profile = () => {
                                       {event.eventName}
                                     </h3>
                                     <div className="flex items-center space-x-4 text-sm text-ghost-grey">
-                                      <Badge 
+                                      {/* <Badge 
                                         className={`bg-${getPassColor(event.passType)}/20 text-${getPassColor(event.passType)} border-${getPassColor(event.passType)}/50`}
                                       >
                                         {getPassIcon(event.passType)}
                                         <span className="ml-1">{event.passType.toUpperCase()} Pass</span>
-                                      </Badge>
+                                      </Badge> */}
                                       <Badge variant="outline" className="text-ghost-grey">
                                         {event.eventType}
                                       </Badge>
@@ -410,9 +409,6 @@ const Profile = () => {
                           <div className="text-center py-12">
                             <Ticket className="w-12 h-12 text-ghost-grey mx-auto mb-4" />
                             <h3 className="text-xl text-ghost-grey mb-2">No Events Registered</h3>
-                            <p className="text-ghost-grey mb-6">
-                              आपने अभी तक कोई event register नहीं किया है।
-                            </p>
                           </div>
                         )}
                       </>
