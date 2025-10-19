@@ -8,6 +8,39 @@ import { Badge } from '@/components/ui/badge';
 import { useAuth } from '@/hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { usePaymentStatus } from '@/contexts/PaymentContext';
+import { eventDetailsData } from '@/data/eventDetailsData';
+
+// Helper function to parse date strings like "15th November", "14th November"
+const parseEventDate = (dateString: string): string => {
+  if (!dateString || dateString === 'TBA') {
+    return 'TBA';
+  }
+  
+  // Handle formats like "15th November", "14th November"
+  const match = dateString.match(/(\d+)(?:st|nd|rd|th)?\s+(\w+)/i);
+  if (match) {
+    const day = match[1];
+    const month = match[2];
+    
+    // Map month names to numbers
+    const monthMap: { [key: string]: string } = {
+      'january': '01', 'february': '02', 'march': '03', 'april': '04',
+      'may': '05', 'june': '06', 'july': '07', 'august': '08',
+      'september': '09', 'october': '10', 'november': '11', 'december': '12'
+    };
+    
+    const monthNum = monthMap[month.toLowerCase()];
+    if (monthNum) {
+      // Create a date for current year with the parsed month and day
+      const currentYear = new Date().getFullYear();
+      const date = new Date(currentYear, parseInt(monthNum) - 1, parseInt(day));
+      return date.toISOString();
+    }
+  }
+  
+  // If parsing fails, return the original string
+  return dateString;
+};
 import { 
   User, 
   Mail, 
@@ -102,49 +135,26 @@ const Profile = () => {
           const eventIds = data.registeredEvents || [];
           
           if (eventIds.length > 0) {
-            // Fetch full event details for each registered event
-            // const eventDetailsPromises = eventIds.map(async (eventId: string) => {
-            //   try {
-            //     const eventResp = await fetch(`${API_BASE}/events/${eventId}`, {
-            //       method: 'GET',
-            //       credentials: 'include'
-            //     });
-            //     if (eventResp.ok) {
-            //       const eventData = await eventResp.json();
-            //       return {
-            //         id: eventId,
-            //         eventName: eventData.event?.name || 'Unknown Event',
-            //         eventType: eventData.event?.type || 'General',
-            //         passType: 'silver' as 'silver' | 'gold', // Default to silver, could be enhanced
-            //         registrationDate: new Date().toISOString(),
-            //         amount: eventData.event?.price || 0,
-            //         status: 'confirmed' as 'confirmed' | 'pending' | 'cancelled',
-            //         venue: eventData.event?.venue || 'TBA',
-            //         eventDate: eventData.event?.date || new Date().toISOString()
-            //       };
-            //     }
-            //     return null;
-            //   } catch (error) {
-            //     console.error(`Failed to fetch event ${eventId}:`, error);
-            //     return null;
-            //   }
-            // });
+            // Map event IDs to full event details from local data
+            const registeredEventsData = eventIds.map((eventId: string) => {
+              const eventData = eventDetailsData[eventId];
+              if (eventData) {
+                return {
+                  id: eventId,
+                  eventName: eventData.name,
+                  eventType: eventData.category || 'General',
+                  passType: 'silver' as 'silver' | 'gold', // Default to silver
+                  registrationDate: new Date().toISOString(),
+                  amount: 0, // Events are free, but you can set a price if needed
+                  status: 'confirmed' as 'confirmed' | 'pending' | 'cancelled',
+                  venue: eventData.location || 'TBA',
+                  eventDate: parseEventDate(eventData.time || 'TBA')
+                };
+              }
+              return null;
+            }).filter(event => event !== null) as EventRegistration[];
             
-            // const eventDetails = await Promise.all(eventDetailsPromises);
-            // const validEvents = eventDetails.filter(event => event !== null) as EventRegistration[];
-            // setRegisteredEvents(validEvents);
-            setRegisteredEvents([
-              {
-                id: '1',
-                eventName: 'FizzBuzz Coding Challenge',
-                eventType: 'Technical',
-                passType: 'gold',
-                registrationDate: '2025-10-18T10:00:00Z',
-                amount: 199,
-                status: 'confirmed',
-                venue: 'Auditorium Hall A',
-                eventDate: '2025-10-25T14:00:00Z'
-              }]);
+            setRegisteredEvents(registeredEventsData);
           } else {
             setRegisteredEvents([]);
           }
@@ -360,7 +370,10 @@ const Profile = () => {
                                     <Calendar className="w-4 h-4 text-neon-cyan" />
                                     <div>
                                       <div className="text-ghost-grey">Event Date</div>
-                                      <div className="text-pixel-white">{new Date(event.eventDate).toLocaleDateString()}</div>
+                                      <div className="text-pixel-white">
+                                        {event.eventDate === 'TBA' ? 'TBA' : 
+                                         new Date(event.eventDate).toLocaleDateString()}
+                                      </div>
                                     </div>
                                   </div>
                                   
@@ -372,21 +385,21 @@ const Profile = () => {
                                     </div>
                                   </div>
                                   
-                                  <div className="flex items-center space-x-2">
+                                  {/* <div className="flex items-center space-x-2">
                                     <Trophy className="w-4 h-4 text-neon-cyan" />
                                     <div>
                                       <div className="text-ghost-grey">Amount</div>
                                       <div className="text-pixel-white">₹{event.amount.toLocaleString()}</div>
                                     </div>
-                                  </div>
+                                  </div> */}
                                   
-                                  <div className="flex items-center space-x-2">
+                                  {/* <div className="flex items-center space-x-2">
                                     <Users className="w-4 h-4 text-neon-cyan" />
                                     <div>
                                       <div className="text-ghost-grey">Registered</div>
                                       <div className="text-pixel-white">{new Date(event.registrationDate).toLocaleDateString()}</div>
                                     </div>
-                                  </div>
+                                  </div> */}
                                 </div>
                               </CardContent>
                             </Card>

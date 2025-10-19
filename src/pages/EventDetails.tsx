@@ -55,7 +55,10 @@ const eventDetails: Record<string, EventDetails> = eventDetailsData
 const EventDetails = () => {
   const { id } = useParams<{ id: string }>();
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
-  const { isLoggedIn } = useAuth();
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [isRegistering, setIsRegistering] = useState(false);
+  const [registrationMessage, setRegistrationMessage] = useState('');
+  const { isLoggedIn, isLoading } = useAuth();
   const navigate = useNavigate();
   
   // Protected route - redirect to login if not authenticated

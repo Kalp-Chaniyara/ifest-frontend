@@ -29,7 +29,7 @@ export const eventsData = [
     rules: ['Details coming soon'],
     category: 'innovation',
     size: 'medium',
-    registrationStarted: false
+    registrationStarted: true
   },
   {
     id: '3',
