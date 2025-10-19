@@ -109,7 +109,7 @@ export const eventDetailsData ={
       { name: 'Dhruvish', phone: '+91 7046525524' },
       { name: 'Tirth', phone: '+91 7984574445' }
     ],
-    rulebookUrl: 'https://docs.google.com/document/d/1-mfQgc34wk0tjnpSS3UwFwSwhP4RNPyE/edit?usp=sharing&ouid=105561346511769055672&rtpof=true&sd=true',
+    rulebookUrl: 'https://docs.google.com/document/d/1-mfQgc34wk0tjnpSS3UwFwSwhP4RNPyE/edit?usp=sharing&ouid=105561346511769055672&rtpof=false&sd=false',
     schedule: [
       { time: 'TBA', activity: 'Details coming soon' }
     ]
@@ -347,7 +347,7 @@ export const eventDetailsData ={
       { name: 'Kasak', phone: '+91 7574897644' },
       { name: 'Ayush', phone: '+91 9624695698' }
     ],
-    rulebookUrl: 'https://docs.google.com/document/d/1oGC7q2NJ9oRKPFKUZ3Wc9TaxyzrHz9-4/edit?usp=sharing&ouid=105561346511769055672&rtpof=true&sd=true',
+    rulebookUrl: 'https://docs.google.com/document/d/1oGC7q2NJ9oRKPFKUZ3Wc9TaxyzrHz9-4/edit?usp=sharing&ouid=105561346511769055672&rtpof=false&sd=false',
     schedule: [
       { time: 'TBA', activity: 'Details coming soon' }
     ]
@@ -533,7 +533,7 @@ export const eventDetailsData ={
       { name: 'Sumit', phone: '+91 9664515557' },
       { name: 'Madhav', phone: '+91 9227013499' }
     ],
-    rulebookUrl: 'https://docs.google.com/document/d/130-QkspKqkSETqfPmG-xLXNetmGUUJwW/edit?usp=sharing&ouid=105561346511769055672&rtpof=true&sd=true',
+    rulebookUrl: 'https://docs.google.com/document/d/130-QkspKqkSETqfPmG-xLXNetmGUUJwW/edit?usp=sharing&ouid=105561346511769055672&rtpof=false&sd=false',
     schedule: [
       { time: 'TBA', activity: 'Event details coming soon' }
     ]
@@ -755,7 +755,7 @@ export const eventDetailsData ={
       { name: 'Mahek', phone: '+91 9601594723' },
       { name: 'Zeel', phone: '+91 9913531830' }
     ],
-    rulebookUrl: 'https://docs.google.com/document/d/1bEF-cYPYuIk6258gO-bWuFZqAMrcFMKq/edit?usp=sharing&ouid=105561346511769055672&rtpof=true&sd=true',
+    rulebookUrl: 'https://docs.google.com/document/d/1bEF-cYPYuIk6258gO-bWuFZqAMrcFMKq/edit?usp=sharing&ouid=105561346511769055672&rtpof=false&sd=false',
     schedule: [
       { time: 'TBA', activity: 'Event details coming soon' }
     ]
@@ -794,7 +794,7 @@ export const eventDetailsData ={
       { name: 'Vedant', phone: '+91 9023095963' },
       { name: 'Aaditya', phone: '+91 8529451266' }
     ],
-    rulebookUrl: 'https://docs.google.com/document/d/1dkMaRZfas1TB5re1t87jmCQ36UgCyPNH/edit?usp=sharing&ouid=105561346511769055672&rtpof=true&sd=true',
+    rulebookUrl: 'https://docs.google.com/document/d/1dkMaRZfas1TB5re1t87jmCQ36UgCyPNH/edit?usp=sharing&ouid=105561346511769055672&rtpof=false&sd=false',
     schedule: [
       { time: 'Round 1: 10:00 AM', activity: 'The Knowledge Dash (Online Speed Quiz) - Top 50% advance' },
       { time: 'Round 2: 11:30 AM', activity: 'The Deep Dive (Conceptual Challenge) - Select finalists chosen' },

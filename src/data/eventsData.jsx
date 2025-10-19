@@ -14,7 +14,7 @@ export const eventsData = [
     rules: ['Details coming soon'],
     category: 'coding',
     size: 'medium',
-    registrationStarted: false
+    registrationStarted: true
   },
   {
     id: '2',
@@ -29,7 +29,7 @@ export const eventsData = [
     rules: ['Details coming soon'],
     category: 'innovation',
     size: 'medium',
-    registrationStarted: false
+    registrationStarted: true
   },
   {
     id: '3',
@@ -44,7 +44,7 @@ export const eventsData = [
     rules: ['Details coming soon'],
     category: 'coding',
     size: 'large',
-    registrationStarted: false
+    registrationStarted: true
   },
   {
     id: '4',
@@ -59,7 +59,7 @@ export const eventsData = [
     rules: ['Details coming soon'],
     category: 'coding',
     size: 'large',
-    registrationStarted: false
+    registrationStarted: true
   },
   {
     id: '5',
@@ -74,7 +74,7 @@ export const eventsData = [
     rules: ['Details coming soon'],
     category: 'coding',
     size: 'medium',
-    registrationStarted: false
+    registrationStarted: true
   },
   {
     id: '6',
@@ -89,7 +89,7 @@ export const eventsData = [
     rules: ['Details coming soon'],
     category: 'innovation',
     size: 'small',
-    registrationStarted: false
+    registrationStarted: true
   },
   {
     id: '7',
@@ -104,7 +104,7 @@ export const eventsData = [
     rules: ['Details coming soon'],
     category: 'innovation',
     size: 'small',
-    registrationStarted: false
+    registrationStarted: true
   },
   {
     id: '8',
@@ -119,7 +119,7 @@ export const eventsData = [
     rules: ['Details coming soon'],
     category: 'innovation',
     size: 'medium',
-    registrationStarted: false
+    registrationStarted: true
   },
   {
     id: '9',
@@ -134,7 +134,7 @@ export const eventsData = [
     rules: ['Details coming soon'],
     category: 'security',
     size: 'large',
-    registrationStarted: false
+    registrationStarted: true
   },
   {
     id: '10',
@@ -149,7 +149,7 @@ export const eventsData = [
     rules: ['Details coming soon'],
     category: 'innovation',
     size: 'medium',
-    registrationStarted: false
+    registrationStarted: true
   },
  
   {
@@ -165,7 +165,7 @@ export const eventsData = [
     rules: ['Details coming soon'],
     category: 'gaming',
     size: 'small',
-    registrationStarted: false
+    registrationStarted: true
   },
   {
     id: '12',
@@ -180,7 +180,7 @@ export const eventsData = [
     rules: ['Details coming soon'],
     category: 'innovation',
     size: 'medium',
-    registrationStarted: false
+    registrationStarted: true
   },
   {
     id: '13',
@@ -195,7 +195,7 @@ export const eventsData = [
     rules: ['Details coming soon'],
     category: 'innovation',
     size: 'medium',
-    registrationStarted: false
+    registrationStarted: true
   },
   {
     id: '14',
@@ -210,7 +210,7 @@ export const eventsData = [
     rules: ['Details coming soon'],
     category: 'quiz',
     size: 'medium',
-    registrationStarted: false
+    registrationStarted: true
   },
   {
     id: '15',
@@ -225,7 +225,7 @@ export const eventsData = [
     rules: ['Details coming soon'],
     category: 'innovation',
     size: 'medium',
-    registrationStarted: false
+    registrationStarted: true
   },
   {
     id: '16',
@@ -240,7 +240,7 @@ export const eventsData = [
     rules: ['Details coming soon'],
     category: 'innovation',
     size: 'large',
-    registrationStarted: false
+    registrationStarted: true
   },
   {
     id: '17',
@@ -255,7 +255,7 @@ export const eventsData = [
     rules: ['Details coming soon'],
     category: 'quiz',
     size: 'medium',
-    registrationStarted: false
+    registrationStarted: true
   },
   {
     id: '18',
@@ -270,7 +270,7 @@ export const eventsData = [
     rules: ['Details coming soon'],
     category: 'coding',
     size: 'medium',
-    registrationStarted: false
+    registrationStarted: true
   },
   {
     id: '19',
@@ -285,7 +285,7 @@ export const eventsData = [
     rules: ['Details coming soon'],
     category: 'coding',
     size: 'medium',
-    registrationStarted: false
+    registrationStarted: true
   },
   {
     id: '20',
@@ -315,6 +315,6 @@ export const eventsData = [
     rules: ['Details coming soon'],
     category: 'ai',
     size: 'medium',
-    registrationStarted: false
+    registrationStarted: true
   }
 ];
