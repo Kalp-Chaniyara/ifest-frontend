@@ -24,10 +24,14 @@ export const PixelHeader = () => {
 
   // Determine whether to show Profile or Register button
   const shouldShowProfile = () => {
-    // Show Profile if:
-    // 1. User is logged in, OR
-    // 2. Payment was successful (even if not logged in yet)
-    return isLoggedIn || paymentStatus === 'success';
+    // Show Profile ONLY if:
+    // 1. User is logged in AND
+    // 2. Payment is successful
+    // 
+    // Show Register in all other cases:
+    // - Not logged in (regardless of payment status)
+    // - Logged in but no payment (this case won't occur but handled for safety)
+    return isLoggedIn && paymentStatus === 'success';
   };
 
   return (

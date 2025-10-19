@@ -261,16 +261,7 @@ const Register = () => {
         registrationDate: new Date().toISOString()
       };
       
-      try {
-        localStorage.setItem('registrationUser', JSON.stringify(registrationUser));
-        // Keep previously saved events if any, else empty list
-        const existingEvents = localStorage.getItem('registeredEvents');
-        if (!existingEvents) {
-          localStorage.setItem('registeredEvents', JSON.stringify([]));
-        }
-      } catch (error) {
-        console.warn('Failed to store registration data:', error);
-      }
+      // No localStorage - data is stored in backend during registration
 
       const reUrl = data.checkoutPageUrl;
       window.open(reUrl, '_self');
@@ -298,16 +289,7 @@ const Register = () => {
       year: userDetails.year,
       registrationDate: new Date().toISOString()
     };
-    try {
-      localStorage.setItem('registrationUser', JSON.stringify(registrationUser));
-      // Keep previously saved events if any, else empty list
-      const existingEvents = localStorage.getItem('registeredEvents');
-      if (!existingEvents) {
-        localStorage.setItem('registeredEvents', JSON.stringify([]));
-      }
-    } catch (error) {
-      console.warn('Failed to store registration data in handlePaymentComplete:', error);
-    }
+    // No localStorage - data is stored in backend during registration
     
     // Update auth state and redirect
     login({ 

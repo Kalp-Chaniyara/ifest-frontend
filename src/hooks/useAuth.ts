@@ -24,34 +24,22 @@ export const useAuth = () => {
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
-        // Check localStorage flag first
-        const isLoggedInFlag = localStorage.getItem('isLoggedIn') === 'true';
-        
-        if (isLoggedInFlag) {
-          // Try to fetch user profile to verify auth
-          const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:4000';
-          const response = await fetch(`${API_BASE}/user/profile`, {
-            method: 'GET',
-            credentials: 'include'
-          });
+        // Always check with API - no localStorage dependency
+        const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:4000';
+        const response = await fetch(`${API_BASE}/user/profile`, {
+          method: 'GET',
+          credentials: 'include'
+        });
 
-          if (response.ok) {
-            const data = await response.json();
-            setAuthState({
-              isLoggedIn: true,
-              isLoading: false,
-              user: data.user
-            });
-          } else {
-            // Token expired or invalid
-            localStorage.removeItem('isLoggedIn');
-            setAuthState({
-              isLoggedIn: false,
-              isLoading: false,
-              user: null
-            });
-          }
+        if (response.ok) {
+          const data = await response.json();
+          setAuthState({
+            isLoggedIn: true,
+            isLoading: false,
+            user: data.user
+          });
         } else {
+          // Not authenticated
           setAuthState({
             isLoggedIn: false,
             isLoading: false,
@@ -72,7 +60,7 @@ export const useAuth = () => {
   }, []);
 
   const login = (userData: { username?: string; email?: string; fullName?: string; phone?: string; mobile_number?: string; isGuest?: boolean }) => {
-    localStorage.setItem('isLoggedIn', 'true');
+    // No localStorage - rely on API cookies/sessions
     setAuthState({
       isLoggedIn: true,
       isLoading: false,
@@ -80,14 +68,27 @@ export const useAuth = () => {
     });
   };
 
-  const logout = () => {
-    localStorage.removeItem('isLoggedIn');
-    setAuthState({
-      isLoggedIn: false,
-      isLoading: false,
-      user: null
-    });
-    // Note: Payment status clearing will be handled by components that use both useAuth and usePaymentStatus
+  const logout = async () => {
+    try {
+      // Call backend logout endpoint to clear session/cookies
+      const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:4000';
+      await fetch(`${API_BASE}/auth/logout`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    } catch (error) {
+      console.warn('Failed to logout from backend:', error);
+    } finally {
+      // Always clear local state regardless of API call result
+      setAuthState({
+        isLoggedIn: false,
+        isLoading: false,
+        user: null
+      });
+    }
   };
 
   return {

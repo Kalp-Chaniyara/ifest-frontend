@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { PixelHeader } from '@/components/PixelHeader';
@@ -705,10 +705,78 @@ const eventDetails: Record<string, EventDetails> = {
 const EventDetails = () => {
   const { id } = useParams<{ id: string }>();
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [isRegistering, setIsRegistering] = useState(false);
+  const [registrationMessage, setRegistrationMessage] = useState('');
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
   
   const event = eventDetails[id || '1'];
+
+  // Check if user is already registered for this event
+  const checkRegistrationStatus = useCallback(async () => {
+    if (!isLoggedIn) return;
+    
+    try {
+      const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:4000';
+      const response = await fetch(`${API_BASE}/user/registration-status/${id}`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Registration status data: ", data);
+        setIsRegistered(data.isRegistered || false);
+      }
+    } catch (error) {
+      console.warn('Failed to check registration status:', error);
+    }
+  }, [isLoggedIn, id]);
+
+  // Register for event
+  const registerForEvent = async () => {
+    if (!isLoggedIn) {
+      navigate('/login');
+      return;
+    }
+
+    setIsRegistering(true);
+    setRegistrationMessage('');
+
+    try {
+      const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:4000';
+      const response = await fetch(`${API_BASE}/user/register-event/${id}`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setIsRegistered(true);
+        setRegistrationMessage('Successfully registered for the event!');
+      } else {
+        setRegistrationMessage(data.message || 'Registration failed. Please try again.');
+      }
+    } catch (error) {
+      setRegistrationMessage('Registration failed. Please try again.');
+      console.error('Registration error:', error);
+    } finally {
+      setIsRegistering(false);
+    }
+  };
+
+  // Check registration status when component mounts or user logs in
+  useEffect(() => {
+    checkRegistrationStatus();
+  }, [checkRegistrationStatus]);
 
   const getEventColor = (color: string) => {
     switch (color) {
@@ -862,15 +930,28 @@ const EventDetails = () => {
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <Button 
-              className="pixel-button-primary"
-              disabled={!event.registrationStarted}
+              className={`${
+                isRegistered 
+                  ? 'pixel-button-success' 
+                  : isRegistering 
+                    ? 'pixel-button-primary opacity-50' 
+                    : 'pixel-button-primary'
+              }`}
+              disabled={!event.registrationStarted || isRegistering}
               onClick={() => {
                 if (event.registrationStarted) {
                   setIsRegistrationOpen(true);
                 }
               }}
             >
-              {event.registrationStarted ? 'Register for Event' : 'Registration Not Started'}
+              {!event.registrationStarted 
+                ? 'Registration Not Started'
+                : isRegistering 
+                  ? 'Registering...'
+                  : isRegistered 
+                    ? 'Already Registered'
+                    : 'Register for Event'
+              }
             </Button>
             {event.rulebookUrl && (
               <Button 
@@ -946,12 +1027,37 @@ const EventDetails = () => {
       <Dialog open={isRegistrationOpen} onOpenChange={setIsRegistrationOpen}>
         <DialogContent className="bg-void-black border-2 border-ghost-grey max-w-md">
           <DialogHeader>
-            <DialogTitle className="text-neon-magenta">Register for {event.name}</DialogTitle>
+            <DialogTitle className="text-neon-magenta">
+              {isRegistered ? `Already Registered for ${event.name}` : `Register for ${event.name}`}
+            </DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
-            <p className="text-ghost-grey">
-              Registration for this event will be available soon. Please check back later or contact the organizers for more information.
-            </p>
+            {isRegistered ? (
+              <>
+                <div className="flex items-center space-x-2 text-success-green">
+                  <CheckCircle className="w-5 h-5" />
+                  <p>You are already registered for this event!</p>
+                </div>
+                <p className="text-ghost-grey text-sm">
+                  Check your profile for more details about your registration and event updates.
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="text-ghost-grey">
+                  Are you sure you want to register for <strong className="text-neon-cyan">{event.name}</strong>?
+                </p>
+                <p className="text-ghost-grey text-sm">
+                  Make sure you have read the rules and requirements before proceeding.
+                </p>
+                {registrationMessage && (
+                  <p className={`text-sm ${registrationMessage.includes('Successfully') ? 'text-success-green' : 'text-error-red'}`}>
+                    {registrationMessage}
+                  </p>
+                )}
+              </>
+            )}
+            
             <div className="flex space-x-4">
               <Button 
                 className="flex-1 pixel-button-primary"
@@ -959,20 +1065,27 @@ const EventDetails = () => {
               >
                 Close
               </Button>
-              <Button 
-                variant="outline" 
-                className="flex-1 border-ghost-grey text-ghost-grey hover:border-neon-cyan hover:text-neon-cyan"
-                onClick={() => {
-                  setIsRegistrationOpen(false);
-                  if (isLoggedIn) {
+              {!isRegistered && (
+                <Button 
+                  className="flex-1 pixel-button-secondary"
+                  disabled={isRegistering}
+                  onClick={registerForEvent}
+                >
+                  {isRegistering ? 'Registering...' : 'Confirm Registration'}
+                </Button>
+              )}
+              {isRegistered && (
+                <Button 
+                  variant="outline" 
+                  className="flex-1 border-ghost-grey text-ghost-grey hover:border-neon-cyan hover:text-neon-cyan"
+                  onClick={() => {
+                    setIsRegistrationOpen(false);
                     navigate('/profile');
-                  } else {
-                    navigate('/register');
-                  }
-                }}
-              >
-                {isLoggedIn ? 'Go to Profile' : 'General Registration'}
-              </Button>
+                  }}
+                >
+                  View Profile
+                </Button>
+              )}
             </div>
           </div>
         </DialogContent>

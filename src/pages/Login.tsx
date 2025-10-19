@@ -72,17 +72,26 @@ const Login = () => {
         })
       });
 
+      const userData = await resp.json();
+
       if (!resp.ok) {
-        const data = await resp.json().catch(() => null);
-        throw new Error(data?.message || 'Login failed');
+        throw new Error(userData?.message || 'Login failed');
       }
 
-      // Update auth state
-      login({ username: formData.phone, email: '' });
+      // Update auth state with complete user data from API response
+      login({ 
+        username: formData.phone, 
+        email: userData.user?.email || '',
+        mobile_number: formData.phone,
+        phone: formData.phone,
+        fullName: userData.user?.full_name || ''
+      });
+      
       alert('Login successful! Welcome to i\'Fest\'25! 🎮');
       navigate('/profile');
-    } catch (error: any) {
-      setFormErrors({ general: error?.message || 'Login failed. Please try again.' });
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Login failed. Please try again.';
+      setFormErrors({ general: errorMessage });
     } finally {
       setIsLoading(false);
     }

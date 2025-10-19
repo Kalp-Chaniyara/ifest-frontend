@@ -42,18 +42,7 @@ const PaymentResult = () => {
         return user.phone.trim();
       }
       
-      // 3. Fallback to localStorage registrationUser
-      try {
-        const storedUser = localStorage.getItem('registrationUser');
-        if (storedUser) {
-          const parsedUser = JSON.parse(storedUser);
-          if (parsedUser.phone) {
-            return parsedUser.phone.trim();
-          }
-        }
-      } catch (error) {
-        console.warn('Failed to parse stored user:', error);
-      }
+      // 3. No localStorage fallback - rely on API
       
       // 4. Try to get from URL parameters as last resort
       const urlUsername = searchParams.get('username');
@@ -135,22 +124,7 @@ const PaymentResult = () => {
 
   const handleRedirect = () => {
     if (paymentStatus === 'success') {
-      // Get user details from localStorage and authenticate
-      try {
-        const storedUser = localStorage.getItem('registrationUser');
-        if (storedUser) {
-          const userData = JSON.parse(storedUser);
-          // Login the user with their registration data
-          login({
-            username: userData.phone,
-            email: userData.email,
-            fullName: userData.fullName
-          });
-        }
-      } catch (error) {
-        console.warn('Failed to parse stored user data:', error);
-      }
-      
+      // User is already authenticated via API cookies
       // Navigate to profile page
       navigate('/profile');
     } else if (paymentStatus === 'failure') {
@@ -303,7 +277,7 @@ const PaymentResult = () => {
                  <p>Global Status: {globalPaymentStatus}</p>
                  <p>Merchant ID: {merchantId || 'Not found'}</p>
                  <p>URL Params: {searchParams.toString()}</p>
-                 <p>Stored User: {localStorage.getItem('registrationUser') ? 'Available' : 'Not found'}</p>
+                 <p>API Only: No localStorage dependency</p>
                  <p>Redirect: {paymentStatus === 'success' ? '/profile' : '/register'}</p>
                </div>
              </div>

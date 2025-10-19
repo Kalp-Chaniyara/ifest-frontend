@@ -32,11 +32,6 @@ export const PaymentProvider = ({ children }: PaymentProviderProps) => {
 
   // Fetch payment status from API
   const fetchPaymentStatus = useCallback(async () => {
-    if (!isLoggedIn || !user?.username) {
-      setPaymentStatusState('none');
-      return;
-    }
-
     setIsLoading(true);
     try {
       const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:4000';
@@ -61,16 +56,13 @@ export const PaymentProvider = ({ children }: PaymentProviderProps) => {
     } finally {
       setIsLoading(false);
     }
-  }, [isLoggedIn, user?.username]);
+  }, []);
 
-  // Load payment status when user logs in
+  // Load payment status on app load and when user logs in
   useEffect(() => {
-    if (isLoggedIn && user?.username) {
-      fetchPaymentStatus();
-    } else {
-      setPaymentStatusState('none');
-    }
-  }, [isLoggedIn, user?.username, fetchPaymentStatus]);
+    // Always try to fetch payment status (works for both logged in and logged out users)
+    fetchPaymentStatus();
+  }, [fetchPaymentStatus]);
 
   const setPaymentStatus = async (status: PaymentStatus, username?: string) => {
     setPaymentStatusState(status);
@@ -93,34 +85,16 @@ export const PaymentProvider = ({ children }: PaymentProviderProps) => {
         });
       } catch (error) {
         console.warn('Failed to update payment status in backend:', error);
-        // Fallback to localStorage for development/offline scenarios
-        if (process.env.NODE_ENV === 'development') {
-          localStorage.setItem('paymentStatus', status);
-        }
-      }
-    } else {
-      // Fallback to localStorage when no username available
-      if (process.env.NODE_ENV === 'development') {
-        localStorage.setItem('paymentStatus', status);
+        // No fallback - API must work
       }
     }
   };
 
   const clearPaymentStatus = async () => {
+    // Don't clear payment status - it should persist across login/logout
+    // Payment status represents a completed transaction and should remain
     setPaymentStatusState('none');
-    
-    // Clear from backend if user is logged in
-    if (isLoggedIn && user?.username) {
-      try {
-        const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:4000';
-        await fetch(`${API_BASE}/user/payment-status`, {
-          method: 'DELETE',
-          credentials: 'include',
-        });
-      } catch (error) {
-        console.warn('Failed to clear payment status in backend:', error);
-      }
-    }
+    console.log('Payment status cleared locally but not from backend - payment persists');
   };
 
   const refreshPaymentStatus = async () => {
