@@ -44,7 +44,7 @@ export const eventsData = [
     rules: ['Details coming soon'],
     category: 'coding',
     size: 'large',
-    registrationStarted: true
+    registrationStarted: false
   },
   {
     id: '4',
@@ -89,7 +89,7 @@ export const eventsData = [
     rules: ['Details coming soon'],
     category: 'innovation',
     size: 'small',
-    registrationStarted: true
+    registrationStarted: false
   },
   {
     id: '7',
@@ -255,7 +255,7 @@ export const eventsData = [
     rules: ['Details coming soon'],
     category: 'quiz',
     size: 'medium',
-    registrationStarted: true
+    registrationStarted: false
   },
   {
     id: '18',

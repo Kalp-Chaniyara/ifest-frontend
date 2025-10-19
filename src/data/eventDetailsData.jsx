@@ -29,7 +29,7 @@ export const eventDetailsData ={
       'Stable internet connection',
       'No team participation allowed'
     ],
-    registrationStarted: false,
+    registrationStarted: true,
     poster: '/events/placeholder.png',
     category: 'coding',
     icon: <Code className="w-8 h-8" />,
@@ -74,7 +74,7 @@ export const eventDetailsData ={
       'No external assistance or collaboration allowed',
       'Follow all instructions given by coordinators'
     ],
-    registrationStarted: false,
+    registrationStarted: true,
     poster: '/events/placeholder.png',
     category: 'innovation',
     icon: <Zap className="w-8 h-8" />,
@@ -109,7 +109,7 @@ export const eventDetailsData ={
       { name: 'Dhruvish', phone: '+91 7046525524' },
       { name: 'Tirth', phone: '+91 7984574445' }
     ],
-    rulebookUrl: 'https://docs.google.com/document/d/1-mfQgc34wk0tjnpSS3UwFwSwhP4RNPyE/edit?usp=sharing&ouid=105561346511769055672&rtpof=false&sd=false',
+    rulebookUrl: 'https://docs.google.com/document/d/1-mfQgc34wk0tjnpSS3UwFwSwhP4RNPyE/edit?usp=sharing&ouid=105561346511769055672&rtpof=true&sd=true',
     schedule: [
       { time: 'TBA', activity: 'Details coming soon' }
     ]
@@ -126,7 +126,7 @@ export const eventDetailsData ={
     rules: ['Details coming soon'],
     organizers: ['Details coming soon'],
     requirements: ['Details coming soon'],
-    registrationStarted: false,
+    registrationStarted: true,
     poster: '/events/placeholder.png',
     category: 'coding',
     icon: <Code className="w-8 h-8" />,
@@ -173,7 +173,7 @@ export const eventDetailsData ={
       'Stable internet connection',
       'Arrive on time for event start'
     ],
-    registrationStarted: false,
+    registrationStarted: true,
     poster: '/events/placeholder.png',
     category: 'coding',
     icon: <Code className="w-8 h-8" />,
@@ -271,7 +271,7 @@ export const eventDetailsData ={
       'Be ready to discuss methods and potential impact of findings',
       'Follow submission guidelines provided by organizers'
     ],
-    registrationStarted: false,
+    registrationStarted: true,
     poster: '/events/placeholder.png',
     category: 'innovation',
     icon: <Code className="w-8 h-8" />,
@@ -312,7 +312,7 @@ export const eventDetailsData ={
       'Submit both edited and raw photos if edited',
       'Obtain consent for human subjects'
     ],
-    registrationStarted: false,
+    registrationStarted: true,
     poster: '/events/placeholder.png',
     category: 'innovation',
     icon: <Code className="w-8 h-8" />,
@@ -338,7 +338,7 @@ export const eventDetailsData ={
     rules: ['Details coming soon'],
     organizers: ['Details coming soon'],
     requirements: ['Details coming soon'],
-    registrationStarted: false,
+    registrationStarted: true,
     poster: '/events/placeholder.png',
     category: 'coding',
     icon: <Code className="w-8 h-8" />,
@@ -347,7 +347,7 @@ export const eventDetailsData ={
       { name: 'Kasak', phone: '+91 7574897644' },
       { name: 'Ayush', phone: '+91 9624695698' }
     ],
-    rulebookUrl: 'https://docs.google.com/document/d/1oGC7q2NJ9oRKPFKUZ3Wc9TaxyzrHz9-4/edit?usp=sharing&ouid=105561346511769055672&rtpof=false&sd=false',
+    rulebookUrl: 'https://docs.google.com/document/d/1oGC7q2NJ9oRKPFKUZ3Wc9TaxyzrHz9-4/edit?usp=sharing&ouid=105561346511769055672&rtpof=true&sd=true',
     schedule: [
       { time: 'TBA', activity: 'Details coming soon' }
     ]
@@ -394,7 +394,7 @@ export const eventDetailsData ={
       'Follow all guidelines in rulebook',
       'Arrive on time for final pitch round'
     ],
-    registrationStarted: false,
+    registrationStarted: true,
     poster: '/events/placeholder.png',
     category: 'innovation',
     icon: <Code className="w-8 h-8" />,
@@ -435,7 +435,7 @@ export const eventDetailsData ={
       'Physical presence required at venue',
       'Inform coordinators about unavailability'
     ],
-    registrationStarted: false,
+    registrationStarted: true,
     poster: '/events/placeholder.png',
     category: 'gaming',
     icon: <Brain className="w-8 h-8" />,
@@ -476,7 +476,7 @@ export const eventDetailsData ={
       'Follow all trading guidelines',
       'Valid contact information for prize eligibility'
     ],
-    registrationStarted: false,
+    registrationStarted: true,
     poster: '/events/placeholder.png',
     category: 'innovation',
     icon: <Code className="w-8 h-8" />,
@@ -524,7 +524,7 @@ export const eventDetailsData ={
       'Follow all campus rules and regulations',
       'Arrive on time for event start'
     ],
-    registrationStarted: false,
+    registrationStarted: true,
     poster: '/events/placeholder.png',
     category: 'gaming',
     icon: <Code className="w-8 h-8" />,
@@ -533,7 +533,7 @@ export const eventDetailsData ={
       { name: 'Sumit', phone: '+91 9664515557' },
       { name: 'Madhav', phone: '+91 9227013499' }
     ],
-    rulebookUrl: 'https://docs.google.com/document/d/130-QkspKqkSETqfPmG-xLXNetmGUUJwW/edit?usp=sharing&ouid=105561346511769055672&rtpof=false&sd=false',
+    rulebookUrl: 'https://docs.google.com/document/d/130-QkspKqkSETqfPmG-xLXNetmGUUJwW/edit?usp=sharing&ouid=105561346511769055672&rtpof=true&sd=true',
     schedule: [
       { time: 'TBA', activity: 'Event details coming soon' }
     ]
@@ -550,7 +550,7 @@ export const eventDetailsData ={
     rules: ['Details coming soon'],
     organizers: ['Details coming soon'],
     requirements: ['Details coming soon'],
-    registrationStarted: false,
+    registrationStarted: true,
     poster: '/events/placeholder.png',
     category: 'coding',
     icon: <Code className="w-8 h-8" />,
@@ -591,7 +591,7 @@ export const eventDetailsData ={
       'Follow all safety guidelines',
       'No personal bicycles required - provided by organizers'
     ],
-    registrationStarted: false,
+    registrationStarted: true,
     poster: '/events/placeholder.png',
     category: 'gaming',
     icon: <Code className="w-8 h-8" />,
@@ -632,7 +632,7 @@ export const eventDetailsData ={
       'Theme: "Pixel Paradox" interpretation',
       'Proper audio rights and permissions'
     ],
-    registrationStarted: false,
+    registrationStarted: true,
     poster: '/events/placeholder.png',
     category: 'innovation',
     icon: <Gamepad2 className="w-8 h-8" />,
@@ -698,7 +698,7 @@ export const eventDetailsData ={
       'Basic programming knowledge in any language',
       'No on-spot entries allowed'
     ],
-    registrationStarted: false,
+    registrationStarted: true,
     poster: '/events/placeholder.png',
     category: 'coding',
     icon: <Code className="w-8 h-8" />,
@@ -746,7 +746,7 @@ export const eventDetailsData ={
       'Logical reasoning and pattern recognition skills',
       'Arrive on time for event start'
     ],
-    registrationStarted: false,
+    registrationStarted: true,
     poster: '/events/placeholder.png',
     category: 'coding',
     icon: <Code className="w-8 h-8" />,
@@ -755,7 +755,7 @@ export const eventDetailsData ={
       { name: 'Mahek', phone: '+91 9601594723' },
       { name: 'Zeel', phone: '+91 9913531830' }
     ],
-    rulebookUrl: 'https://docs.google.com/document/d/1bEF-cYPYuIk6258gO-bWuFZqAMrcFMKq/edit?usp=sharing&ouid=105561346511769055672&rtpof=false&sd=false',
+    rulebookUrl: 'https://docs.google.com/document/d/1bEF-cYPYuIk6258gO-bWuFZqAMrcFMKq/edit?usp=sharing&ouid=105561346511769055672&rtpof=true&sd=true',
     schedule: [
       { time: 'TBA', activity: 'Event details coming soon' }
     ]
@@ -785,7 +785,7 @@ export const eventDetailsData ={
       'Individual participation (no teams allowed)',
       'Interest in AI, ML, and Data Science fields'
     ],
-    registrationStarted: false,
+    registrationStarted: true,
     poster: '/events/placeholder.png',
     category: 'ai',
     icon: <Brain className="w-8 h-8" />,
@@ -794,7 +794,7 @@ export const eventDetailsData ={
       { name: 'Vedant', phone: '+91 9023095963' },
       { name: 'Aaditya', phone: '+91 8529451266' }
     ],
-    rulebookUrl: 'https://docs.google.com/document/d/1dkMaRZfas1TB5re1t87jmCQ36UgCyPNH/edit?usp=sharing&ouid=105561346511769055672&rtpof=false&sd=false',
+    rulebookUrl: 'https://docs.google.com/document/d/1dkMaRZfas1TB5re1t87jmCQ36UgCyPNH/edit?usp=sharing&ouid=105561346511769055672&rtpof=true&sd=true',
     schedule: [
       { time: 'Round 1: 10:00 AM', activity: 'The Knowledge Dash (Online Speed Quiz) - Top 50% advance' },
       { time: 'Round 2: 11:30 AM', activity: 'The Deep Dive (Conceptual Challenge) - Select finalists chosen' },
@@ -813,7 +813,7 @@ export const eventDetailsData ={
     rules: ['Details coming soon'],
     organizers: ['Details coming soon'],
     requirements: ['Details coming soon'],
-    registrationStarted: false,
+    registrationStarted: true,
     poster: '/events/placeholder.png',
     category: 'ai',
     icon: <Zap className="w-8 h-8" />,
