@@ -49,8 +49,8 @@ const userCategories: UserCategory[] = [
 
 const getPassPrice = (categoryId: string, passId: string): number => {
   const prices: Record<string, Record<string, number>> = {
-    'non-dau': { silver: 150, gold: 400 },
-    'non-dau-ieee': { silver: 100, gold: 350 },
+    'non-dau': { silver: 150, gold: 500 },
+    'non-dau-ieee': { silver: 100, gold: 400 },
     'dau': { silver: 0, gold: 100 }
   };
   return prices[categoryId]?.[passId] || 0;
