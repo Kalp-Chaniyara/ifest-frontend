@@ -45,6 +45,7 @@ interface EventDetails {
   color: string;
   coordinators: Array<{ name: string; phone: string }>;
   rulebookUrl?: string;
+  googleFormUrl?: string;
   schedule: {
     time: string;
     activity: string;
@@ -363,6 +364,34 @@ const EventDetails = () => {
               </Button>
             )}
           </div>
+
+          {/* Google Form Button and Notice */}
+          {event.googleFormUrl && (
+            <Card className="pixel-card mb-8">
+              <CardContent className="pt-6">
+                <div className="flex flex-col items-center space-y-4">
+                  <div className="bg-pacman-yellow/10 border border-pacman-yellow/30 rounded-lg p-4 w-full">
+                    <div className="flex items-start space-x-3">
+                      <CheckCircle className="w-6 h-6 text-pacman-yellow mt-1 flex-shrink-0" />
+                      <div>
+                        <h3 className="text-pacman-yellow font-bold text-lg mb-2">Important Notice</h3>
+                        <p className="text-ghost-grey leading-relaxed">
+                          Please note that if you have registered but haven't filled out the Google Form, your registration will not be counted. Make sure to complete the form below to secure your participation.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <Button
+                    className="pixel-button-primary w-full sm:w-auto"
+                    onClick={() => window.open(event.googleFormUrl, '_blank')}
+                  >
+                    <ExternalLink className="w-4 h-4 mr-2" />
+                    Fill Google Form
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          )}
 
           {/* Description */}
           <Card className="pixel-card mb-8">

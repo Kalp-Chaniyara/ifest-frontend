@@ -110,6 +110,7 @@ export const eventDetailsData ={
       { name: 'Tirth', phone: '+91 7984574445' }
     ],
     rulebookUrl: 'https://docs.google.com/document/d/1-mfQgc34wk0tjnpSS3UwFwSwhP4RNPyE/edit?usp=sharing&ouid=105561346511769055672&rtpof=true&sd=true',
+    googleFormUrl: '', // Add Google Form URL here
     schedule: [
       { time: 'TBA', activity: 'Details coming soon' }
     ]
@@ -231,6 +232,7 @@ export const eventDetailsData ={
       { name: 'Muktik', phone: '+91 9638783511' }
     ],
     rulebookUrl: 'https://drive.google.com/file/d/1lW5LFssVVH8oCKWL8qmt0D4h6n09FK2f/view?usp=sharing',
+    googleFormUrl: '', // Add Google Form URL here
     schedule: [
       { time: 'TBA', activity: 'Details coming soon' }
     ]
@@ -322,6 +324,7 @@ export const eventDetailsData ={
       { name: 'Bhavi', phone: '+91 8780152628' }
     ],
     rulebookUrl: 'https://drive.google.com/file/d/1qFi6NqXFYVnzDMa77gbwfS1oeyGxT4YS/view?usp=sharing',
+    googleFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSeOduwsafEMDE80Vg7m4U_MnGv5XgWPM4bdYtjxwFZk2kJ6pw/viewform', // Add Google Form URL here
     schedule: [
       { time: 'TBA', activity: 'Details coming soon' }
     ]
@@ -668,6 +671,7 @@ export const eventDetailsData ={
       { name: 'Nikhil', phone: '+91 9149083243' }
     ],
     rulebookUrl: 'https://docs.google.com/document/d/1GjPFYKtk8W_umGBTnmD2FxgDEXNkgBquQp34oA8I6nk/edit?usp=sharing',
+    googleFormUrl: '', // Add Google Form URL here
     schedule: [
       { time: 'TBA', activity: 'Details coming soon' }
     ]
