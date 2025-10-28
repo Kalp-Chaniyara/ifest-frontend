@@ -175,7 +175,7 @@ export const eventDetailsData ={
       'Arrive on time for event start'
     ],
     registrationStarted: true,
-    poster: '/events/placeholder.png',
+    poster: '/events/I.RELAY.png',
     category: 'coding',
     icon: <Code className="w-8 h-8" />,
     color: 'pacman-yellow',
@@ -315,7 +315,7 @@ export const eventDetailsData ={
       'Obtain consent for human subjects'
     ],
     registrationStarted: true,
-    poster: '/events/placeholder.png',
+    poster: '/events/I.CAPTURE.png',
     category: 'innovation',
     icon: <Code className="w-8 h-8" />,
     color: 'pacman-yellow',
@@ -480,7 +480,7 @@ export const eventDetailsData ={
       'Valid contact information for prize eligibility'
     ],
     registrationStarted: true,
-    poster: '/events/placeholder.png',
+    poster: '/events/Cryptotrade.png',
     category: 'innovation',
     icon: <Code className="w-8 h-8" />,
     color: 'pacman-yellow',
@@ -595,7 +595,7 @@ export const eventDetailsData ={
       'No personal bicycles required - provided by organizers'
     ],
     registrationStarted: true,
-    poster: '/events/placeholder.png',
+    poster: '/events/I.RIDE.png',
     category: 'gaming',
     icon: <Code className="w-8 h-8" />,
     color: 'pacman-yellow',
@@ -818,7 +818,7 @@ export const eventDetailsData ={
     organizers: ['Details coming soon'],
     requirements: ['Details coming soon'],
     registrationStarted: true,
-    poster: '/events/placeholder.png',
+    poster: '/events/i.prompt.png',
     category: 'ai',
     icon: <Zap className="w-8 h-8" />,
     color: 'neon-magenta',
