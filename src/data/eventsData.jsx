@@ -316,5 +316,20 @@ export const eventsData = [
     category: 'ai',
     size: 'medium',
     registrationStarted: true
+  },
+  {
+    id: '22',
+    name: 'Pickel ball',
+    description: 'Smash, sprint and score in the ultimate pickleball face-off!',
+    icon: <Trophy className="w-8 h-8" />,
+    color: 'neon-magenta',
+    prize: 'TBD',
+    participants: 'Team',
+    time: '15th November',
+    location: 'Basketball Court (DAU)',
+    rules: ['Details coming soon'],
+    category: 'gaming',
+    size: 'medium',
+    registrationStarted: true
   }
 ];

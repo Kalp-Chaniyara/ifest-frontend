@@ -830,5 +830,32 @@ export const eventDetailsData ={
     schedule: [
       { time: 'TBA', activity: 'Details coming soon' }
     ]
+  },
+  '22': {
+    id: '22',
+    name: 'Pickel ball',
+    description: 'Smash, sprint and score in the ultimate pickleball face-off!',
+    longDescription: 'Details coming soon.',
+    time: '15th November',
+    location: 'Basketball Court (DAU)',
+    participants: 'Team (2 members)',
+    prize: '5000 INR',
+    rules: ['Details coming soon'],
+    organizers: ['Details coming soon'],
+    requirements: ['Details coming soon'],
+    registrationStarted: true,
+    poster: '/events/pickleball.png',
+    category: 'gaming',
+    icon: <Trophy className="w-8 h-8" />,
+    color: 'neon-magenta',
+    coordinators: [
+      { name: 'Pranshu', phone: '+91 7490816116' },
+      { name: 'Vivek', phone: '+91 9601049280' }
+    ],
+    rulebookUrl: '',
+    googleFormUrl: 'https://forms.gle/UJS3xdoUgs6vogSu8',
+    schedule: [
+      { time: 'TBA', activity: 'Details coming soon' }
+    ]
   }
 };

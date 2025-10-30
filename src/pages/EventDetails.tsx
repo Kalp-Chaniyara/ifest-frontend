@@ -283,7 +283,7 @@ const EventDetails = () => {
                   <div className="flex items-center space-x-3 p-3 bg-void-black/50 rounded">
                     <Trophy className="w-6 h-6 text-pacman-yellow" />
                     <div>
-                      <div className="text-ghost-grey text-base">Prize</div>
+                      <div className="text-ghost-grey text-base">Prize Pool</div>
                       <div className="text-pacman-yellow font-bold text-xl">{event.prize}</div>
                   </div>
                 </div>
