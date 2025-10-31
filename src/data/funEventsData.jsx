@@ -46,6 +46,22 @@ export const funEventsData = [
     size: 'medium',
     registrationStarted: true
   }
+  ,
+  {
+    id: '24',
+    name: 'Family Feud',
+    description: "Family Feud – The Ultimate Battle of Wits! Get ready to think fast, laugh loud, and guess smart!",
+    icon: <Trophy className="w-8 h-8" />,
+    color: 'pacman-yellow',
+    prize: 'TBD',
+    participants: 'Team',
+    time: '15th November',
+    location: 'DAU',
+    rules: ['Details coming soon'],
+    category: 'gaming',
+    size: 'medium',
+    registrationStarted: true
+  }
 ];
 
 

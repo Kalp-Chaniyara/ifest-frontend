@@ -128,7 +128,7 @@ export const eventDetailsData ={
     organizers: ['Details coming soon'],
     requirements: ['Details coming soon'],
     registrationStarted: true,
-    poster: '/events/placeholder.png',
+    poster: '/events/i.clash.png',
     category: 'coding',
     icon: <Code className="w-8 h-8" />,
     color: 'pacman-yellow',
@@ -882,5 +882,27 @@ export const eventDetailsData ={
     rulebookUrl: '',
     googleFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSfmXcHlS-x4KiJBtXsh4uTh0C-t-Q8IGWxikjjgYVc6QS6EOw/viewform?usp=dialog',
     schedule: [ { time: 'TBA', activity: 'Performance slots and judging' } ]
+  },
+  '24': {
+    id: '24',
+    name: 'Family Feud',
+    description: 'Family Feud – The Ultimate Battle of Wits!',
+    longDescription: `Family Feud – The Ultimate Battle of Wits!\nGet ready to think fast, laugh loud, and guess smart!`,
+    time: '15th November',
+    location: 'DAU',
+    participants: 'Team',
+    prize: 'TBD',
+    rules: [ 'Details coming soon' ],
+    organizers: ['Cultural Team'],
+    requirements: [ 'Team registration via website' ],
+    registrationStarted: true,
+    poster: '/events/family-feud.png',
+    category: 'gaming',
+    icon: <Trophy className="w-8 h-8" />,
+    color: 'pacman-yellow',
+    coordinators: [ { name: 'TBD', phone: '' } ],
+    rulebookUrl: '',
+    googleFormUrl: '',
+    schedule: [ { time: 'TBA', activity: 'Event rounds and timings' } ]
   }
 };
