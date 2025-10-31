@@ -121,9 +121,6 @@ const Login = () => {
                 <CardTitle className="text-neon-cyan text-2xl">
                   Welcome Back!
                 </CardTitle>
-                <CardDescription className="text-ghost-grey">
-                  Login करें अपने i'Fest'25 account में
-                </CardDescription>
               </CardHeader>
               
               <CardContent>
@@ -182,7 +179,7 @@ const Login = () => {
                     )}
                   </div>
 
-                  <div className="flex items-center justify-between text-sm">
+                  {/* <div className="flex items-center justify-between text-sm">
                     <div className="flex items-center space-x-2">
                       <input
                         id="remember"
@@ -200,7 +197,7 @@ const Login = () => {
                     >
                       Forgot Password?
                     </button>
-                  </div>
+                  </div> */}
 
                   <Button 
                     type="submit" 

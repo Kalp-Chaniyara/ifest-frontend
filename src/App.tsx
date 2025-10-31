@@ -22,6 +22,8 @@ import RefundPolicy from "./pages/RefundPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import Merchandise from "./pages/Merchandise";
 import PaymentResult from "./pages/PaymentResult";
+import FunEvents from "./pages/FunEvents";
+import FunEventDetails from "./pages/FunEventDetails";
 import { PaymentProvider } from "./contexts/PaymentContext";
 
 const queryClient = new QueryClient();
@@ -41,6 +43,8 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/events" element={<Events />} />
             <Route path="/event/:id" element={<EventDetails />} />
+            <Route path="/fun-events" element={<FunEvents />} />
+            <Route path="/fun-events/:id" element={<FunEventDetails />} />
             <Route path="/robo-events" element={<RoboEvents />} />
             <Route path="/robo-events/:id" element={<RoboEventDetails />} />
             <Route path="/team" element={<Team />} />

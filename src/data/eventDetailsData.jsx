@@ -833,7 +833,7 @@ export const eventDetailsData ={
   },
   '22': {
     id: '22',
-    name: 'Pickel ball',
+    name: 'Pickle ball',
     description: 'Smash, sprint and score in the ultimate pickleball face-off!',
     longDescription: 'Details coming soon.',
     time: '15th November',
@@ -857,5 +857,30 @@ export const eventDetailsData ={
     schedule: [
       { time: 'TBA', activity: 'Details coming soon' }
     ]
+  },
+  '23': {
+    id: '23',
+    name: 'WAR OF DJ',
+    description: 'High-energy DJ showdown with electrifying performances.',
+    longDescription: `WAR OF DJ\n\nThink you’ve got the beats to move the crowd?\nHere’s your stage to prove it!\n\nJoin WAR OF DJ at i.Fest ’25 and drop your sickest mixes to claim the spotlight!\nThe winner also gets a chance to compete in Mumbai!\n\n Date: November 16\n Venue: DA-IICT, Gandhinagar\n\n Register now — https://docs.google.com/forms/d/e/1FAIpQLSfmXcHlS-x4KiJBtXsh4uTh0C-t-Q8IGWxikjjgYVc6QS6EOw/viewform?usp=dialog`,
+    time: 'November 16',
+    location: 'DA-IICT, Gandhinagar',
+    participants: 'Team',
+    prize: 'TBD',
+    rules: [ 'Details coming soon' ],
+    organizers: ['Media & Cultural Team'],
+    requirements: [ 'Details coming soon' ],
+    registrationStarted: true,
+    poster: '/events/DJ Battle.png',
+    category: 'gaming',
+    icon: <Trophy className="w-8 h-8" />,
+    color: 'neon-magenta',
+    coordinators: [
+      { name: 'Dhruva', phone: '+91 9875210560' },
+      { name: 'Harsh', phone: '+91 6376108451' }
+    ],
+    rulebookUrl: '',
+    googleFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSfmXcHlS-x4KiJBtXsh4uTh0C-t-Q8IGWxikjjgYVc6QS6EOw/viewform?usp=dialog',
+    schedule: [ { time: 'TBA', activity: 'Performance slots and judging' } ]
   }
 };
